@@ -73,20 +73,44 @@ body {
   }
 
 
-
   #BtnContainer{
     display: flex;
     flex-direction: row;
-    
+
   }
 
   .NewBtnContainer {
     background-color: rgba(100, 100, 100, 0.5);
     flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
   }
 
   .AddBtnContainer {
-    flex-grow:4.2;
+    flex-grow:6.9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .EVEButton {
+    background-image: linear-gradient(-135deg, #0C0C0C, #0C0C0C, #0C0C0C, #0C0C0C, #202020, #202020);
+    width: 45px;
+    height: 19px;
+    border-style: inset;
+    border-width: 1px;
+    border-left-color: rgba(0, 0, 0, 0.2);
+    border-right-color: rgba(200, 200, 200, 0.2);
+    border-top-color: rgba(0, 0, 0, 0.2);
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+    text-align: center;
+    display: inline-block;
+    font-family: EveSans;
+    color: rgb(190, 190, 190);
+    font-size: 13px;
+    font-weight: 300;
+    margin-top: 3px;
   }
 
 
