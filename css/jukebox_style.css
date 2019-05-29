@@ -1,0 +1,16 @@
+body {
+  background-image: url("https://i.imgur.com/xucPsO3.jpg");
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+}
+
+.jukeboxWrapper {
+  background-color: rgba(0, 0, 0, 0.95);
+  border-color: white;
+  border-width: thin;
+  align-self: center;
+  width: 800px;
+  height: 350px;
+  margin-top: 125px;
+  margin-left: 225px;
+}
