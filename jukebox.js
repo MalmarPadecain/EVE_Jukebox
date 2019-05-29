@@ -9,6 +9,18 @@ function play(track) {
 }
 
 function update() {
+    updateProgress();
+    updateVolume();
+}
+
+function updateVolume() {
+    let audio = document.getElementById("audio");
+    let volumeControll = document.getElementById("volume");
+
+    audio.volume = volumeControll.value
+}
+
+function updateProgress() {
     let audio = document.getElementById("audio");
     let progress = document.getElementById("progress");
     progress.innerText = (Math.round(parseFloat(audio.currentTime) / parseFloat(audio.duration) * 100)).toString() + "%";
@@ -23,4 +35,4 @@ function pause() {
     }
 }
 
-setInterval(update, 10);
+setInterval(update, 500);

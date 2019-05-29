@@ -9,8 +9,11 @@
 <audio id="audio">
     <source id="source" src="">
 </audio>
-<p id="progress"></p>
-<button id="pause" onclick="pause()">Pause</button>
+<div id="control">
+    <p id="progress"></p>
+    <button id="pause" onclick="pause()">Pause</button>
+    <input type="range" id="volume" name="volume" min="0" max="1" step="0.01" value="1">
+</div>
 <table>
     <tr>
         <th>Number</th>
