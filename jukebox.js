@@ -1,9 +1,24 @@
+function generateTable() {
+    let path = "/Jukebox/playlists/EVE_Soundtrack.json";
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let result = xhr.responseText;
+            let playlist = JSON.parse(result);
+            let table = document.getElementById("table");
+            for (let song of playlist.songs) {
+                table.innerHTML += `<tr onclick="play('${song.link}')"><td>num</td><td>${song.name}</td><td>${song.duration}</td></tr>`;
+            }
+        }
+    };
+    xhr.open("GET", path, true);
+    xhr.send();
+}
+
 function play(track) {
     let audio = document.getElementById("audio");
 
-    document.getElementById("title").innerText = track;
-    document.getElementById("source").src = track;
-
+    audio.src = track;
     audio.load();
     audio.play()
 }
@@ -35,4 +50,5 @@ function pause() {
     }
 }
 
+generateTable();
 setInterval(update, 500);
