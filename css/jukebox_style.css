@@ -25,6 +25,8 @@ body {
   margin-right: 3px;
 }
 
+
+
 #ListContainer {
   height: 80%;
   display: flex;
@@ -49,7 +51,23 @@ body {
     margin-right: 4px;
     flex-grow: 1;
   }
-}
+
+
+
+  #BtnContainer{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .NewBtnContainer {
+    background-color: rgba(100, 100, 100, 0.5);
+    flex-grow: 1;
+  }
+
+  .AddBtnContainer {
+    flex-grow:5.92;
+  }
+
 
 table {
 }
