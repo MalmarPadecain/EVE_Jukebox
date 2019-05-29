@@ -5,12 +5,38 @@ body {
 }
 
 .jukeboxWrapper {
-  background-color: rgba(0, 0, 0, 0.95);
-  border-color: white;
-  border-width: thin;
+  background-color: rgba(15, 15, 15, 0.86);
   align-self: center;
-  width: 800px;
-  height: 350px;
-  margin-top: 125px;
+  width: 700px;
+  height: 500px;
+  margin-top: 55px;
   margin-left: 225px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.jukeboxMain {
+  background-color: rgba(50, 50, 50, 0.5);
+  flex-grow: 1;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+#Lists {
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+}
+
+.Playlist {
+  background-color: Pink;
+  flex-grow: 1;
+}
+
+.Tracklist {
+  background-color: red;
+  flex-grow: 4.5;
 }
