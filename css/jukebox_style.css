@@ -2,6 +2,23 @@ body {
   background-image: url("https://i.imgur.com/xucPsO3.jpg");
   background-repeat: no-repeat, repeat;
   background-size: cover;
+  color: rgb(200,200,200);
+}
+
+
+@font-face {
+    font-family: 'EveSans';
+    src: url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.eot');
+    src: url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.eot?#iefix') format('embedded-opentype'),
+         url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.woff') format('woff'),
+         url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.ttf') format('truetype'),
+         url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.svg#webfont') format('svg');
+}
+
+.test {
+  font-size: 72px;
+  font-family: EveSans;
+  font-weight: 900;
 }
 
 .jukeboxWrapper {
@@ -14,6 +31,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-family: EveSans;
+  font-weight: 100;
+  font-size: 13px;
 }
 
 .jukeboxMain {
@@ -28,7 +48,7 @@ body {
 
 
 #ListContainer {
-  height: 80%;
+  height: 75%;
   display: flex;
   flex-direction: row;
 }
@@ -57,6 +77,7 @@ body {
   #BtnContainer{
     display: flex;
     flex-direction: row;
+    
   }
 
   .NewBtnContainer {
@@ -65,7 +86,7 @@ body {
   }
 
   .AddBtnContainer {
-    flex-grow:5.92;
+    flex-grow:4.2;
   }
 
 
