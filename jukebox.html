@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EVE Jukebox</title>
+    <script src="jukebox.js"></script>
+</head>
+<body>
+<audio id="audio">
+    <source id="source" src="">
+</audio>
+<p id="progress"></p>
+<button id="pause" onclick="pause()">Pause</button>
+<table>
+    <tr>
+        <th>Number</th>
+        <th>Title</th>
+        <th>Duration</th>
+    </tr>
+    <tr>
+        <th>1</th>
+        <th id="title" onclick="play('music/Borderlines.mp3')"></th>
+        <th>?</th>
+    </tr>
+</table>
+</body>
+</html>
