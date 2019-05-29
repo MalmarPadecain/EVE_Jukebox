@@ -27,14 +27,36 @@
       4
     </div>
 
-    <div class="jukeboxMain" id="Lists">
+    <div class="jukeboxMain" id="ListContainer">
 
-      <div class="Playlist">
+      <div class="PlaylistContainer">
         5.1
       </div>
 
-      <div class="Tracklist">
-        5.2
+      <div class="TracklistContainer">
+        <table class="Tracklist">
+            <tr>
+              <th> </th>
+              <th>Number</th>
+              <th>Title</th>
+              <th>Duration</th>
+              <th> </th>
+            </tr>
+            <tr>
+              <td> </td>
+              <td>1</td>
+              <td id="title" onclick="play('music/Borderlines.mp3')"></td>
+              <td>?</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td> </td>
+              <td>2</td>
+              <td id="title" onclick="play('music/Borderlines.mp3')"></td>
+              <td>?</td>
+              <td> </td>
+            </tr>
+        </table>
       </div>
 
     </div>
@@ -52,18 +74,6 @@
 </audio>
 <p id="progress"></p>
 <button id="pause" onclick="pause()">Pause</button>
-<table>
-    <tr>
-        <th>Number</th>
-        <th>Title</th>
-        <th>Duration</th>
-    </tr>
-    <tr>
-        <th>1</th>
-        <th id="title" onclick="play('music/Borderlines.mp3')"></th>
-        <th>?</th>
-    </tr>
-</table>
 
 </body>
 </html>
