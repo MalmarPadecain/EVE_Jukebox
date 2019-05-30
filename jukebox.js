@@ -1,3 +1,9 @@
+state = {
+    shuffle: false,
+    playlist: [],
+    playing: null
+};
+
 function generateTable() {
     let path = "/Jukebox/playlists/EVE_Soundtrack.json";
     let xhr = new XMLHttpRequest();
@@ -7,6 +13,7 @@ function generateTable() {
             let playlist = JSON.parse(result);
             let table = document.getElementById("table");
             for (let song of playlist.songs) {
+                state.playlist.push(song);
                 table.innerHTML += `<tr onclick="play('${song.link}')"><td>num</td><td>${song.name}</td><td>${song.duration}</td></tr>`;
             }
         }
@@ -15,24 +22,19 @@ function generateTable() {
     xhr.send();
 }
 
-function play(track) {
+function play(link) {
     let audio = document.getElementById("audio");
 
-    audio.src = track;
+    audio.src = link;
     audio.load();
     audio.play()
 }
 
-function update() {
-    updateProgress();
-    updateVolume();
-}
-
 function updateVolume() {
     let audio = document.getElementById("audio");
-    let volumeControll = document.getElementById("volume");
+    let volumeControl = document.getElementById("volume");
 
-    audio.volume = volumeControll.value
+    audio.volume = volumeControl.value
 }
 
 function updateProgress() {
@@ -51,4 +53,4 @@ function pause() {
 }
 
 generateTable();
-setInterval(update, 500);
+setInterval(updateProgress, 500);
