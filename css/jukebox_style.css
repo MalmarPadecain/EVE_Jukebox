@@ -120,27 +120,27 @@ body {
     margin-bottom: 1px;
   }
 
-
-/*table {
-  border-collapse: collapse;
-  background-color: rgba(60, 60, 60, 0.5);
-  border: 1px solid black;
-
-}
-th{
-
-}
-td{
-  border-left: 2px solid rgba(117,117,117,0.6);
-  border-right: 2px solid rgba(117,117,117,0.6);
-  border-bottom: 2px solid rgba(117,117,117,0.6);
-  border-top: 2px solid rgba(117,117,117,0.6);
-}*/
+  #col1 {
+    width: 7%;
+  }
+  #col2 {
+    width: 10%;
+  background: rgba(120, 120, 120, 0.2);
+  }
+  #col3 {
+    width: 55%;
+  }
+  #col4 {
+    width: 20%;
+  }
+  #col5 {
+    width: 8%;
+  }
 
 table {
     border: 2px solid rgba(117,117,117,1);
     border-collapse: collapse;
-    background-color: rgba(60, 60, 60, 0.5);
+    background-color: rgba(60, 60, 60, 0.15);
 }
 
 tr {
@@ -153,11 +153,43 @@ tr + tr {
 
 td {
     border-left: 2px solid rgba(117,117,117,1);
+    vertical-align: bottom;
+    padding-bottom: 0px;
+    padding-left: 4px;
 }
 
 td + td {
     border-left: 1px solid rgba(117,117,117,0.6);
 }
+
+th:last-child {
+  border-right: 0px;
+}
+
+tr td:nth-child(2) {
+  background: rgba(120, 120, 120, 0.2);
+}
+
+th {
+  border-right: 1px solid rgba(117,117,117,0.6);
+  font-weight: 400;
+  padding-left: 4px;
+}
+
+.thBorderRight {
+  border-right: 1px solid rgba(117,117,117,0.6);
+  margin-right: 2px;
+  display: inline-block;
+  position: relative;
+  float: right;
+  /*align-self: flex-end;  Leave this for now  */
+}
+
+/*.thBorderParent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} This entire class is a bit icky and doesn't work how I'd like  */
 
 tr:hover {
   background-color: rgba(130, 130, 130, 0.25);
