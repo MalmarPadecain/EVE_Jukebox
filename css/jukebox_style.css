@@ -118,15 +118,84 @@ body {
     font-weight: 300;
     margin-top: 1px;
     margin-bottom: 1px;
+    outline: none;
+  }
+
+  .controlBtn {
+    box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.18);
+    margin-left: 2px;
+    border: 1px solid rgba(215,215,215,0.15)
+  }
+
+  #btnShuffle {
+    margin-left: 8px;
+  }
+
+  .volumeContainer {
+    align-self: flex-end;
+    flex-direction: row;
+    display:flex;
+    margin-right: 4px;
+    margin-bottom: 2px;
+    width: 95px;
+  }
+
+  .volumeSymbol {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  .slider {
+    -webkit-appearance: none;
+    width: 95%;
+    height: 8px;
+    background: rgba(0,0,0,0);
+    border: 1px solid rgba(55,55,55,1);
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin-top: 0px;
+    margin-right: 3px;
+    margin-left: 1px;
+    outline: none;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgb(194,207,215);
+    background: radial-gradient(circle, rgba(194,207,215,1) 1%, rgba(89,107,111,1) 50%, rgba(81,102,111,1) 80%);
+    cursor: pointer;
+    outline: none;
+    box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.7);
+  }
+
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .controlBtnContainer {
+    align-self: flex-start;
+    display:inline-block;
+  }
+
+  #buttonList {
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   #Separator {
     padding-left: 0px;
     padding-right: 0px;
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  #buttonList {
     background-color: rgba(0, 0, 0, 0);
   }
 

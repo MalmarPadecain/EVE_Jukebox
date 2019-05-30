@@ -20,7 +20,20 @@
       2
     </div>
     <div class="jukeboxMain" id="buttonList">
-      <img src="images/btnBack.jpg" class="controlBtn"><img src="images/btnPlay.jpg" class="controlBtn"><img src="images/btnFwd.jpg" class="controlBtn"><img src="images/btnShuffleOff.jpg" class="controlBtn">
+      <div class="controlBtnContainer">
+        <img src="images/btnBack.jpg" class="controlBtn"><img src="images/btnPlay.jpg" class="controlBtn"><img src="images/btnFwd.jpg" class="controlBtn"><img src="images/btnShuffleOff.jpg" class="controlBtn" id="btnShuffle">
+      </div>
+      <div class="volumeContainer">
+        <div class="volumeSymbol">
+          <img src="images/lowVolume.png">
+        </div>
+        <div>
+          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+        <div class="volumeSymbol">
+          <img src="images/highVolume.png">
+        </div>
+      </div>
     </div>
     <div class="jukeboxMain" id=Separator>
       <hr/>
