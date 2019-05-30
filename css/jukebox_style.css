@@ -30,7 +30,7 @@ body {
   font-size: 12px;
   border-width: 1.5px;
   border-style: inset;
-  border-image: linear-gradient(324.40deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(0,0,0,0.25) 70%) 1;
+  border-image: linear-gradient(324.40deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(215,215,215,0.2) 70%) 1;
   box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.62);
 }
 
@@ -120,12 +120,36 @@ body {
     margin-bottom: 1px;
   }
 
+  #Separator {
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  #buttonList {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  #doubleChevron {
+    margin-left: 2px;
+    margin-top: 5px;
+  }
+
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgba(215,215,215,0.55);
+    margin: 0 0;
+    padding: -5;
+}
+
   #col1 {
     width: 7%;
   }
   #col2 {
     width: 10%;
-  background: rgba(120, 120, 120, 0.2);
+    background: rgba(120, 120, 120, 0.2);
   }
   #col3 {
     width: 55%;
@@ -138,21 +162,21 @@ body {
   }
 
 table {
-    border: 2px solid rgba(117,117,117,1);
+    border: 1px solid rgba(140,140,140,1); /*Part of outer border*/
     border-collapse: collapse;
     background-color: rgba(60, 60, 60, 0.15);
 }
 
 tr {
-    border-top: 2px solid rgba(117,117,117,1);
+    border-top: 1px solid rgba(140,140,140,1); /*Part of outer border*/
 }
 
 tr + tr {
-    border-top: 1px solid rgba(117,117,117,0.6);
+    border-top: 1px solid rgba(140,140,140,0.6); /*Part of outer border*/
 }
 
 td {
-    border-left: 2px solid rgba(117,117,117,1);
+    border-left: 1px solid rgba(117,117,117,1);
     vertical-align: bottom;
     padding-bottom: 0px;
     padding-left: 4px;
@@ -186,17 +210,9 @@ th {
   position: relative;
   float: right;
   height: 100%;
-  /*align-self: flex-end;  Leave this for now  */
 }
-
-/*.thBorderParent {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-} This entire class is a bit icky and doesn't work how I'd like  */
 
 tr:hover {
   background: linear-gradient(to bottom, rgba(160, 160, 160, 0) 8%, rgba(160, 160, 160, 0.35) 8%, rgba(160, 160, 160, 0.35) 49%, rgba(160, 160, 160, 0.35) 90%, rgba(160, 160, 160, 0) 90%);
-  /*background-color: rgba(130, 130, 130, 0.25);*/
   color: white;
 }
