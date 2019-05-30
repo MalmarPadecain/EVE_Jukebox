@@ -55,7 +55,25 @@ function togglePause() {
     if (state.audio.paused) {
         state.audio.play();
     } else {
-        audio.pause();
+        state.audio.pause();
+    }
+}
+
+function toggleShuffle() {
+    state.shuffle = !state.shuffle;
+}
+
+function* makeSongIterator(playlist: Playlist) {
+    while (true) {
+        if (state.shuffle) {
+            let index = Math.floor(Math.random() * playlist.songs.length);
+
+            yield playlist[index];
+        } else {
+            for (let song of playlist.songs) {
+                yield song;
+            }
+        }
     }
 }
 
