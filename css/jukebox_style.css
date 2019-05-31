@@ -1,5 +1,5 @@
 body {
-  background-image: url("https://i.imgur.com/xucPsO3.jpg");
+  background-image: url("https://i.imgur.com/FOtZvBc.jpg");
   background-repeat: no-repeat, repeat;
   background-size: cover;
   color: rgb(200,200,200);
@@ -21,17 +21,19 @@ body {
   align-self: center;
   width: 700px;
   height: 450px;
-  margin-top: 55px;
-  margin-left: 225px;
+  margin-top: 95px;
+  margin-left: 900px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   font-family: EveSans;
   font-size: 12px;
+  font-weight: 300;
   border-width: 1.5px;
   border-style: inset;
   border-image: linear-gradient(327.2deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(215,215,215,0.2) 70%) 1;
-  box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.62);
+  box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.32);
+  padding: 0;
 }
 
 
@@ -49,8 +51,39 @@ body {
 }
 
 #TitleBox {
-  margin-top: 3px;
+  margin-top: 2px;
+  margin-bottom: 0px;
   flex-grow: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#NowPlayingContainerContainer {
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 7px;
+}
+
+#NowPlayingContainer {
+  background-color: rgba(70, 70, 70, 0.55);
+  -webkit-box-shadow: inset 3px 3px 7px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 3px 3px 7px 0px rgba(0,0,0,0.25);
+  box-shadow: inset 3px 3px 7px 0px rgba(0,0,0,0.25);
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.NowPlaying {
+  margin-top: auto;
+  margin-bottom: 1px;
+  font-size: 14px;
+}
+
+#TimeElapsed {
+  margin-left: 5px;
+}
+
+#SongName {
+  margin-left: 20px;
 }
 
 #ListContainer {
@@ -62,8 +95,19 @@ body {
 }
 
 .PlaylistContainer {
-  background-color: rgba(100, 100, 100, 0.5);
-  flex-grow: 1;
+  background-color: rgba(70, 70, 70, 0.55);
+  flex-grow: 0;
+  width: 120px;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Playlist {
+  justify-content: flex-start;
+  font-size: 13px;
+  margin-left: 4px;
+  margin-top: 2px;
 }
 
 .TracklistContainer {
@@ -105,7 +149,7 @@ body {
 
   .EVEButton {
     background-image: linear-gradient(-135deg, #0C0C0C, #0C0C0C, #0C0C0C, #0C0C0C, #202020, #202020);
-    width: 45px;
+
     height: 19px;
     border-style: inset;
     border-width: 1px;
@@ -118,7 +162,7 @@ body {
     font-family: EveSans;
     color: rgb(190, 190, 190);
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 100;
     margin-top: 1px;
     margin-bottom: 1px;
     outline: none;
@@ -127,7 +171,7 @@ body {
   .controlBtn {
     box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.18);
     margin-left: 2px;
-    border: 1px solid rgba(215,215,215,0.15)
+    border: 1px solid rgba(215,215,215,0)
   }
 
   #btnShuffle {
@@ -176,12 +220,15 @@ body {
   }
 
   .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+    appearance: none;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: #4CAF50;
-    outline: none;
+    background: rgb(194,207,215);
+    background: radial-gradient(circle, rgba(194,207,215,1) 1%, rgba(89,107,111,1) 50%, rgba(81,102,111,1) 80%);
     cursor: pointer;
+    outline: none;
+    box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.7);
   }
 
   .controlBtnContainer {
@@ -194,9 +241,17 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 6px;
   }
 
-  #Separator {
+  #UpperSeparator {
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 1px;
+  }
+
+  #LowerSeparator {
     padding-left: 0px;
     padding-right: 0px;
     background-color: rgba(0, 0, 0, 0);
@@ -211,7 +266,7 @@ body {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid rgba(215,215,215,0.55);
+    border-top: 1px solid rgba(215,215,215,0.20);
     margin: 0 0;
     padding: -5;
 }
@@ -252,6 +307,7 @@ td {
     vertical-align: bottom;
     padding-bottom: 0px;
     padding-left: 4px;
+    height: 17px;
 }
 
 td + td {
@@ -272,7 +328,7 @@ th {
   padding-left: 4px;
   padding-bottom: 0px;
   padding-top: 0px;
-  line-height: 12px;
+  line-height: 15px;
 }
 
 .thBorderRight {
