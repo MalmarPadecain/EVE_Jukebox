@@ -16,6 +16,10 @@ body {
 }
 
 
+.test {
+  margin-left: 50px;
+}
+
 .jukeboxWrapper {
   background-color: rgba(0, 0, 0, 0.74);
   align-self: center;
@@ -169,7 +173,7 @@ body {
   }
 
   .controlBtn {
-    box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.18);
+    box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.28);
     margin-left: 2px;
     border: 1px solid rgba(215,215,215,0)
   }
@@ -209,9 +213,10 @@ body {
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
+    border: 1px solid rgba(51,61,67,1);
     background: rgb(194,207,215);
     background: radial-gradient(circle, rgba(194,207,215,1) 1%, rgba(89,107,111,1) 50%, rgba(81,102,111,1) 80%);
     cursor: pointer;
@@ -221,9 +226,10 @@ body {
 
   .slider::-moz-range-thumb {
     appearance: none;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
+    border: 1px solid rgba(51,61,67,1);
     background: rgb(194,207,215);
     background: radial-gradient(circle, rgba(194,207,215,1) 1%, rgba(89,107,111,1) 50%, rgba(81,102,111,1) 80%);
     cursor: pointer;
@@ -341,6 +347,6 @@ th {
 }
 
 tr:hover {
-  background: linear-gradient(to bottom, rgba(160, 160, 160, 0) 8%, rgba(160, 160, 160, 0.35) 8%, rgba(160, 160, 160, 0.35) 49%, rgba(160, 160, 160, 0.35) 90%, rgba(160, 160, 160, 0) 90%);
+  background: linear-gradient(to bottom, rgba(160, 160, 160, 0) 10%, rgba(160, 160, 160, 0.35) 10%, rgba(160, 160, 160, 0.35) 49%, rgba(160, 160, 160, 0.35) 90%, rgba(160, 160, 160, 0) 90%);
   color: white;
 }
