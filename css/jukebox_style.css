@@ -20,7 +20,7 @@ body {
   background-color: rgba(0, 0, 0, 0.74);
   align-self: center;
   width: 700px;
-  height: 500px;
+  height: 450px;
   margin-top: 55px;
   margin-left: 225px;
   display: flex;
@@ -30,7 +30,7 @@ body {
   font-size: 12px;
   border-width: 1.5px;
   border-style: inset;
-  border-image: linear-gradient(324.40deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(215,215,215,0.2) 70%) 1;
+  border-image: linear-gradient(327.2deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(215,215,215,0.2) 70%) 1;
   box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.62);
 }
 
@@ -58,6 +58,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
+  background: rgba(0, 0, 0, 0);
 }
 
 .PlaylistContainer {
@@ -69,6 +70,7 @@ body {
   flex-grow: 4.2;
   display: flex;
   text-align: left;
+  background: rgba(0, 0, 0, 0);
 }
 
 
@@ -77,12 +79,13 @@ body {
     margin-left: 4px;
     margin-right: 4px;
     flex-grow: 1;
+    background-color: rgba(40, 40, 40, 0.5)
   }
 
   #BtnContainer{
     display: flex;
     flex-direction: row;
-
+    background: rgba(0, 0, 0, 0);
   }
 
   .NewBtnContainer {
