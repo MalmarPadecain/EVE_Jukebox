@@ -1,40 +1,54 @@
 class Playlist {
-    name: String;
+    name: string;
     songs: Array<Song>;
 }
 
 class Song {
-    name: String;
-    link: String;
-    duration: String;
+    name: string;
+    link: string;
+    duration: string;
 }
 
 class State {
     audio: HTMLAudioElement;
     shuffle: Boolean;
     playlist: Playlist;
+    it: Iterator<Song>
 }
 
 const state = new State;
 
-function generateTable() { //probably needs to be rewritten. looks ugly
-    let path = "/Jukebox/playlists/EVE_Soundtrack.json";
+
+// Setup
+
+function init() {
+    getPlaylist("EVE_Soundtrack");
+}
+
+function getPlaylist(name: String) {
+    let path = `/Jukebox/playlists/${name}.json`;
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            let result = xhr.responseText;
-            state.playlist = <Playlist>JSON.parse(result);
-            let table = document.getElementById("table");
-            for (let song of state.playlist.songs) {
-                table.innerHTML += `<tr onclick="play('${song.link}')"><td>num</td><td>${song.name}</td><td>${song.duration}</td></tr>`;
-            }
+            state.playlist = <Playlist>JSON.parse(xhr.responseText);
+            state.it = makeSongIterator(state.playlist);
+            generateTable();
         }
     };
     xhr.open("GET", path, true);
     xhr.send();
 }
 
-function play(link) {
+function generateTable() {
+    let table = document.getElementById("table");
+    for (let song of state.playlist.songs) {
+        console.log(song);
+        table.innerHTML += `<tr onclick="play('${song.link}')"><td>num</td><td>${song.name}</td><td>${song.duration}</td></tr>`;
+    }
+}
+
+// Control
+function play(link: string) {
     state.audio.src = link;
     state.audio.load();
     state.audio.play()
@@ -80,6 +94,6 @@ function* makeSongIterator(playlist: Playlist) {
 document.addEventListener('DOMContentLoaded', (event) => {
     state.audio = <HTMLAudioElement>document.getElementById("audio");
     state.shuffle = false;
-    generateTable();
+    init();
 });
 setInterval(updateProgress, 1000);
