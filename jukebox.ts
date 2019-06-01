@@ -42,7 +42,6 @@ function getPlaylist(name: String) {
 function generateTable() {
     let table = document.getElementById("table");
     for (let song of state.playlist.songs) {
-        console.log(song);
         table.innerHTML += `<tr onclick="play('${song.link}')"><td>num</td><td>${song.name}</td><td>${song.duration}</td></tr>`;
     }
 }
@@ -63,6 +62,10 @@ function updateVolume() {
 function updateProgress() {
     let progress = document.getElementById("progress");
     progress.innerText = (Math.round(state.audio.currentTime / state.audio.duration * 100)).toString() + "%";
+}
+
+function nextSong() {
+    play(state.it.next().value.link);
 }
 
 function togglePause() {
