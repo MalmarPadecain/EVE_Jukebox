@@ -65,6 +65,10 @@ function updateProgress() {
     progress.innerText = (Math.round(state.audio.currentTime / state.audio.duration * 100)).toString() + "%";
 }
 
+function nextSong() {
+    play(state.it.next().value.link);
+}
+
 function togglePause() {
     if (state.audio.paused) {
         state.audio.play();
