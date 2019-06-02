@@ -16,22 +16,66 @@ class State {
     it: Iterator<Song>
 }
 
+class SongIterator implements Iterator<Song> {
+    readonly songList: Song[];
+    private _index: number;
+
+    constructor(songList: Song[]) {
+        this.songList = songList;
+        this.index = 0;
+    }
+
+    get index(): number {
+        return this._index;
+    }
+
+    set index(newIndex: number) {
+        if (newIndex < this.index && newIndex < 0) {
+            this._index = this.songList.length - 1;
+        } else if (newIndex > this.index && newIndex >= this.songList.length) {
+            this._index = 0;
+        } else {
+            this._index = newIndex;
+        }
+    }
+
+    public next(back = false): IteratorResult<Song> {
+        if (!back) {
+            return {
+                done: false,
+                value: this._next()
+            }
+        } else {
+            return {
+                done: false,
+                value: this._last()
+            }
+        }
+
+    }
+
+    _next() {
+        this.index++;
+        return this.songList[this.index];
+    }
+
+    _last() {
+        this.index--;
+        return this.songList[this.index];
+    }
+}
+
 const state = new State;
 
 
 // Setup
-
-function init() {
-    getPlaylist("EVE_Soundtrack");
-}
-
 function getPlaylist(name: String) {
     let path = `/Jukebox/playlists/${name}.json`;
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             state.playlist = <Playlist>JSON.parse(xhr.responseText);
-            state.it = makeSongIterator(state.playlist);
+            state.it = new SongIterator(state.playlist.songs);
             generateTable();
         }
     };
@@ -68,6 +112,10 @@ function nextSong() {
     play(state.it.next().value.link);
 }
 
+function lastSong() {
+    play(state.it.next(true).value.link);
+}
+
 function togglePause() {
     if (state.audio.paused) {
         state.audio.play();
@@ -80,23 +128,12 @@ function toggleShuffle() {
     state.shuffle = !state.shuffle;
 }
 
-function* makeSongIterator(playlist: Playlist) {
-    while (true) {
-        if (state.shuffle) {
-            let index = Math.floor(Math.random() * playlist.songs.length);
-
-            yield playlist[index];
-        } else {
-            for (let song of playlist.songs) {
-                yield song;
-            }
-        }
-    }
-}
-
 document.addEventListener('DOMContentLoaded', (event) => {
     state.audio = <HTMLAudioElement>document.getElementById("audio");
     state.shuffle = false;
-    init();
+    getPlaylist("EVE_Soundtrack");
+    state.audio.addEventListener('ended', (event) => {
+        nextSong();
+    })
 });
 setInterval(updateProgress, 1000);
