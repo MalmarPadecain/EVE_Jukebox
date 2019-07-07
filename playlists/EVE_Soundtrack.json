@@ -1,0 +1,15 @@
+{
+  "name": "EVE Soundtrack",
+  "songs": [
+    {
+      "name": "Unidentified Phenomenon",
+      "link": "https://www.modenstudios.com/EVE/music/Unidentified%20Phenomenon.mp3",
+      "duration": "4:30"
+    },
+    {
+      "name": "The Day After the Strom",
+      "link": "https://www.modenstudios.com/EVE/music/The%20Day%20After%20the%20Storm.mp3",
+      "duration": "4:56"
+    }
+  ]
+}
