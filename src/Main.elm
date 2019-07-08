@@ -144,10 +144,6 @@ view model =
     }
 
 
---viewPlaylist : Model -> Html Msg
---viewPlaylist model =
-
-
 loadJson : String -> Cmd Msg
 loadJson link =
     Http.get
