@@ -1,8 +1,9 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Array exposing (Array)
 import Browser
-import Html exposing (Html, button, div, li, text, ul)
+import Html exposing (Html, audio, button, div, li, text, ul)
+import Html.Attributes exposing (id)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, string, array, map2, map3)
@@ -20,7 +21,7 @@ type alias Song =
 
 type alias Playlist =
     { name : String
-    , playlist : Array Song}
+    , songs : Array Song}
 
 
 type Model =
@@ -36,11 +37,17 @@ type Msg
     | Shuffled (Array Song)
     | Load String
     | Loaded (Result Http.Error Playlist)
+    | ChooseSong Int
+    | Play
+    | TogglePause
+
+
+port control : String -> Cmd msg
 
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Success { playlist = { name = "Empty", playlist = Array.empty }
+    ( Success { playlist = { name = "Empty", songs = Array.empty }
       , index = 0
       }
     , Cmd.none
@@ -56,41 +63,49 @@ main =
         }
 
 
+next : Model -> Model
+next model =
+    case model of
+        Success pl ->
+            if pl.index == Array.length pl.playlist.songs - 1
+            then Success { playlist = pl.playlist, index = 0 }
+            else Success { playlist = pl.playlist, index = pl.index + 1 }
+        Error _ ->
+            model
+
+
+previous : Model -> Model
+previous model =
+    case model of
+        Success pl ->
+            if pl.index == 0
+            then Success { playlist = pl.playlist, index = 0 }
+            else Success { playlist = pl.playlist, index = pl.index + 1 }
+        Error _ ->
+            model
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Next ->
-            case model of
-                Success playlist ->
-                    if playlist.index == Array.length playlist.playlist.playlist - 1
-                    then ( Success { playlist = playlist.playlist, index = 0 }, Cmd.batch [] )
-                    else( Success { playlist = playlist.playlist, index = playlist.index + 1 }, Cmd.batch [] )
-                Error _ ->
-                    (model, Cmd.batch [])
+            update Play (next model)
         Previous ->
-            case model of
-                Success playlist ->
-                    if playlist.index == 0 then
-                        ( Success{ playlist = playlist.playlist, index = Array.length playlist.playlist.playlist - 1 }, Cmd.batch [] )
-
-                    else
-                        ( Success{ playlist = playlist.playlist, index = playlist.index - 1 }, Cmd.batch [] )
-                Error _ ->
-                    (model, Cmd.batch [])
+            update Play (previous model)
         Shuffle ->
             case model of
-                Success playlist ->
-                    ( model, generate Shuffled (shuffle playlist.playlist.playlist) )
+                Success pl ->
+                    ( model, generate Shuffled (shuffle pl.playlist.songs) )
                 Error _ ->
                     (model, Cmd.batch [])
         Shuffled shuffledList ->
-            ( Success{ playlist = { name = "", playlist = shuffledList } , index = 0 }, Cmd.batch [] )
+            ( Success{ playlist = { name = "", songs = shuffledList } , index = 0 }, Cmd.batch [] )
         Load link ->
             ( model, loadJson link)
         Loaded result ->
             case result of
-                Ok lst ->
-                    (Success { playlist = lst , index = 0}, Cmd.none)
+                Ok pl ->
+                    (Success { playlist = pl , index = 0}, Cmd.none)
                 Err err ->
                     case err of
                         Http.BadUrl url ->
@@ -103,45 +118,59 @@ update msg model =
                             (Error (String.fromInt status ++ " returned"), Cmd.none)
                         Http.BadBody body ->
                             (Error ("Bad Body: " ++ body ), Cmd.none)
+        ChooseSong songIndex ->
+            case model of
+                Success pl->
+                    update Play <| Success {playlist = pl.playlist, index = songIndex}
+                Error _ ->
+                    update Play model
+        Play ->
+            (model, control ("play " ++ (currentSong model).link))
+        TogglePause ->
+            (model, control "togglePause")
 
 
-renderList : Model -> Html msg
+renderList : Model -> Html Msg
 renderList model =
     case model of
-        Success playlist ->
-            playlist.playlist.playlist
+        Success pl ->
+            pl.playlist.songs
+                |> Array.indexedMap (\index song -> li [ onClick (ChooseSong index) ] [ text song.name ])
                 |> Array.toList
-                |> List.map (\l -> li [] [ text l.name ])
                 |> ul []
         Error err ->
             div [] [ text err ]
 
 
-currentlyPlaying : Model -> Song
-currentlyPlaying model =
+currentSong : Model -> Song
+currentSong model =
     case model of
-        Success playlist ->
-            case Array.get playlist.index playlist.playlist.playlist of
-                Nothing ->
-                    {name="", link="", duration=""}
-                Just song ->
-                    song
+        Success pl ->
+            Maybe.withDefault {name="", link="", duration=""} <| Array.get pl.index pl.playlist.songs
         Error _ ->
             {name="", link="", duration=""}
 
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "Jukebox"
-    , body =
-        [ button [ onClick Shuffle ] [ text "Shuffle" ]
-        , button [ onClick Previous ] [ text "-" ]
-        , renderList model
-        , div [] [ text ((currentlyPlaying model).name) ]
-        , button [ onClick Next ] [ text "+" ]
-        , button [ onClick (Load "playlists/EVE_Soundtrack.json") ] [text "Load"]
-        ]
-    }
+    case model of
+        Success pl->
+            { title = "Jukebox"
+            , body =
+                [ button [ onClick Shuffle ] [ text "Shuffle" ]
+                , button [ onClick Previous ] [ text "-" ]
+                , button [ onClick Next ] [ text "+" ]
+                , button [ onClick TogglePause ] [ text "Pause" ]
+                , renderList model
+                , div [] [ text (((currentSong model).name) ++ " " ++ String.fromInt pl.index) ]
+                , button [ onClick (Load "playlists/EVE_Soundtrack.json") ] [text "Load"]
+                , audio
+                    [ id "audio" ] []
+                ]
+            }
+        Error msg ->
+            { title = "Jukebox"
+            , body = [ text msg ] }
 
 
 loadJson : String -> Cmd Msg
@@ -158,5 +187,5 @@ songDecoder =
         (field "songs"
             (array (map3 Song
                  (field "name" string)
-                 (field "link" string)
-                 (field "duration" string))))
+                 (field "duration" string)
+                 (field "link" string))))
