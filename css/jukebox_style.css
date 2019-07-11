@@ -34,6 +34,7 @@ body {
   border-image: linear-gradient(326.1deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(215,215,215,0.2) 70%) 1;
   box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.32);
   padding: 0;
+  cursor: default;
 }
 
 
@@ -97,7 +98,7 @@ body {
 .PlaylistContainer {
   background-color: rgba(70, 70, 70, 0.55);
   flex-grow: 0;
-  width: 240px;
+  width: 250px;
   margin-top: 4px;
   display: flex;
   flex-direction: column;
@@ -108,6 +109,12 @@ body {
   font-size: 13px;
   margin-left: 4px;
   margin-top: 2px;
+  cursor: default;
+}
+
+.Playlist:hover {
+  background: rgba(160, 160, 160, 0.35) 8%;
+  color: white;
 }
 
 .TracklistContainer {
@@ -299,8 +306,23 @@ body {
 
 }
 
-::-webkit-scrollbar-button {
-  margin-left: 1px
+/* Buttons */
+::-webkit-scrollbar-button:single-button {
+  background-color: #bbbbbb00;
+  display: block;
+  border-style: solid;
+  height: 6px;
+  width: 6px;
+}
+/* Up */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  border-width: 0 3.5px 3.5px 3.5px;
+  border-color: transparent transparent #c3c3c3 transparent;
+}
+   /* Down */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  border-width: 3.5px 3.5px 0 3.5px;
+  border-color: #c3c3c3 transparent transparent transparent;
 }
 
   hr {
@@ -311,6 +333,23 @@ body {
     margin: 0 0;
     padding: -5;
 }
+
+  #col1head {
+    width: 7%;
+  }
+  #col2head {
+    width: 9.95%;
+    background: rgba(120, 120, 120, 0.2);
+  }
+  #col3head {
+    width: 54.1%;
+  }
+  #col4head {
+    width: 19.8%;
+  }
+  #col5head {
+    width: 10%;
+  }
 
   #col1 {
     width: 7%;
@@ -333,7 +372,7 @@ body {
       border-left: 1px solid rgba(140,140,140,1);
       border-right: 1px solid rgba(140,140,140,1);
       border-top: 1px solid rgba(140,140,140,1);
-      border-bottom: 1px solid rgba(140,140,140,1);
+      border-bottom: 1px solid rgba(140,140,140,0.62);
       border-collapse: collapse;
       background-color: rgba(60, 60, 60, 0.15);
   }
