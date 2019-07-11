@@ -162,11 +162,11 @@ renderTable pl =
                                                                               , td [] [ text song.duration]
                                                                               , td [] []])
         |> Array.toList
-        |> (\l -> l ++ [ tr [] [ td [ id "col1" ] []
-                       , td [ id "col2" ] []
-                       , td [ id "col3" ] []
-                       , td [ id "col4" ] []
-                       , td [ id "col5" ] []]
+        |> (\l -> l ++ [tr [] [ td [ id "col1" ] []
+                     , td [ id "col2" ] []
+                     , td [ id "col3" ] []
+                     , td [ id "col4" ] []
+                     , td [ id "col5" ] []]
         ])
         |> tbody [ class "scrollContent" ]]]
 
