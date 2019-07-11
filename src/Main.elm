@@ -87,47 +87,44 @@ previous model =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of
-        Next ->
-            update Play (next model)
-        Previous ->
-            update Play (previous model)
-        Shuffle ->
-            case model of
-                Success pl ->
+    case model of
+        Success pl ->
+            case msg of
+                Next ->
+                    update Play (next model)
+                Previous ->
+                    update Play (previous model)
+                Shuffle ->
                     ( model, generate Shuffled (shuffle pl.playlist.songs) )
-                Error _ ->
-                    (model, Cmd.batch [])
-        Shuffled shuffledList ->
-            ( Success{ playlist = { name = "", songs = shuffledList } , index = 0 }, Cmd.batch [] )
-        Load link ->
-            ( model, loadJson link)
-        Loaded result ->
-            case result of
-                Ok pl ->
-                    (Success { playlist = pl , index = 0}, Cmd.none)
-                Err err ->
-                    case err of
-                        Http.BadUrl url ->
-                            (Error ("Bad URL: " ++ url), Cmd.none)
-                        Http.Timeout ->
-                            (Error ("Request timed out."), Cmd.none)
-                        Http.NetworkError ->
-                            (Error ("A Network Error occurred"), Cmd.none)
-                        Http.BadStatus status ->
-                            (Error (String.fromInt status ++ " returned"), Cmd.none)
-                        Http.BadBody body ->
-                            (Error ("Bad Body: " ++ body ), Cmd.none)
-        ChooseSong songIndex ->
-            case model of
-                Success pl->
+                Shuffled shuffledList ->
+                    ( Success{ playlist = { name = "", songs = shuffledList } , index = 0 }, Cmd.batch [] )
+                Load link ->
+                    ( model, loadJson link)
+                Loaded result ->
+                    case result of
+                        Ok playlist ->
+                            (Success { playlist = playlist , index = 0}, Cmd.none)
+                        Err err ->
+                            case err of
+                                Http.BadUrl url ->
+                                    (Error ("Bad URL: " ++ url), Cmd.none)
+                                Http.Timeout ->
+                                    (Error ("Request timed out."), Cmd.none)
+                                Http.NetworkError ->
+                                    (Error ("A Network Error occurred"), Cmd.none)
+                                Http.BadStatus status ->
+                                    (Error (String.fromInt status ++ " returned"), Cmd.none)
+                                Http.BadBody body ->
+                                    (Error ("Bad Body: " ++ body ), Cmd.none)
+                ChooseSong songIndex ->
                     update Play <| Success {playlist = pl.playlist, index = songIndex}
-                Error _ ->
-                    update Play model
-        Play ->
-            (model, control ("play " ++ (currentSong model).link))
-        TogglePause ->
-            (model, control "togglePause")
+                Play ->
+                    (model, control ("play " ++ (currentSong model).link))
+                TogglePause ->
+                    (model, control "togglePause")
+        Error _ ->
+            (model, Cmd.none)
+
 
 renderTable : Playlist -> Html Msg
 renderTable pl =
@@ -137,7 +134,7 @@ renderTable pl =
                                            , th [] [ text "Title" ]
                                            , th [] [ text "Duration" ]
                                            , th [] []]]
-    ,pl.songs
+    , pl.songs
         |> Array.indexedMap (\index song -> tr [ onClick (ChooseSong index) ] [ td [] []
                                                                               , td [] [ text (String.fromInt index) ]
                                                                               , td [] [ text song.name ]
