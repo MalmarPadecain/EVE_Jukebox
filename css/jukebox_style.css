@@ -20,9 +20,9 @@ body {
   background-color: rgba(0, 0, 0, 0.74);
   align-self: center;
   width: 700px;
-  height: 450px;
-  margin-top: 95px;
-  margin-left: 640px;
+  height: 470px;
+  margin-top: 245px;
+  margin-left: 340px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -31,7 +31,7 @@ body {
   font-weight: 300;
   border-width: 1.5px;
   border-style: inset;
-  border-image: linear-gradient(327.2deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(215,215,215,0.2) 70%) 1;
+  border-image: linear-gradient(326.1deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(215,215,215,0.2) 70%) 1;
   box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.32);
   padding: 0;
 }
@@ -97,7 +97,7 @@ body {
 .PlaylistContainer {
   background-color: rgba(70, 70, 70, 0.55);
   flex-grow: 0;
-  width: 120px;
+  width: 240px;
   margin-top: 4px;
   display: flex;
   flex-direction: column;
@@ -126,7 +126,6 @@ body {
   flex-grow: 1;
   background-color: rgba(40, 40, 40, 0.5)
 }
-
 
 .Tracklist{
     margin-top: 0px;
@@ -272,6 +271,38 @@ body {
     margin-top: 5px;
   }
 
+  /* width */
+::-webkit-scrollbar {
+  width: 7px;
+  background: rgba(68, 68, 68, 0.4);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border: solid 1px #4e4d4d6b;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 2px 2px #565656;
+  border: solid 1px #0000003d;
+  border-right: solid 0.51px rgba(220, 220, 220, 0.5);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+
+}
+
+::-webkit-scrollbar-button {
+  margin-left: 1px
+}
+
   hr {
     display: block;
     height: 1px;
@@ -298,8 +329,20 @@ body {
     width: 8%;
   }
 
-table {
-    border: 1px solid rgba(140,140,140,1); /*Part of outer border*/
+  table.TracklistHeader {
+      border-left: 1px solid rgba(140,140,140,1);
+      border-right: 1px solid rgba(140,140,140,1);
+      border-top: 1px solid rgba(140,140,140,1);
+      border-bottom: 1px solid rgba(140,140,140,1);
+      border-collapse: collapse;
+      background-color: rgba(60, 60, 60, 0.15);
+  }
+
+table.Tracklist {
+    border-left: 0px solid rgba(140,140,140,1);
+    border-right: 1px solid rgba(140,140,140,1);
+    border-top: 0px solid rgba(140,140,140,1);
+    border-bottom: 1px solid rgba(140,140,140,1);
     border-collapse: collapse;
     background-color: rgba(60, 60, 60, 0.15);
 }
@@ -353,4 +396,72 @@ th {
 tr:hover {
   background: linear-gradient(to bottom, rgba(160, 160, 160, 0) 8%, rgba(160, 160, 160, 0.35) 8%, rgba(160, 160, 160, 0.35) 49%, rgba(160, 160, 160, 0.35) 90%, rgba(160, 160, 160, 0) 90%);
   color: white;
+}
+
+
+
+/*Much of the CSS below this point is from the imaputz Big Four Fixed Table. */
+
+/* define the table content to be scrollable                                              */
+/* set TBODY element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+/* induced side effect is that child TDs no longer accept width: auto                     */
+html>body tbody.scrollContent {
+	display: block;
+	height: 313px;
+	overflow: auto;
+	width: 100%
+}
+
+/* define width of TH elements: 1st, 2nd, and 3rd respectively.          */
+/* Add 16px to last TH for scrollbar padding. All other non-IE browsers. */
+html>body thead.fixedHeader th {
+	width: 200px
+}
+
+html>body thead.fixedHeader th + th {
+	width: 240px
+}
+
+html>body thead.fixedHeader th + th + th {
+	width: 316px
+}
+
+/* define width of TD elements: 1st, 2nd, and 3rd respectively.          */
+/* All other non-IE browsers.                                            */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
+html>body tbody.scrollContent td {
+	width: 200px
+}
+
+html>body tbody.scrollContent td + td {
+	width: 240px
+}
+
+html>body tbody.scrollContent td + td + td {
+	width: 300px
+}
+/* define height and width of scrollable area. Add 16px to width for scrollbar          */
+div.tableContainer {
+	clear: both;
+	height: 285px;
+	overflow: auto;
+	width: 756px
+}
+
+/* Reset overflow value to hidden for all non-IE browsers. */
+html>body div.tableContainer {
+	overflow: hidden;
+	width: 756px
+}
+
+/* All other non-IE browsers.                                        */
+html>body div.tableContainer table {
+	width: 756px
+}
+
+/* set THEAD element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+html>body thead.fixedHeader tr {
+	display: block
 }
