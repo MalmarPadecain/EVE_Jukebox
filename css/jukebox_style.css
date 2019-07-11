@@ -26,7 +26,7 @@ body {
   width: 700px;
   height: 450px;
   margin-top: 95px;
-  margin-left: 900px;
+  margin-left: 640px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -117,13 +117,23 @@ body {
 .TracklistContainer {
   flex-grow: 4.2;
   display: flex;
+  flex-direction: column;
   text-align: left;
   background: rgba(0, 0, 0, 0);
 }
 
+.TracklistHeader {
+  margin-top: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 0px;
+  flex-grow: 1;
+  background-color: rgba(40, 40, 40, 0.5)
+}
+
 
 .Tracklist{
-    margin-top: 4px;
+    margin-top: 0px;
     margin-left: 4px;
     margin-right: 4px;
     flex-grow: 1;

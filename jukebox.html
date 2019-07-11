@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="jukeboxMain" id=LowerSeparator>
+    <div class="jukeboxMain" id="LowerSeparator">
       <hr/>
       <div>
         <img src="images/doubleChevron.png" id="doubleChevron">
@@ -73,14 +73,16 @@
         </div>
       </div>
       <div class="TracklistContainer">
+          <table class="TracklistHeader">
+            <tr>
+              <th id="col1"><div class="thBorderRight">&nbsp;</div></th>
+              <th id="col2" class="thBorderParent">Number<div class="thBorderRight">&nbsp;</div></th>
+              <th id="col3">Title<div class="thBorderRight">&nbsp;</div></th>
+              <th id="col4">Duration<div class="thBorderRight">&nbsp;</div></th>
+              <th id="col5"> </th>
+            </tr>
+          </table>
           <table class="Tracklist">
-              <tr>
-                <th id="col1"><div class="thBorderRight">&nbsp;</div></th>
-                <th id="col2" class="thBorderParent">Number<div class="thBorderRight">&nbsp;</div></th>
-                <th id="col3">Title<div class="thBorderRight">&nbsp;</div></th>
-                <th id="col4">Duration<div class="thBorderRight">&nbsp;</div></th>
-                <th id="col5"> </th>
-              </tr>
               <tr>
                 <td> </td>
                 <td>6</td>
@@ -185,6 +187,13 @@
                 <td id="title" onclick="play('music/Borderlines.mp3')">Inter-Spatial-Flexure</td>
                 <td>06:06</td>
                 <td> </td>
+              </tr>
+              <tr>
+                <td id="col1"><div>&nbsp;</div></th>
+                <td id="col2" class="thBorderParent"><div>&nbsp;</div></th>
+                <td id="col3"><div>&nbsp;</div></th>
+                <td id="col4"><div>&nbsp;</div></th>
+                <td id="col5"> </th>
               </tr>
           </table>
       </div>
