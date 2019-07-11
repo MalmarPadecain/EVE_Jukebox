@@ -2,8 +2,8 @@ port module Main exposing (..)
 
 import Array exposing (Array)
 import Browser
-import Html exposing (Html, audio, button, div, li, text, ul)
-import Html.Attributes exposing (id)
+import Html exposing (Html, audio, button, div, table, tbody, thead, td, th, tr, text)
+import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, string, array, map2, map3)
@@ -129,17 +129,21 @@ update msg model =
         TogglePause ->
             (model, control "togglePause")
 
-
-renderList : Model -> Html Msg
-renderList model =
-    case model of
-        Success pl ->
-            pl.playlist.songs
-                |> Array.indexedMap (\index song -> li [ onClick (ChooseSong index) ] [ text song.name ])
-                |> Array.toList
-                |> ul []
-        Error err ->
-            div [] [ text err ]
+renderTable : Playlist -> Html Msg
+renderTable pl =
+    -- index comes from the map not from the model. will this lead to problems?
+    table [ class "Tracklist" ] [ thead [] [ tr [] [ th [] []
+                                           , th [] [ text "Number" ]
+                                           , th [] [ text "Title" ]
+                                           , th [] [ text "Duration" ]
+                                           , th [] []]]
+    ,pl.songs
+        |> Array.indexedMap (\index song -> tr [ onClick (ChooseSong index) ] [ td [] []
+                                                                              , td [] [ text (String.fromInt index) ]
+                                                                              , td [] [ text song.name ]
+                                                                              , td [] [ text song.duration]])
+        |> Array.toList
+        |> tbody []]
 
 
 currentSong : Model -> Song
@@ -157,12 +161,18 @@ view model =
         Success pl->
             { title = "Jukebox"
             , body =
-                [ button [ onClick Shuffle ] [ text "Shuffle" ]
+                [ div [ class "jukeboxMain" ] [ text "1" ]
+                , div [ class "jukeboxMain" ] [ text "2" ]
+                , div [ class "jukeboxMain" ] [ text "3" ]
+                , div [ class "jukeboxMain" ] [ text "4" ]
+                , div [ class "jukeboxMain"
+                      , id "listContainer" ] [ div [ class "PlaylistContainer" ] [ text "5.1" ]
+                                                   , div [ class "TracklistContainer"] [ renderTable pl.playlist ]]
+                , div [ class "jukeboxMain" ] [ text "6" ]
+                , button [ onClick Shuffle ] [ text "Shuffle" ]
                 , button [ onClick Previous ] [ text "-" ]
                 , button [ onClick Next ] [ text "+" ]
                 , button [ onClick TogglePause ] [ text "Pause" ]
-                , renderList model
-                , div [] [ text (((currentSong model).name) ++ " " ++ String.fromInt pl.index) ]
                 , button [ onClick (Load "playlists/EVE_Soundtrack.json") ] [text "Load"]
                 , audio
                     [ id "audio" ] []
