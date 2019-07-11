@@ -1,5 +1,5 @@
 body {
-  background-image: url("https://i.imgur.com/FOtZvBc.jpg");
+  background-image: url("https://i.imgur.com/jggDsyr.jpg");
   background-repeat: no-repeat, repeat;
   background-size: cover;
   color: rgb(200,200,200);
@@ -21,8 +21,8 @@ body {
   align-self: center;
   width: 700px;
   height: 470px;
-  margin-top: 245px;
-  margin-left: 340px;
+  margin-top: 95px;
+  margin-left: 175px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -98,7 +98,7 @@ body {
 .PlaylistContainer {
   background-color: rgba(70, 70, 70, 0.55);
   flex-grow: 0;
-  width: 250px;
+  width: 110px;
   margin-top: 4px;
   display: flex;
   flex-direction: column;
@@ -165,7 +165,6 @@ body {
 
   .EVEButton {
     background-image: linear-gradient(-135deg, #0C0C0C, #0C0C0C, #0C0C0C, #0C0C0C, #202020, #202020);
-
     height: 19px;
     border-style: inset;
     border-width: 1px;
@@ -303,7 +302,6 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-
 }
 
 /* Buttons */
@@ -352,20 +350,20 @@ body {
   }
 
   #col1 {
-    width: 7%;
+    width: 35.4px;
   }
   #col2 {
-    width: 10%;
+    width: 52.7px;
     background: rgba(120, 120, 120, 0.2);
   }
   #col3 {
-    width: 55%;
+    width: 313px;
   }
   #col4 {
-    width: 20%;
+    width: 110px;
   }
   #col5 {
-    width: 8%;
+    width: 41px;
   }
 
   table.TracklistHeader {
@@ -437,38 +435,13 @@ tr:hover {
   color: white;
 }
 
-
-
-/*Much of the CSS below this point is from the imaputz Big Four Fixed Table. */
-
-/* define the table content to be scrollable                                              */
-/* set TBODY element to have block level attributes. All other non-IE browsers            */
-/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
-/* induced side effect is that child TDs no longer accept width: auto                     */
 html>body tbody.scrollContent {
 	display: block;
 	height: 313px;
 	overflow-y: scroll;
-	width: 100%
 }
 
-/* define width of TH elements: 1st, 2nd, and 3rd respectively.          */
-/* Add 16px to last TH for scrollbar padding. All other non-IE browsers. */
-html>body thead.fixedHeader th {
-	width: 200px
-}
-
-html>body thead.fixedHeader th + th {
-	width: 240px
-}
-
-html>body thead.fixedHeader th + th + th {
-	width: 316px
-}
-
-/* define width of TD elements: 1st, 2nd, and 3rd respectively.          */
-/* All other non-IE browsers.                                            */
-/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
+/* define width of TD elements: 1st, 2nd, and 3rd respectively.
 html>body tbody.scrollContent td {
 	width: 200px
 }
@@ -480,27 +453,4 @@ html>body tbody.scrollContent td + td {
 html>body tbody.scrollContent td + td + td {
 	width: 300px
 }
-/* define height and width of scrollable area. Add 16px to width for scrollbar          */
-div.tableContainer {
-	clear: both;
-	height: 285px;
-	overflow-y: scroll;
-	width: 756px
-}
-
-/* Reset overflow value to hidden for all non-IE browsers. */
-html>body div.tableContainer {
-	overflow: hidden;
-	width: 756px
-}
-
-/* All other non-IE browsers.                                        */
-html>body div.tableContainer table {
-	width: 756px
-}
-
-/* set THEAD element to have block level attributes. All other non-IE browsers            */
-/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
-html>body thead.fixedHeader tr {
-	display: block
-}
+*/
