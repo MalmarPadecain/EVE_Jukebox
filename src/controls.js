@@ -1,7 +1,6 @@
 window.app.ports.control.subscribe(function (msg) {
     let command = msg.split(' ')[0];
     let params = msg.split(' ').slice(1);
-    console.log("Command:" + command + "\nParams: " + params.toString());
     switch (command) {
         case "togglePause":
             togglePause();
