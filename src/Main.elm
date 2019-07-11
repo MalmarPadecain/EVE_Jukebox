@@ -2,8 +2,8 @@ port module Main exposing (..)
 
 import Array exposing (Array)
 import Browser
-import Html exposing (Html, audio, button, div, table, tbody, thead, td, th, tr, text)
-import Html.Attributes exposing (class, id)
+import Html exposing (Html, audio, button, div, hr, img, input, table, tbody, td, th, tr, text)
+import Html.Attributes exposing (class, id, max, min, src, type_, value)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, string, array, map2, map3)
@@ -129,18 +129,46 @@ update msg model =
 renderTable : Playlist -> Html Msg
 renderTable pl =
     -- index comes from the map not from the model. will this lead to problems?
-    table [ class "Tracklist" ] [ thead [] [ tr [] [ th [] []
-                                           , th [] [ text "Number" ]
-                                           , th [] [ text "Title" ]
-                                           , th [] [ text "Duration" ]
-                                           , th [] []]]
-    , pl.songs
+    div [ class "TracklistContainer" ]
+        [ table [ class "TracklistHeader" ]
+            [ tr []
+                [ th [ id "col1head" ]
+                    [ div [ class "thBorderRight" ]
+                        [ text " " ]
+                    ]
+                , th [ class "thBorderParent", id "col2head" ]
+                    [ text "Number                        "
+                    , div [ class "thBorderRight" ]
+                        [ text " " ]
+                    ]
+                , th [ id "col3head" ]
+                    [ text "Title                        "
+                    , div [ class "thBorderRight" ]
+                        [ text " " ]
+                    ]
+                , th [ id "col4head" ]
+                    [ text "Duration                        "
+                    , div [ class "thBorderRight" ]
+                        [ text " " ]
+                    ]
+                , th [ id "col5head" ]
+                    []
+                ]
+            ]
+    , table [ class "Tracklist" ] [ pl.songs
         |> Array.indexedMap (\index song -> tr [ onClick (ChooseSong index) ] [ td [] []
                                                                               , td [] [ text (String.fromInt index) ]
                                                                               , td [] [ text song.name ]
-                                                                              , td [] [ text song.duration]])
+                                                                              , td [] [ text song.duration]
+                                                                              , td [] []])
         |> Array.toList
-        |> tbody []]
+        |> (\l -> l ++ [tr [] [ td [ id "col1" ] []
+                     , td [ id "col2" ] []
+                     , td [ id "col3" ] []
+                     , td [ id "col4" ] []
+                     , td [ id "col5" ] []]
+        ])
+        |> tbody [ class "scrollContent" ]]]
 
 
 currentSong : Model -> Song
@@ -157,22 +185,89 @@ view model =
     case model of
         Success pl->
             { title = "Jukebox"
-            , body =
-                [ div [ class "jukeboxMain" ] [ text "1" ]
-                , div [ class "jukeboxMain" ] [ text "2" ]
-                , div [ class "jukeboxMain" ] [ text "3" ]
-                , div [ class "jukeboxMain" ] [ text "4" ]
-                , div [ class "jukeboxMain"
-                      , id "listContainer" ] [ div [ class "PlaylistContainer" ] [ text "5.1" ]
-                                                   , div [ class "TracklistContainer"] [ renderTable pl.playlist ]]
-                , div [ class "jukeboxMain" ] [ text "6" ]
-                , button [ onClick Shuffle ] [ text "Shuffle" ]
-                , button [ onClick Previous ] [ text "-" ]
-                , button [ onClick Next ] [ text "+" ]
-                , button [ onClick TogglePause ] [ text "Pause" ]
-                , button [ onClick (Load "playlists/EVE_Soundtrack.json") ] [text "Load"]
-                , audio
-                    [ id "audio" ] []
+            , body = [
+                div [ class "jukeboxWrapper" ]
+                    [ div [ class "jukeboxMain", id "TitleBox" ]
+                        [ div [ class "MainTextPos" ]
+                            [ text "Jukebox        " ]
+                        ]
+                    , div [ class "jukeboxMain", id "UpperSeparator" ]
+                        [ hr []
+                            []
+                        ]
+                    , div [ class "jukeboxMain", id "NowPlayingContainerContainer" ]
+                        [ div [ id "NowPlayingContainer" ]
+                            [ div [ class "NowPlaying", id "TimeElapsed" ]
+                                [ text "03:49            " ]
+                            , div [ class "NowPlaying", id "SongName" ]
+                                [ text (currentSong model).name ]
+                            ]
+                        ]
+                    , div [ class "jukeboxMain", id "buttonList" ]
+                        [ div [ class "controlBtnContainer" ]
+                            [ img [ class "controlBtn", src "images/btnBack.jpg", onClick Previous ]
+                                []
+                            , img [ class "controlBtn", src "images/btnPlay.jpg", onClick TogglePause ]
+                                []
+                            , img [ class "controlBtn", src "images/btnFwd.jpg" , onClick Next]
+                                []
+                            , img [ class "controlBtn", id "btnShuffle", src "images/btnShuffleOff.jpg", onClick Shuffle ]
+                                []
+                            ]
+                        , div [ class "volumeContainer" ]
+                            [ div [ class "volumeSymbol" ]
+                                [ img [ src "images/lowVolume.png" ]
+                                    []
+                                ]
+                            , div []
+                                [ input [ class "slider", id "myRange", max "100", min "1", type_ "range", value "50" ]
+                                    []
+                                ]
+                            , div [ class "volumeSymbol" ]
+                                [ img [ src "images/highVolume.png" ]
+                                    []
+                                ]
+                            ]
+                        ]
+                    , div [ class "jukeboxMain", id "LowerSeparator" ]
+                        [ hr []
+                            []
+                        , div []
+                            [ img [ id "doubleChevron", src "images/doubleChevron.png" ]
+                                []
+                            ]
+                        ]
+                    , div [ class "jukeboxMain", id "ListContainer" ]
+                        [ div [ class "PlaylistContainer" ]
+                            [ div [ class "Playlist" , onClick (Load "./playlists/EVE_Soundtrack.json")]
+                                [ text "EVE Soundtrack" ]
+                            , div [ class "Playlist" ]
+                                [ text "Login Screens" ]
+                            , div [ class "Playlist" ]
+                                [ text "EVE Valkyrie" ]
+                            , div [ class "Playlist" ]
+                                [ text "Peace Logs" ]
+                            , div [ class "Playlist" ]
+                                [ text "War Logs" ]
+                            , div [ class "Playlist" ]
+                                [ text "Dead Logs" ]
+                            ]
+                        , renderTable pl.playlist
+                            ]
+                    , div [ class "jukeboxMain", id "BtnContainer" ]
+                        [ div [ class "NewBtnContainer" ]
+                            [ div [ id "newBtn" ]
+                                [ button [ class "EVEButton" ]
+                                    [ text "New" ]
+                                ]
+                            ]
+                        , div [ class "AddBtnContainer" ]
+                            [ button [ class "EVEButton" ]
+                                [ text "Add Tracks" ]
+                            ]
+                        ]
+                    , audio [ id "audio" ] []
+                    ]
                 ]
             }
         Error msg ->
