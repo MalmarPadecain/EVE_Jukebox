@@ -8,11 +8,11 @@ body {
 
 @font-face {
     font-family: 'EveSans';
-    src: url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.eot');
-    src: url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.eot?#iefix') format('embedded-opentype'),
-         url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.woff') format('woff'),
-         url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.ttf') format('truetype'),
-         url('https://ashyin.space/wp-content/themes/author/assets/font-awesome/webfonts/evesans.svg#webfont') format('svg');
+    src: url('fonts/evesans.eot');
+    src: url('fonts/evesans.eot?#iefix') format('embedded-opentype'),
+         url('fonts/evesans.woff') format('woff'),
+         url('fonts/evesans.ttf') format('truetype'),
+         url('fonts/evesans.svg#webfont') format('svg');
 }
 
 
