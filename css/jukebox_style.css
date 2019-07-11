@@ -448,7 +448,7 @@ tr:hover {
 html>body tbody.scrollContent {
 	display: block;
 	height: 313px;
-	overflow: auto;
+	overflow-y: scroll;
 	width: 100%
 }
 
@@ -484,7 +484,7 @@ html>body tbody.scrollContent td + td + td {
 div.tableContainer {
 	clear: both;
 	height: 285px;
-	overflow: auto;
+	overflow-y: scroll;
 	width: 756px
 }
 
