@@ -79,8 +79,8 @@ previous model =
     case model of
         Success pl ->
             if pl.index == 0
-            then Success { playlist = pl.playlist, index = 0 }
-            else Success { playlist = pl.playlist, index = pl.index + 1 }
+            then Success { playlist = pl.playlist, index = Array.length pl.playlist.songs - 1 }
+            else Success { playlist = pl.playlist, index = pl.index - 1 }
         Error _ ->
             model
 
