@@ -10,7 +10,29 @@
 
 <body>
 
-  <div class="test"> EVE Online Jukebox Project </div>
+  <div id="About"><a href="#open-modal">About: EVE Online Jukebox Project</a></div>
+
+  <div id="open-modal" class="modal-window">
+    <div>
+      <a href="#modal-close" title="Close" class="modal-close">CLOSE &times;</a>
+      <h1 class="modalText">The EVE Online Jukebox Project</h1>
+      <div class="modalText">
+        <hr>
+        <p>
+          Bring back the good old times of EVE with this recreation of the EVE Jukebox with CSS.
+        </p>
+      </br>
+        <p id="smallText">
+          EVE Online and the EVE logo are the registered trademarks of CCP hf. All rights are reserved worldwide. All other trademarks are the property of their respective owners. EVE Online, the EVE logo, EVE and all associated logos and designs are the intellectual property of CCP hf. All artwork, screenshots, characters, vehicles, storylines, world facts or other recognizable features of the intellectual property relating to these trademarks are likewise the intellectual property of CCP hf. CCP hf. has granted permission to New Eden Report to use EVE Online and all associated logos and designs for promotional and information purposes on its website but does not endorse, and is not in any way affiliated with, New Eden Report. CCP is in no way responsible for the content on or functioning of this website, nor can it be liable for any damage arising from the use of this website.
+        </p>
+      </br>
+        <p id="stylingBy">
+          Styling by Ashley Traynor </br> Backend by Malmar Padecain </br></hr>
+        </p>
+      </div>
+    </div>
+  </div>
+
 
   <div class="jukeboxWrapper">
     <div class="jukeboxMain" id="TitleBox">
@@ -40,7 +62,7 @@
           <img src="images/lowVolume.png">
         </div>
         <div>
-          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          <input type="range" min="1" max="100" value="80" class="slider" id="myRange">
         </div>
         <div class="volumeSymbol">
           <img src="images/highVolume.png">

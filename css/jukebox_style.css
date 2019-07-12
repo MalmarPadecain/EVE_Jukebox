@@ -11,6 +11,7 @@ body {
   src: url('fonts/evesans.eot?#iefix') format('embedded-opentype'), url('fonts/evesans.woff') format('woff'), url('fonts/evesans.ttf') format('truetype'), url('fonts/evesans.svg#webfont') format('svg');
 }
 
+
 .jukeboxWrapper {
   background-color: rgba(0, 0, 0, 0.74);
   align-self: center;
@@ -21,7 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  font-family: EveSans;
+  font-family: EveSans, Sans-Serif;
   font-size: 12px;
   font-weight: 300;
   border-width: 1.5px;
@@ -168,7 +169,7 @@ body {
   border-bottom-color: rgba(255, 255, 255, 0.2);
   text-align: center;
   display: inline-block;
-  font-family: EveSans;
+  font-family: EveSans, Sans-Serif;
   color: rgb(190, 190, 190);
   font-size: 13px;
   font-weight: 100;
@@ -474,3 +475,83 @@ html>body tbody.scrollContent td + td + td {
 	width: 300px
 }
 */
+
+.modal-window {
+  position: fixed;
+  background-color: rgba(200, 200, 200, 0.75);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modal-window:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-window>div {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 2rem;
+  background: #fff;
+  color: #444;
+}
+
+.modal-window header {
+  font-weight: bold;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+  font-family: EveSans, Sans-Serif;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+
+.modalText  {
+  font-family: EveSans, Sans-Serif;
+}
+
+#About {
+  font-family: EVESans, Sans-Serif;
+  text-decoration: none;
+  color:black;
+  font-weight: 400;
+}
+
+#smallText {
+  font-weight: 200;
+  font-size: 8px;
+}
+
+#stylingBy {
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+  color: Black;
+}
