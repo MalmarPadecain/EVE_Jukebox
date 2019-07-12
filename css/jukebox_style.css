@@ -2,19 +2,14 @@ body {
   background-image: url("https://i.imgur.com/jggDsyr.jpg");
   background-repeat: no-repeat, repeat;
   background-size: cover;
-  color: rgb(200,200,200);
+  color: rgb(200, 200, 200);
 }
-
 
 @font-face {
-    font-family: 'EveSans';
-    src: url('fonts/evesans.eot');
-    src: url('fonts/evesans.eot?#iefix') format('embedded-opentype'),
-         url('fonts/evesans.woff') format('woff'),
-         url('fonts/evesans.ttf') format('truetype'),
-         url('fonts/evesans.svg#webfont') format('svg');
+  font-family: 'EveSans';
+  src: url('fonts/evesans.eot');
+  src: url('fonts/evesans.eot?#iefix') format('embedded-opentype'), url('fonts/evesans.woff') format('woff'), url('fonts/evesans.ttf') format('truetype'), url('fonts/evesans.svg#webfont') format('svg');
 }
-
 
 .jukeboxWrapper {
   background-color: rgba(0, 0, 0, 0.74);
@@ -26,17 +21,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  font-family: EveSans;
+  font-family: EveSans, Sans-Serif;
   font-size: 12px;
   font-weight: 300;
   border-width: 1.5px;
   border-style: inset;
-  border-image: linear-gradient(326.1deg, rgba(0,0,0,0) 50%, rgba(215,215,215,0.75) 20%, rgba(215,215,215,0.2) 70%) 1;
-  box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.32);
+  border-image: linear-gradient(326.1deg, rgba(0, 0, 0, 0) 50%, rgba(215, 215, 215, 0.75) 20%, rgba(215, 215, 215, 0.2) 70%) 1;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.32);
   padding: 0;
   cursor: default;
 }
-
 
 .jukeboxMain {
   background-color: rgba(45, 45, 45, 0.5);
@@ -65,9 +59,9 @@ body {
 
 #NowPlayingContainer {
   background-color: rgba(70, 70, 70, 0.55);
-  -webkit-box-shadow: inset 3px 3px 7px 0px rgba(0,0,0,0.25);
-  -moz-box-shadow: inset 3px 3px 7px 0px rgba(0,0,0,0.25);
-  box-shadow: inset 3px 3px 7px 0px rgba(0,0,0,0.25);
+  -webkit-box-shadow: inset 3px 3px 7px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 3px 3px 7px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 3px 3px 7px 0px rgba(0, 0, 0, 0.25);
   height: 20px;
   display: flex;
   flex-direction: row;
@@ -134,156 +128,160 @@ body {
   background-color: rgba(40, 40, 40, 0.5)
 }
 
-.Tracklist{
-    margin-top: 0px;
-    margin-left: 4px;
-    margin-right: 4px;
-    flex-grow: 1;
-    background-color: rgba(40, 40, 40, 0.5)
-  }
+.Tracklist {
+  margin-top: 0px;
+  margin-left: 4px;
+  margin-right: 4px;
+  flex-grow: 1;
+  background-color: rgba(40, 40, 40, 0.5)
+}
 
-  #BtnContainer{
-    display: flex;
-    flex-direction: row;
-    background: rgba(0, 0, 0, 0);
-  }
+#BtnContainer {
+  display: flex;
+  flex-direction: row;
+  background: rgba(0, 0, 0, 0);
+}
 
-  .NewBtnContainer {
-    background-color: rgba(0, 0, 0, 0);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
+.NewBtnContainer {
+  background-color: rgba(0, 0, 0, 0);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
-  .AddBtnContainer {
-    flex-grow:7.1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
+.AddBtnContainer {
+  flex-grow: 7.1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
-  .EVEButton {
-    background-image: linear-gradient(-135deg, #0C0C0C, #0C0C0C, #0C0C0C, #0C0C0C, #202020, #202020);
-    height: 19px;
-    border-style: inset;
-    border-width: 1px;
-    border-left-color: rgba(0, 0, 0, 0.2);
-    border-right-color: rgba(200, 200, 200, 0.2);
-    border-top-color: rgba(0, 0, 0, 0.2);
-    border-bottom-color: rgba(255, 255, 255, 0.2);
-    text-align: center;
-    display: inline-block;
-    font-family: EveSans;
-    color: rgb(190, 190, 190);
-    font-size: 13px;
-    font-weight: 100;
-    margin-top: 1px;
-    margin-bottom: 1px;
-    outline: none;
-  }
+.EVEButton {
+  background-image: linear-gradient(-135deg, #0C0C0C, #0C0C0C, #0C0C0C, #0C0C0C, #202020, #202020);
+  height: 19px;
+  border-style: inset;
+  border-width: 1px;
+  border-left-color: rgba(0, 0, 0, 0.2);
+  border-right-color: rgba(200, 200, 200, 0.2);
+  border-top-color: rgba(0, 0, 0, 0.2);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  display: inline-block;
+  font-family: EveSans, Sans-Serif;
+  color: rgb(190, 190, 190);
+  font-size: 13px;
+  font-weight: 100;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  outline: none;
+}
 
-  .controlBtn {
-    box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.18);
-    margin-left: 2px;
-    border: 1px solid rgba(215,215,215,0)
-  }
+.controlBtn {
+  box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.18);
+  margin-left: 2px;
+  border: 1px solid rgba(215, 215, 215, 0)
+}
 
-  #btnShuffle {
-    margin-left: 8px;
-  }
+#btnShuffle {
+  margin-left: 8px;
+}
 
-  .volumeContainer {
-    align-self: flex-end;
-    flex-direction: row;
-    display:flex;
-    margin-right: 4px;
-    margin-bottom: 2px;
-    width: 95px;
-  }
+.volumeContainer {
+  align-self: flex-end;
+  flex-direction: row;
+  display: flex;
+  margin-right: 4px;
+  margin-bottom: 2px;
+  width: 95px;
+}
 
-  .volumeSymbol {
-    margin-left: 2px;
-    margin-right: 2px;
-  }
+.volumeSymbol {
+  margin-left: 2px;
+  margin-right: 2px;
+}
 
-  .slider {
-    -webkit-appearance: none;
-    width: 95%;
-    height: 8px;
-    background: rgba(0,0,0,0);
-    border: 1px solid rgba(55,55,55,1);
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-    margin-top: 0px;
-    margin-right: 3px;
-    margin-left: 1px;
-    outline: none;
-  }
+.slider {
+  -webkit-appearance: none;
+  width: 95%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(55, 55, 55, 1);
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  margin-top: 0px;
+  margin-right: 3px;
+  margin-left: 1px;
+  outline: none;
+}
 
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgb(194,207,215);
-    background: radial-gradient(circle, rgba(194,207,215,1) 1%, rgba(89,107,111,1) 50%, rgba(81,102,111,1) 80%);
-    cursor: pointer;
-    outline: none;
-    box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.7);
-  }
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgb(194, 207, 215);
+  background: radial-gradient(circle, rgba(194, 207, 215, 1) 1%, rgba(89, 107, 111, 1) 50%, rgba(81, 102, 111, 1) 80%);
+  cursor: pointer;
+  outline: none;
+  box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.7);
+}
 
-  .slider::-moz-range-thumb {
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgb(194,207,215);
-    background: radial-gradient(circle, rgba(194,207,215,1) 1%, rgba(89,107,111,1) 50%, rgba(81,102,111,1) 80%);
-    cursor: pointer;
-    outline: none;
-    box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.7);
-  }
+.slider::-moz-range-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgb(194, 207, 215);
+  background: radial-gradient(circle, rgba(194, 207, 215, 1) 1%, rgba(89, 107, 111, 1) 50%, rgba(81, 102, 111, 1) 80%);
+  cursor: pointer;
+  outline: none;
+  box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.7);
+}
 
-  .controlBtnContainer {
-    align-self: flex-start;
-    display:inline-block;
-  }
+.controlBtnContainer {
+  align-self: flex-start;
+  display: inline-block;
+}
 
-  #buttonList {
-    background-color: rgba(0, 0, 0, 0);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 6px;
-  }
+#buttonList {
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 6px;
+}
 
-  #UpperSeparator {
-    padding-left: 0px;
-    padding-right: 0px;
-    background-color: rgba(0, 0, 0, 0);
-    margin-top: 1px;
-  }
+#UpperSeparator {
+  padding-left: 0px;
+  padding-right: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 1px;
+}
 
-  #LowerSeparator {
-    padding-left: 0px;
-    padding-right: 0px;
-    background-color: rgba(0, 0, 0, 0);
-  }
+#LowerSeparator {
+  padding-left: 0px;
+  padding-right: 0px;
+  background-color: rgba(0, 0, 0, 0);
+}
 
-  #doubleChevron {
-    margin-left: 2px;
-    margin-top: 5px;
-  }
+#doubleChevron {
+  margin-left: 2px;
+  margin-top: 5px;
+}
 
-  /* width */
+
+/* width */
+
 ::-webkit-scrollbar {
   width: 7px;
   background: rgba(68, 68, 68, 0.4);
 }
 
+
 /* Track */
+
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
   border: solid 1px #4e4d4d6b;
@@ -293,18 +291,23 @@ body {
   background: rgba(0, 0, 0, 0.1);
 }
 
+
 /* Handle */
+
 ::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 2px 2px #565656;
   border: solid 1px #0000003d;
   border-right: solid 0.51px rgba(220, 220, 220, 0.5);
 }
 
+
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-}
+
+::-webkit-scrollbar-thumb:hover {}
+
 
 /* Buttons */
+
 ::-webkit-scrollbar-button:single-button {
   background-color: #bbbbbb00;
   display: block;
@@ -312,84 +315,100 @@ body {
   height: 6px;
   width: 6px;
 }
+
+
 /* Up */
+
 ::-webkit-scrollbar-button:single-button:vertical:decrement {
   border-width: 0 3.5px 3.5px 3.5px;
   border-color: transparent transparent #c3c3c3 transparent;
 }
-   /* Down */
+
+
+/* Down */
+
 ::-webkit-scrollbar-button:single-button:vertical:increment {
   border-width: 3.5px 3.5px 0 3.5px;
   border-color: #c3c3c3 transparent transparent transparent;
 }
 
-  hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid rgba(215,215,215,0.20);
-    margin: 0 0;
-    padding: -5;
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgba(215, 215, 215, 0.20);
+  margin: 0 0;
+  padding: -5;
 }
 
-  #col1head {
-    width: 7%;
-  }
-  #col2head {
-    width: 9.95%;
-    background: rgba(120, 120, 120, 0.2);
-  }
-  #col3head {
-    width: 54.1%;
-  }
-  #col4head {
-    width: 19.8%;
-  }
-  #col5head {
-    width: 10%;
-  }
+#col1head {
+  width: 7%;
+}
 
-  #col1 {
-    width: 35.4px;
-  }
-  #col2 {
-    width: 52.7px;
-    background: rgba(120, 120, 120, 0.2);
-  }
-  #col3 {
-    width: 313px;
-  }
-  #col4 {
-    width: 110px;
-  }
-  #col5 {
-    width: 41px;
-  }
+#col2head {
+  width: 9.95%;
+  background: rgba(120, 120, 120, 0.2);
+}
 
-  table.TracklistHeader {
-      border-left: 1px solid rgba(140,140,140,1);
-      border-right: 1px solid rgba(140,140,140,1);
-      border-top: 1px solid rgba(140,140,140,1);
-      border-bottom: 1px solid rgba(140,140,140,0.62);
-      border-collapse: collapse;
-      background-color: rgba(60, 60, 60, 0.15);
-  }
+#col3head {
+  width: 54.1%;
+}
+
+#col4head {
+  width: 19.8%;
+}
+
+#col5head {
+  width: 10%;
+}
+
+#col1 {
+  width: 35.4px;
+}
+
+#col2 {
+  width: 52.7px;
+  background: rgba(120, 120, 120, 0.2);
+}
+
+#col3 {
+  width: 313px;
+}
+
+#col4 {
+  width: 110px;
+}
+
+#col5 {
+  width: 41px;
+}
+
+table.TracklistHeader {
+  border-left: 1px solid rgba(140, 140, 140, 1);
+  border-right: 1px solid rgba(140, 140, 140, 1);
+  border-top: 1px solid rgba(140, 140, 140, 1);
+  border-bottom: 1px solid rgba(140, 140, 140, 0.62);
+  border-collapse: collapse;
+  background-color: rgba(60, 60, 60, 0.15);
+}
 
 table.Tracklist {
-    border-left: 0px solid rgba(140,140,140,1);
-    border-right: 1px solid rgba(140,140,140,1);
-    border-top: 0px solid rgba(140,140,140,1);
-    border-bottom: 1px solid rgba(140,140,140,1);
-    border-collapse: collapse;
-    background-color: rgba(60, 60, 60, 0.15);
+  border-left: 0px solid rgba(140, 140, 140, 1);
+  border-right: 1px solid rgba(140, 140, 140, 1);
+  border-top: 0px solid rgba(140, 140, 140, 1);
+  border-bottom: 1px solid rgba(140, 140, 140, 1);
+  border-collapse: collapse;
+  background-color: rgba(60, 60, 60, 0.15);
 }
 
 tr {
-    border-top: 1px solid rgba(140,140,140,1); /*Part of outer border*/
+  border-top: 1px solid rgba(140, 140, 140, 1);
+  /*Part of outer border*/
 }
 
-tr + tr {
-    border-top: 1px solid rgba(140,140,140,0.6); /*Part of outer border*/
+tr+tr {
+  border-top: 1px solid rgba(140, 140, 140, 0.6);
+  /*Part of outer border*/
 }
 
 td {
@@ -400,8 +419,8 @@ td {
     height: 17px;
 }
 
-td + td {
-    border-left: 1px solid rgba(117,117,117,0.6);
+td+td {
+  border-left: 1px solid rgba(117, 117, 117, 0.6);
 }
 
 th:last-child {
@@ -413,7 +432,7 @@ tr td:nth-child(2) {
 }
 
 th {
-  border-right: 1px solid rgba(117,117,117,0.6);
+  border-right: 1px solid rgba(117, 117, 117, 0.6);
   font-weight: 400;
   padding-left: 4px;
   padding-bottom: 0px;
@@ -422,7 +441,7 @@ th {
 }
 
 .thBorderRight {
-  border-right: 1px solid rgba(117,117,117,0.6);
+  border-right: 1px solid rgba(117, 117, 117, 0.6);
   margin-right: 2px;
   display: inline-block;
   position: relative;
@@ -436,10 +455,11 @@ tr:hover {
 }
 
 html>body tbody.scrollContent {
-	display: block;
-	height: 313px;
-	overflow-y: scroll;
+  display: block;
+  height: 313px;
+  overflow-y: scroll;
 }
+
 
 /* define width of TD elements: 1st, 2nd, and 3rd respectively.
 html>body tbody.scrollContent td {
@@ -454,3 +474,90 @@ html>body tbody.scrollContent td + td + td {
 	width: 300px
 }
 */
+
+.modal-window {
+  position: fixed;
+  background-color: rgba(56, 54, 54, 0.75);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modal-window:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-window>div {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 2rem;
+  background: #444343;
+  color: #eae8e6;
+}
+
+.modal-window header {
+  font-weight: bold;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+  font-family: EveSans, Sans-Serif;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+
+.modalText {
+  font-family: EveSans, Sans-Serif;
+}
+
+#About {
+  font-family: EVESans, Sans-Serif;
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+}
+
+#smallText {
+  font-weight: 200;
+  font-size: 8px;
+  text-align: justify;
+}
+
+#stylingBy {
+  text-align: center;
+  color: white;
+}
+
+#gitLink {
+  color: orange;
+  font-size: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: Black;
+}
