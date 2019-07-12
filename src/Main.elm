@@ -3,7 +3,7 @@ port module Main exposing (..)
 import Array exposing (Array)
 import Browser
 import Html exposing (Html, audio, button, div, hr, img, input, table, tbody, td, th, tr, text)
-import Html.Attributes exposing (class, id, max, min, src, step, type_)
+import Html.Attributes exposing (class, id, max, min, src, step, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Http
 import Json.Decode exposing (Decoder, field, string, array, map2, map3)
@@ -165,11 +165,11 @@ renderTable pl =
                                                                               , td [] [ text song.duration]
                                                                               , td [] []])
         |> Array.toList
-        |> (\l -> l ++ [tr [] [ td [ id "col1" ] []
-                     , td [ id "col2" ] []
-                     , td [ id "col3" ] []
-                     , td [ id "col4" ] []
-                     , td [ id "col5" ] []]
+        |> (\l -> l ++ [ tr [] [ td [ id "col1" ] []
+                       , td [ id "col2" ] []
+                       , td [ id "col3" ] []
+                       , td [ id "col4" ] []
+                       , td [ id "col5" ] []]
         ])
         |> tbody [ class "scrollContent" ]]]
 
@@ -223,7 +223,7 @@ view model =
                                     []
                                 ]
                             , div []
-                                [ input [ class "slider", id "myRange", max "100", min "0", step "1", type_ "range"
+                                [ input [ class "slider", id "myRange", max "100", min "0", step "1", type_ "range", value "100"
                                         , onInput (\volume -> ChangeVolume volume) ]
                                     []
                                 ]
