@@ -11,7 +11,6 @@ body {
   src: url('fonts/evesans.eot?#iefix') format('embedded-opentype'), url('fonts/evesans.woff') format('woff'), url('fonts/evesans.ttf') format('truetype'), url('fonts/evesans.svg#webfont') format('svg');
 }
 
-
 .jukeboxWrapper {
   background-color: rgba(0, 0, 0, 0.74);
   align-self: center;
@@ -478,7 +477,7 @@ html>body tbody.scrollContent td + td + td {
 
 .modal-window {
   position: fixed;
-  background-color: rgba(200, 200, 200, 0.75);
+  background-color: rgba(56, 54, 54, 0.75);
   top: 0;
   right: 0;
   bottom: 0;
@@ -501,8 +500,8 @@ html>body tbody.scrollContent td + td + td {
   position: relative;
   margin: 10% auto;
   padding: 2rem;
-  background: #fff;
-  color: #444;
+  background: #444343;
+  color: #eae8e6;
 }
 
 .modal-window header {
@@ -531,24 +530,31 @@ html>body tbody.scrollContent td + td + td {
   margin: 0 0 15px;
 }
 
-.modalText  {
+.modalText {
   font-family: EveSans, Sans-Serif;
 }
 
 #About {
   font-family: EVESans, Sans-Serif;
   text-decoration: none;
-  color:black;
+  color: black;
   font-weight: 400;
 }
 
 #smallText {
   font-weight: 200;
   font-size: 8px;
+  text-align: justify;
 }
 
 #stylingBy {
-  text-align: right;
+  text-align: center;
+  color: white;
+}
+
+#gitLink {
+  color: orange;
+  font-size: 10px;
 }
 
 a {
