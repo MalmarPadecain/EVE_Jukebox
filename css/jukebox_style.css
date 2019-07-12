@@ -394,7 +394,7 @@ tr + tr {
 
 td {
     border-left: 1px solid rgba(117,117,117,1);
-    vertical-align: bottom;
+    vertical-align: center;
     padding-bottom: 0px;
     padding-left: 4px;
     height: 17px;
