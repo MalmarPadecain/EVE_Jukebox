@@ -3,8 +3,8 @@ port module Main exposing (..)
 import Array exposing (Array)
 import Browser
 import Html exposing (Html, audio, button, div, hr, img, input, table, tbody, td, th, tr, text)
-import Html.Attributes exposing (class, id, max, min, src, type_, value)
-import Html.Events exposing (onClick)
+import Html.Attributes exposing (class, id, max, min, src, step, type_, value)
+import Html.Events exposing (onClick, onInput)
 import Http
 import Json.Decode exposing (Decoder, field, string, array, map2, map3)
 import Maybe
@@ -38,6 +38,7 @@ type Msg
     | Load String
     | Loaded (Result Http.Error Playlist)
     | ChooseSong Int
+    | ChangeVolume String
     | Play
     | TogglePause
 
@@ -118,6 +119,8 @@ update msg model =
                                     (Error ("Bad Body: " ++ body ), Cmd.none)
                 ChooseSong songIndex ->
                     update Play <| Success {playlist = pl.playlist, index = songIndex}
+                ChangeVolume volume ->
+                    (model, control ("volume " ++ volume))
                 Play ->
                     (model, control ("play " ++ (currentSong model).link))
                 TogglePause ->
@@ -220,7 +223,8 @@ view model =
                                     []
                                 ]
                             , div []
-                                [ input [ class "slider", id "myRange", max "100", min "1", type_ "range", value "50" ]
+                                [ input [ class "slider", id "myRange", max "100", min "0", step "1", type_ "range", value "100"
+                                        , onInput (\volume -> ChangeVolume volume) ]
                                     []
                                 ]
                             , div [ class "volumeSymbol" ]
