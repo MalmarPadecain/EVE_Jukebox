@@ -8,6 +8,9 @@ window.app.ports.control.subscribe(function (msg) {
         case "play":
             play(params[0]);
             break;
+        case "volume":
+            changeVolume(params[0]);
+            break;
     }
 });
 
@@ -25,4 +28,9 @@ togglePause = function () {
     } else {
         audio.pause();
     }
+};
+
+changeVolume = function (volume) {
+    const audio = document.getElementById("audio");
+    audio.volume = volume/100;
 };
