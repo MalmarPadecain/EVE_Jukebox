@@ -1,12 +1,12 @@
-port module Main exposing (..)
+port module Main exposing (Model(..), Msg(..), Playlist, Song, control, currentSong, init, loadJson, main, next, previous, renderTable, songDecoder, update, view)
 
 import Array exposing (Array)
 import Browser
-import Html exposing (Html, audio, button, div, hr, img, input, table, tbody, td, th, tr, text)
-import Html.Attributes exposing (class, id, max, min, src, step, type_)
+import Html exposing (Html, audio, button, div, hr, img, input, table, tbody, td, text, th, tr)
+import Html.Attributes exposing (class, id, max, min, src, step, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Http
-import Json.Decode exposing (Decoder, field, string, array, map2, map3)
+import Json.Decode exposing (Decoder, array, field, map2, map3, string)
 import Maybe
 import Random exposing (generate)
 import Random.Array exposing (shuffle)
@@ -20,14 +20,16 @@ type alias Song =
 
 
 type alias Playlist =
-    { name : String
-    , songs : Array Song}
+    { index : Int
+    , volume : Float
+    , name : String
+    , songs : Array Song
+    }
 
 
-type Model =
-    Success { playlist : Playlist
-    , index : Int
-    } | Error String
+type Model
+    = Success Playlist
+    | Error String
 
 
 type Msg
@@ -38,7 +40,7 @@ type Msg
     | Load String
     | Loaded (Result Http.Error Playlist)
     | ChooseSong Int
-    | ChangeVolume String
+    | ChangeVolume Float
     | Play
     | TogglePause
 
@@ -48,9 +50,12 @@ port control : String -> Cmd msg
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Success { playlist = { name = "Empty", songs = Array.empty }
-      , index = 0
-      }
+    ( Success
+        { name = "Empty"
+        , songs = Array.empty
+        , index = 0
+        , volume = 100
+        }
     , Cmd.none
     )
 
@@ -68,9 +73,12 @@ next : Model -> Model
 next model =
     case model of
         Success pl ->
-            if pl.index == Array.length pl.playlist.songs - 1
-            then Success { playlist = pl.playlist, index = 0 }
-            else Success { playlist = pl.playlist, index = pl.index + 1 }
+            if pl.index == Array.length pl.songs - 1 then
+                Success { pl | index = 0 }
+
+            else
+                Success { pl | index = pl.index + 1 }
+
         Error _ ->
             model
 
@@ -79,9 +87,12 @@ previous : Model -> Model
 previous model =
     case model of
         Success pl ->
-            if pl.index == 0
-            then Success { playlist = pl.playlist, index = Array.length pl.playlist.songs - 1 }
-            else Success { playlist = pl.playlist, index = pl.index - 1 }
+            if pl.index == 0 then
+                Success { pl | index = Array.length pl.songs - 1 }
+
+            else
+                Success { pl | index = pl.index - 1 }
+
         Error _ ->
             model
 
@@ -93,40 +104,55 @@ update msg model =
             case msg of
                 Next ->
                     update Play (next model)
+
                 Previous ->
                     update Play (previous model)
+
                 Shuffle ->
-                    ( model, generate Shuffled (shuffle pl.playlist.songs) )
+                    ( model, generate Shuffled (shuffle pl.songs) )
+
                 Shuffled shuffledList ->
-                    ( Success{ playlist = { name = "", songs = shuffledList } , index = 0 }, Cmd.batch [] )
+                    ( Success { pl | songs = shuffledList, index = 0 }, Cmd.batch [] )
+
                 Load link ->
-                    ( model, loadJson link)
+                    ( model, loadJson link )
+
                 Loaded result ->
                     case result of
                         Ok playlist ->
-                            (Success { playlist = playlist , index = 0}, Cmd.none)
+                            ( Success playlist, Cmd.none )
+
                         Err err ->
                             case err of
                                 Http.BadUrl url ->
-                                    (Error ("Bad URL: " ++ url), Cmd.none)
+                                    ( Error ("Bad URL: " ++ url), Cmd.none )
+
                                 Http.Timeout ->
-                                    (Error ("Request timed out."), Cmd.none)
+                                    ( Error "Request timed out.", Cmd.none )
+
                                 Http.NetworkError ->
-                                    (Error ("A Network Error occurred"), Cmd.none)
+                                    ( Error "A Network Error occurred", Cmd.none )
+
                                 Http.BadStatus status ->
-                                    (Error (String.fromInt status ++ " returned"), Cmd.none)
+                                    ( Error (String.fromInt status ++ " returned"), Cmd.none )
+
                                 Http.BadBody body ->
-                                    (Error ("Bad Body: " ++ body ), Cmd.none)
+                                    ( Error ("Bad Body: " ++ body), Cmd.none )
+
                 ChooseSong songIndex ->
-                    update Play <| Success {playlist = pl.playlist, index = songIndex}
+                    update Play <| Success { pl | index = songIndex }
+
                 ChangeVolume volume ->
-                    (model, control ("volume " ++ volume))
+                    ( Success { pl | volume = volume }, control ("volume " ++ String.fromFloat volume) )
+
                 Play ->
-                    (model, control ("play " ++ (currentSong model).link))
+                    ( model, control ("play " ++ (currentSong model).link) )
+
                 TogglePause ->
-                    (model, control "togglePause")
+                    ( model, control "togglePause" )
+
         Error _ ->
-            (model, Cmd.none)
+            ( model, Cmd.none )
 
 
 renderTable : Playlist -> Html Msg
@@ -158,38 +184,52 @@ renderTable pl =
                     []
                 ]
             ]
-    , table [ class "Tracklist" ] [ pl.songs
-        |> Array.indexedMap (\index song -> tr [ onClick (ChooseSong index) ] [ td [] []
-                                                                              , td [] [ text (String.fromInt index) ]
-                                                                              , td [] [ text song.name ]
-                                                                              , td [] [ text song.duration]
-                                                                              , td [] []])
-        |> Array.toList
-        |> (\l -> l ++ [ tr [] [ td [ id "col1" ] []
-                       , td [ id "col2" ] []
-                       , td [ id "col3" ] []
-                       , td [ id "col4" ] []
-                       , td [ id "col5" ] []]
-        ])
-        |> tbody [ class "scrollContent" ]]]
+        , table [ class "Tracklist" ]
+            [ pl.songs
+                |> Array.indexedMap
+                    (\index song ->
+                        tr [ onClick (ChooseSong index) ]
+                            [ td [] []
+                            , td [] [ text (String.fromInt index) ]
+                            , td [] [ text song.name ]
+                            , td [] [ text song.duration ]
+                            , td [] []
+                            ]
+                    )
+                |> Array.toList
+                |> (\l ->
+                        l
+                            ++ [ tr []
+                                    [ td [ id "col1" ] []
+                                    , td [ id "col2" ] []
+                                    , td [ id "col3" ] []
+                                    , td [ id "col4" ] []
+                                    , td [ id "col5" ] []
+                                    ]
+                               ]
+                   )
+                |> tbody [ class "scrollContent" ]
+            ]
+        ]
 
 
 currentSong : Model -> Song
 currentSong model =
     case model of
         Success pl ->
-            Maybe.withDefault {name="", link="", duration=""} <| Array.get pl.index pl.playlist.songs
+            Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get pl.index pl.songs
+
         Error _ ->
-            {name="", link="", duration=""}
+            { name = "", link = "", duration = "" }
 
 
 view : Model -> Browser.Document Msg
 view model =
     case model of
-        Success pl->
+        Success pl ->
             { title = "Jukebox"
-            , body = [
-                div [ class "jukeboxWrapper" ]
+            , body =
+                [ div [ class "jukeboxWrapper" ]
                     [ div [ class "jukeboxMain", id "TitleBox" ]
                         [ div [ class "MainTextPos" ]
                             [ text "Jukebox        " ]
@@ -212,7 +252,7 @@ view model =
                                 []
                             , img [ class "controlBtn", src "images/btnPlay.jpg", onClick TogglePause ]
                                 []
-                            , img [ class "controlBtn", src "images/btnFwd.jpg" , onClick Next]
+                            , img [ class "controlBtn", src "images/btnFwd.jpg", onClick Next ]
                                 []
                             , img [ class "controlBtn", id "btnShuffle", src "images/btnShuffleOff.jpg", onClick Shuffle ]
                                 []
@@ -223,8 +263,16 @@ view model =
                                     []
                                 ]
                             , div []
-                                [ input [ class "slider", id "myRange", max "100", min "0", step "1", type_ "range"
-                                        , onInput (\volume -> ChangeVolume volume) ]
+                                [ input
+                                    [ class "slider"
+                                    , id "myRange"
+                                    , max "100"
+                                    , min "0"
+                                    , step "1"
+                                    , type_ "range"
+                                    , value <| String.fromFloat pl.volume
+                                    , onInput (\volume -> ChangeVolume <| Maybe.withDefault 100 <| String.toFloat volume)
+                                    ]
                                     []
                                 ]
                             , div [ class "volumeSymbol" ]
@@ -243,7 +291,7 @@ view model =
                         ]
                     , div [ class "jukeboxMain", id "ListContainer" ]
                         [ div [ class "PlaylistContainer" ]
-                            [ div [ class "Playlist" , onClick (Load "./playlists/EVE_Soundtrack.json")]
+                            [ div [ class "Playlist", onClick (Load "./playlists/EVE_Soundtrack.json") ]
                                 [ text "EVE Soundtrack" ]
                             , div [ class "Playlist" ]
                                 [ text "Login Screens" ]
@@ -256,8 +304,8 @@ view model =
                             , div [ class "Playlist" ]
                                 [ text "Dead Logs" ]
                             ]
-                        , renderTable pl.playlist
-                            ]
+                        , renderTable pl
+                        ]
                     , div [ class "jukeboxMain", id "BtnContainer" ]
                         [ div [ class "NewBtnContainer" ]
                             [ div [ id "newBtn" ]
@@ -274,24 +322,31 @@ view model =
                     ]
                 ]
             }
+
         Error msg ->
             { title = "Jukebox"
-            , body = [ text msg ] }
+            , body = [ text msg ]
+            }
 
 
 loadJson : String -> Cmd Msg
 loadJson link =
     Http.get
         { url = link
-        , expect = Http.expectJson Loaded songDecoder}
+        , expect = Http.expectJson Loaded songDecoder
+        }
 
 
 songDecoder : Decoder Playlist
 songDecoder =
-    map2 Playlist
+    map2 (Playlist 0 100)
         (field "name" string)
         (field "songs"
-            (array (map3 Song
-                 (field "name" string)
-                 (field "duration" string)
-                 (field "link" string))))
+            (array
+                (map3 Song
+                    (field "name" string)
+                    (field "duration" string)
+                    (field "link" string)
+                )
+            )
+        )
