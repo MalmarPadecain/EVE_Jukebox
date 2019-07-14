@@ -32,5 +32,5 @@ togglePause = function () {
 
 changeVolume = function (volume) {
     const audio = document.getElementById("audio");
-    audio.volume = volume/100;
+    audio.volume = volume / 100;
 };

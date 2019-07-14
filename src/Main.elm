@@ -258,7 +258,8 @@ view model =
                                 []
                             ]
                         , div [ class "volumeContainer" ]
-                            [ div [ class "volumeSymbol" ]
+                            [ div [ class "volumeSymbol"
+                                  , onClick <| ChangeVolume 0 ]
                                 [ img [ src "images/lowVolume.png" ]
                                     []
                                 ]
@@ -275,7 +276,8 @@ view model =
                                     ]
                                     []
                                 ]
-                            , div [ class "volumeSymbol" ]
+                            , div [ class "volumeSymbol"
+                                  , onClick <| ChangeVolume 100]
                                 [ img [ src "images/highVolume.png" ]
                                     []
                                 ]
