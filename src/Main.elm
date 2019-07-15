@@ -21,7 +21,7 @@ init _ =
         , index = 0
         , volume = 100
         }
-    , Cmd.none
+    , loadJson "./playlists/EVE_Soundtrack.json"
     )
 
 
