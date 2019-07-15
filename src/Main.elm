@@ -60,21 +60,7 @@ update msg model =
                             ( Success playlist, Cmd.none )
 
                         Err err ->
-                            case err of
-                                Http.BadUrl url ->
-                                    ( Error ("Bad URL: " ++ url), Cmd.none )
-
-                                Http.Timeout ->
-                                    ( Error "Request timed out.", Cmd.none )
-
-                                Http.NetworkError ->
-                                    ( Error "A Network Error occurred", Cmd.none )
-
-                                Http.BadStatus status ->
-                                    ( Error (String.fromInt status ++ " returned"), Cmd.none )
-
-                                Http.BadBody body ->
-                                    ( Error ("Bad Body: " ++ body), Cmd.none )
+                            ( Error <| errorToString err, Cmd.none )
 
                 ChooseSong songIndex ->
                     update Play <| Success { pl | index = songIndex }
@@ -113,3 +99,22 @@ songDecoder =
                 )
             )
         )
+
+
+errorToString : Http.Error -> String
+errorToString e =
+    case e of
+        Http.BadUrl url ->
+            "Bad URL: " ++ url
+
+        Http.Timeout ->
+            "Request timed out."
+
+        Http.NetworkError ->
+            "A Network Error occurred"
+
+        Http.BadStatus status ->
+            String.fromInt status ++ " returned"
+
+        Http.BadBody body ->
+            "Bad Body: " ++ body
