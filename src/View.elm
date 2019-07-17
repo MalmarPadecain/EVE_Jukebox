@@ -6,6 +6,7 @@ import Core exposing (..)
 import Html exposing (Html, audio, button, div, hr, img, input, table, tbody, td, text, th, tr)
 import Html.Attributes exposing (class, id, max, min, src, step, type_, value)
 import Html.Events exposing (onClick, onInput)
+import Html.Lazy exposing (lazy)
 
 
 renderTable : Playlist -> Html Msg
@@ -153,7 +154,7 @@ view model =
                             , div [ class "Playlist" ]
                                 [ text "Dead Logs" ]
                             ]
-                        , renderTable pl
+                        , lazy renderTable pl
                         ]
                     , div [ class "jukeboxMain", id "BtnContainer" ]
                         [ div [ class "NewBtnContainer" ]
