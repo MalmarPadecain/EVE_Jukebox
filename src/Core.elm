@@ -1,4 +1,4 @@
-module Core exposing (Model(..), Msg(..), Playlist, Song, currentSong, previous, next)
+module Core exposing (Model(..), Msg(..), Playlist, Song, currentSong, next, previous)
 
 import Array exposing (Array)
 import Http
