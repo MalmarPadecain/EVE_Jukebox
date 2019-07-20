@@ -3,8 +3,8 @@ module View exposing (renderTable, view)
 import Array
 import Browser
 import Core exposing (..)
-import Html exposing (Html, audio, button, div, hr, img, input, table, tbody, td, text, th, tr)
-import Html.Attributes exposing (class, id, max, min, src, step, type_, value)
+import Html exposing (Html, a, audio, br, button, div, h1, hr, img, input, p, table, tbody, td, text, th, tr)
+import Html.Attributes exposing (class, href, id, max, min, src, step, title, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Lazy exposing (lazy)
 
@@ -164,10 +164,11 @@ view model =
                                 ]
                             ]
                         , div [ class "AddBtnContainer" ]
-                            [ button [ class "EVEButton" ]
-                                [ text "Add Tracks" ]
+                            [ a [ class "EVEButton", href "#open-modal" ]
+                                [ text "About" ]
                             ]
                         ]
+                    , aboutWindow
                     , audio [ id "audio" ] []
                     ]
                 ]
@@ -177,3 +178,45 @@ view model =
             { title = "Jukebox"
             , body = [ text msg ]
             }
+
+
+aboutWindow =
+    div [ class "modal-window", id "open-modal" ]
+        [ div []
+            [ a [ class "modal-close", href "#modal-close", title "Close" ]
+                [ text "CLOSE" ]
+            , h1 [ class "modalText" ]
+                [ text "The EVE Online Jukebox Project" ]
+            , div [ class "modalText" ]
+                [ hr []
+                    []
+                , p []
+                    [ text "Bring back the good old times of EVE with this recreation of the EVE Jukebox using CSS.        " ]
+                , br []
+                    []
+                , p [ id "smallText" ]
+                    [ text """EVE Online and the EVE logo are the registered trademarks of CCP hf.
+                               All rights are reserved worldwide. All other trademarks are the property of their
+                               respective owners. EVE Online, the EVE logo, EVE and all associated logos and designs
+                               are the intellectual property of CCP hf. All artwork, screenshots, characters, vehicles,
+                               storylines, world facts or other recognizable features of the intellectual property
+                               relating to these trademarks are likewise the intellectual property of CCP hf.
+                               CCP is in no way responsible for the content on or functioning of this website, nor can
+                               it be liable for any damage arising from the use of this website.""" ]
+                , br []
+                    []
+                , p [ id "stylingBy" ]
+                    [ a [ href "https://ashyin.space/", id "stylingBy" ]
+                        [ text "Styling by Ashley Traynor" ]
+                    , br []
+                        []
+                    , a [ href "https://evewho.com/pilot/Malhia+Fehrnah", id "stylingBy" ]
+                        [ text "Backend by Malmar Padecain" ]
+                    , br []
+                        []
+                    , a [ href "https://github.com/MalmarPadecain/EVE_Jukebox", id "gitLink" ]
+                        [ text "This is an open source project!" ]
+                    ]
+                ]
+            ]
+        ]
