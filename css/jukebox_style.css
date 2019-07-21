@@ -158,7 +158,7 @@ body {
 }
 
 .EVEButton {
-  background-image: linear-gradient(-135deg, #0C0C0C, #0C0C0C, #0C0C0C, #0C0C0C, #202020, #202020);
+  background-image: linear-gradient(-135deg, #101010, #101010, #101010, #101010, #202020, #202020);
   height: 19px;
   border-style: inset;
   border-width: 1px;
@@ -173,7 +173,7 @@ body {
   font-size: 13px;
   font-weight: 100;
   margin-top: 1px;
-  margin-bottom: 1px;
+  margin-bottom: 3px;
   outline: none;
 }
 
@@ -402,7 +402,7 @@ table.Tracklist {
 }
 
 tr {
-  border-top: 1px solid rgba(140, 140, 140, 1);
+  /*border-top: 1px solid rgba(140, 140, 140, 1);*/
   /*Part of outer border*/
 }
 
@@ -413,7 +413,7 @@ tr+tr {
 
 td {
   border-left: 1px solid rgba(117, 117, 117, 1);
-  vertical-align: bottom;
+  vertical-align: center;
   padding-bottom: 0px;
   padding-left: 4px;
   height: 17px;
@@ -543,7 +543,7 @@ html>body tbody.scrollContent td + td + td {
 
 #smallText {
   font-weight: 200;
-  font-size: 8px;
+  font-size: 9px;
   text-align: justify;
 }
 
