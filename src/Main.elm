@@ -3,6 +3,7 @@ port module Main exposing (control, init, loadJson, main, songDecoder, update)
 import Array exposing (Array)
 import Browser
 import Core exposing (..)
+import Draggable
 import Http
 import Json.Decode exposing (Decoder, array, field, map2, map3, string)
 import Random exposing (generate)
@@ -13,13 +14,34 @@ import View exposing (..)
 port control : String -> Cmd msg
 
 
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    case model of
+        Success { dragState } ->
+            Draggable.subscriptions DragMsg dragState.drag
+
+        Error _ ->
+            Sub.none
+
+
+dragConfig : Draggable.Config String Msg
+dragConfig =
+    Draggable.basicConfig OnDragBy
+
+
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( Success
-        { name = "Empty"
-        , songs = Array.empty
-        , index = 0
+        { playlist =
+            { index = 0
+            , name = "Empty"
+            , songs = Array.empty
+            }
         , volume = 100
+        , dragState =
+            { position = ( 0, 0 )
+            , drag = Draggable.init
+            }
         }
     , loadJson "./playlists/EVE_Soundtrack.json"
     )
@@ -30,14 +52,14 @@ main =
         { init = init
         , update = update
         , view = view
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = subscriptions
         }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case model of
-        Success pl ->
+        Success { playlist, volume, dragState } ->
             case msg of
                 Next ->
                     update Play (next model)
@@ -46,33 +68,74 @@ update msg model =
                     update Play (previous model)
 
                 Shuffle ->
-                    ( model, generate Shuffled (shuffle pl.songs) )
+                    ( model, generate Shuffled (shuffle playlist.songs) )
 
                 Shuffled shuffledList ->
-                    ( Success { pl | songs = shuffledList, index = 0 }, Cmd.batch [] )
+                    ( Success
+                        { playlist = { playlist | songs = shuffledList, index = 0 }
+                        , volume = volume
+                        , dragState = dragState
+                        }
+                    , Cmd.batch []
+                    )
 
                 Load link ->
                     ( model, loadJson link )
 
                 Loaded result ->
                     case result of
-                        Ok playlist ->
-                            ( Success playlist, Cmd.none )
+                        Ok pl ->
+                            ( Success { playlist = pl, volume = volume, dragState = dragState }, Cmd.none )
 
                         Err err ->
                             ( Error <| errorToString err, Cmd.none )
 
                 ChooseSong songIndex ->
-                    update Play <| Success { pl | index = songIndex }
+                    update Play <|
+                        Success
+                            { playlist = { playlist | index = songIndex }
+                            , volume = volume
+                            , dragState = dragState
+                            }
 
-                ChangeVolume volume ->
-                    ( Success { pl | volume = volume }, control ("volume " ++ String.fromFloat volume) )
+                ChangeVolume vol ->
+                    ( Success { playlist = playlist, volume = vol, dragState = dragState }
+                    , control ("volume " ++ String.fromFloat vol)
+                    )
 
                 Play ->
                     ( model, control ("play " ++ (currentSong model).link) )
 
                 TogglePause ->
                     ( model, control "togglePause" )
+
+                OnDragBy ( dx, dy ) ->
+                    ( Success
+                        { playlist = playlist
+                        , volume = volume
+                        , dragState =
+                            { dragState
+                                | position =
+                                    ( round (toFloat (Tuple.first dragState.position) + dx)
+                                    , round (toFloat (Tuple.second dragState.position) + dy)
+                                    )
+                            }
+                        }
+                    , Cmd.none
+                    )
+
+                DragMsg dragMsg ->
+                    let
+                        ( newDragState, m ) =
+                            Draggable.update dragConfig dragMsg dragState
+                    in
+                    ( Success
+                        { playlist = playlist
+                        , volume = volume
+                        , dragState = { position = dragState.position, drag = newDragState.drag }
+                        }
+                    , m
+                    )
 
         Error _ ->
             ( model, Cmd.none )
@@ -88,7 +151,7 @@ loadJson link =
 
 songDecoder : Decoder Playlist
 songDecoder =
-    map2 (Playlist 0 100)
+    map2 (Playlist 0)
         (field "name" string)
         (field "songs"
             (array

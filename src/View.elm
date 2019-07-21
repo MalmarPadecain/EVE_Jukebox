@@ -3,8 +3,9 @@ module View exposing (renderTable, view)
 import Array
 import Browser
 import Core exposing (..)
+import Draggable
 import Html exposing (Html, a, audio, br, button, div, h1, hr, img, input, p, table, tbody, td, text, th, tr)
-import Html.Attributes exposing (class, href, id, max, min, src, step, title, type_, value)
+import Html.Attributes exposing (class, href, id, max, min, src, step, style, title, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Lazy exposing (lazy)
 
@@ -70,17 +71,25 @@ renderTable pl =
 view : Model -> Browser.Document Msg
 view model =
     case model of
-        Success pl ->
+        Success { playlist, volume, dragState } ->
             { title = "Jukebox"
             , body =
-                [ div [ class "jukeboxWrapper" ]
+                [ div
+                    [ class "jukeboxWrapper"
+                    , Draggable.mouseTrigger "jukebox" DragMsg
+                    , style "transform" <|
+                        "translate("
+                            ++ String.fromInt (Tuple.first dragState.position)
+                            ++ "px, "
+                            ++ String.fromInt (Tuple.second dragState.position)
+                            ++ "px)"
+                    ]
                     [ div [ class "jukeboxMain", id "TitleBox" ]
                         [ div [ class "MainTextPos" ]
-                            [ text "Jukebox        " ]
+                            [ text "Jukebox" ]
                         ]
                     , div [ class "jukeboxMain", id "UpperSeparator" ]
-                        [ hr []
-                            []
+                        [ hr [] []
                         ]
                     , div [ class "jukeboxMain", id "NowPlayingContainerContainer" ]
                         [ div [ id "NowPlayingContainer" ]
@@ -106,8 +115,7 @@ view model =
                                 [ class "volumeSymbol"
                                 , onClick <| ChangeVolume 0
                                 ]
-                                [ img [ src "images/lowVolume.png" ]
-                                    []
+                                [ img [ src "images/lowVolume.png" ] []
                                 ]
                             , div []
                                 [ input
@@ -117,8 +125,8 @@ view model =
                                     , min "0"
                                     , step "1"
                                     , type_ "range"
-                                    , value <| String.fromFloat pl.volume
-                                    , onInput (\volume -> ChangeVolume <| Maybe.withDefault 100 <| String.toFloat volume)
+                                    , value <| String.fromFloat volume
+                                    , onInput (\vol -> ChangeVolume <| Maybe.withDefault 100 <| String.toFloat vol)
                                     ]
                                     []
                                 ]
@@ -154,7 +162,7 @@ view model =
                             , div [ class "Playlist" ]
                                 [ text "Dead Logs" ]
                             ]
-                        , lazy renderTable pl
+                        , lazy renderTable playlist
                         ]
                     , div [ class "jukeboxMain", id "BtnContainer" ]
                         [ div [ class "NewBtnContainer" ]
@@ -188,12 +196,10 @@ aboutWindow =
             , h1 [ class "modalText" ]
                 [ text "The EVE Online Jukebox Project" ]
             , div [ class "modalText" ]
-                [ hr []
-                    []
+                [ hr [] []
                 , p []
-                    [ text "Bring back the good old times of EVE with this recreation of the EVE Jukebox using CSS.        " ]
-                , br []
-                    []
+                    [ text "Bring back the good old times of EVE with this recreation of the EVE Jukebox using CSS." ]
+                , br [] []
                 , p [ id "smallText" ]
                     [ text """EVE Online and the EVE logo are the registered trademarks of CCP hf.
                                All rights are reserved worldwide. All other trademarks are the property of their
@@ -203,8 +209,7 @@ aboutWindow =
                                relating to these trademarks are likewise the intellectual property of CCP hf.
                                CCP is in no way responsible for the content on or functioning of this website, nor can
                                it be liable for any damage arising from the use of this website.""" ]
-                , br []
-                    []
+                , br [] []
                 , p [ id "stylingBy" ]
                     [ a [ href "https://ashyin.space/", id "stylingBy" ]
                         [ text "Styling by Ashley Traynor" ]
