@@ -77,7 +77,6 @@ view model =
             , body =
                 [ div
                     [ class "jukeboxWrapper"
-                    , Draggable.mouseTrigger "jukebox" DragMsg
                     , style "transform" <|
                         "translate("
                             ++ String.fromInt (Tuple.first dragState.position)
@@ -85,7 +84,11 @@ view model =
                             ++ String.fromInt (Tuple.second dragState.position)
                             ++ "px)"
                     ]
-                    [ div [ class "jukeboxMain", id "TitleBox" ]
+                    [ div
+                        [ class "jukeboxMain"
+                        , id "TitleBox"
+                        , Draggable.mouseTrigger "jukebox" DragMsg
+                        ]
                         [ div [ class "MainTextPos" ]
                             [ text "Jukebox" ]
                         ]
