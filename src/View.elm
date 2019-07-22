@@ -6,8 +6,9 @@ import Core exposing (..)
 import Draggable
 import Html exposing (Html, a, audio, br, button, div, h1, hr, img, input, p, table, tbody, td, text, th, tr)
 import Html.Attributes exposing (class, href, id, max, min, src, step, style, title, type_, value)
-import Html.Events exposing (onClick, onInput)
+import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
+import Json.Decode as Decode
 
 
 renderTable : Playlist -> Html Msg
@@ -177,7 +178,11 @@ view model =
                             ]
                         ]
                     , aboutWindow
-                    , audio [ id "audio" ] []
+                    , audio
+                        [ id "audio"
+                        , on "ended" (Decode.succeed Next)
+                        ]
+                        []
                     ]
                 ]
             }
