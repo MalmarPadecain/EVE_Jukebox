@@ -1,4 +1,4 @@
-port module Main exposing (control, init, loadJson, main, songDecoder, update)
+port module Main exposing (control, main, progress, update)
 
 import Array exposing (Array)
 import Browser
@@ -6,6 +6,7 @@ import Core exposing (..)
 import Draggable
 import Http
 import Json.Decode exposing (Decoder, array, field, map2, map3, string)
+import Platform.Sub as Sub
 import Random exposing (generate)
 import Random.Array exposing (shuffle)
 import View exposing (..)
@@ -14,11 +15,17 @@ import View exposing (..)
 port control : String -> Cmd msg
 
 
+port progress : (Float -> msg) -> Sub msg
+
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
     case model of
         Success { dragState } ->
-            Draggable.subscriptions DragMsg dragState.drag
+            Sub.batch
+                [ Draggable.subscriptions DragMsg dragState.drag
+                , progress Progress
+                ]
 
         Error _ ->
             Sub.none
@@ -34,6 +41,7 @@ init _ =
     ( Success
         { playlist =
             { index = 0
+            , progress = 0
             , name = "Empty"
             , songs = Array.empty
             }
@@ -137,6 +145,15 @@ update msg model =
                     , m
                     )
 
+                Progress val ->
+                    ( Success
+                        { playlist = { playlist | progress = val }
+                        , volume = volume
+                        , dragState = dragState
+                        }
+                    , Cmd.none
+                    )
+
         Error _ ->
             ( model, Cmd.none )
 
@@ -151,7 +168,7 @@ loadJson link =
 
 songDecoder : Decoder Playlist
 songDecoder =
-    map2 (Playlist 0)
+    map2 (Playlist 0 0)
         (field "name" string)
         (field "songs"
             (array

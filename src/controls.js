@@ -34,3 +34,10 @@ changeVolume = function (volume) {
     const audio = document.getElementById("audio");
     audio.volume = volume / 100;
 };
+
+updateProgress = function () {
+    const audio = document.getElementById("audio");
+    window.app.ports.progress.send(audio.currentTime)
+};
+
+setInterval(updateProgress, 1000);

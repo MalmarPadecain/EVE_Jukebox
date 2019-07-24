@@ -1,4 +1,4 @@
-module Core exposing (Model(..), Msg(..), Playlist, Song, currentSong, next, previous)
+module Core exposing (Model(..), Msg(..), Playlist, Song, currentSong, next, previous, secondsToString)
 
 import Array exposing (Array)
 import Draggable
@@ -14,6 +14,7 @@ type alias Song =
 
 type alias Playlist =
     { index : Int
+    , progress : Float
     , name : String
     , songs : Array Song
     }
@@ -47,6 +48,7 @@ type Msg
     | TogglePause
     | OnDragBy Draggable.Delta
     | DragMsg (Draggable.Msg String)
+    | Progress Float
 
 
 next : Model -> Model
@@ -89,3 +91,17 @@ currentSong model =
 
         Error _ ->
             { name = "", link = "", duration = "" }
+
+
+secondsToString : Float -> String
+secondsToString seconds =
+    let
+        sec =
+            remainderBy 60 (floor seconds)
+
+        min =
+            floor seconds // 60
+    in
+    String.fromInt min
+        ++ ":"
+        ++ String.padLeft 2 '0' (String.fromInt sec)

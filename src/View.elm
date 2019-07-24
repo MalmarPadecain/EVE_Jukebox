@@ -98,7 +98,7 @@ view model =
                     , div [ class "jukeboxMain", id "NowPlayingContainerContainer" ]
                         [ div [ id "NowPlayingContainer" ]
                             [ div [ class "NowPlaying", id "TimeElapsed" ]
-                                [ text "03:49            " ]
+                                [ text <| secondsToString playlist.progress ]
                             , div [ class "NowPlaying", id "SongName" ]
                                 [ text (currentSong model).name ]
                             ]
