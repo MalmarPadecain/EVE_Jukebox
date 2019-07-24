@@ -408,6 +408,11 @@ table.Tracklist {
   background-color: rgba(60, 60, 60, 0.15);
 }
 
+.finalRow:hover{
+  background: rgba(0,0,0,0);
+  height: auto;
+}
+
 tr {
   /*border-top: 1px solid rgba(140, 140, 140, 1);*/
   /*Part of outer border*/
