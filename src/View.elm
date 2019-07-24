@@ -22,17 +22,17 @@ renderTable pl =
                         [ text " " ]
                     ]
                 , th [ class "thBorderParent", id "col2head" ]
-                    [ text "Number                        "
+                    [ text "Number"
                     , div [ class "thBorderRight" ]
                         [ text " " ]
                     ]
                 , th [ id "col3head" ]
-                    [ text "Title                        "
+                    [ text "Title"
                     , div [ class "thBorderRight" ]
                         [ text " " ]
                     ]
                 , th [ id "col4head" ]
-                    [ text "Duration                        "
+                    [ text "Duration"
                     , div [ class "thBorderRight" ]
                         [ text " " ]
                     ]
@@ -114,11 +114,11 @@ view model =
                             , img
                                 [ class "controlBtn"
                                 , id "btnShuffle"
-                                , if playlist.shuffled then
-                                    src "images/btnShuffleOn.jpg"
+                                , if playlist.shuffledSongs == Nothing then
+                                    src "images/btnShuffleOff.jpg"
 
                                   else
-                                    src "images/btnShuffleOff.jpg"
+                                    src "images/btnShuffleOn.jpg"
                                 , onClick Shuffle
                                 ]
                                 []
