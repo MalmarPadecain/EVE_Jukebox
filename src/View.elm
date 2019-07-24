@@ -111,7 +111,16 @@ view model =
                                 []
                             , img [ class "controlBtn", src "images/btnFwd.jpg", onClick Next ]
                                 []
-                            , img [ class "controlBtn", id "btnShuffle", src "images/btnShuffleOff.jpg", onClick Shuffle ]
+                            , img
+                                [ class "controlBtn"
+                                , id "btnShuffle"
+                                , if playlist.shuffled then
+                                    src "images/btnShuffleOn.jpg"
+
+                                  else
+                                    src "images/btnShuffleOff.jpg"
+                                , onClick Shuffle
+                                ]
                                 []
                             ]
                         , div [ class "volumeContainer" ]

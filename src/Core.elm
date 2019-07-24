@@ -15,6 +15,7 @@ type alias Song =
 type alias Playlist =
     { index : Int
     , progress : Float
+    , shuffled : Bool
     , name : String
     , songs : Array Song
     }

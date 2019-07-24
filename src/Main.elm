@@ -42,6 +42,7 @@ init _ =
         { playlist =
             { index = 0
             , progress = 0
+            , shuffled = False
             , name = "Empty"
             , songs = Array.empty
             }
@@ -80,7 +81,7 @@ update msg model =
 
                 Shuffled shuffledList ->
                     ( Success
-                        { playlist = { playlist | songs = shuffledList, index = 0 }
+                        { playlist = { playlist | songs = shuffledList, index = 0, shuffled = True }
                         , volume = volume
                         , dragState = dragState
                         }
@@ -168,7 +169,7 @@ loadJson link =
 
 songDecoder : Decoder Playlist
 songDecoder =
-    map2 (Playlist 0 0)
+    map2 (Playlist 0 0 False)
         (field "name" string)
         (field "songs"
             (array
