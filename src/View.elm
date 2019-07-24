@@ -56,11 +56,61 @@ renderTable pl =
                 |> (\l ->
                         l
                             ++ [ tr []
-                                    [ td [ id "col1" ] []
-                                    , td [ id "col2" ] []
-                                    , td [ id "col3" ] []
-                                    , td [ id "col4" ] []
-                                    , td [ id "col5" ] []
+                                    [ td
+                                        [ id "col1"
+                                        , class "finalRow"
+                                        , style "height" <|
+                                            if 313 - (Array.length pl.songs * 16) > 0 then
+                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
+
+                                            else
+                                                "0"
+                                        ]
+                                        []
+                                    , td
+                                        [ id "col2"
+                                        , class "finalRow"
+                                        , style "height" <|
+                                            if 313 - (Array.length pl.songs * 16) > 0 then
+                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
+
+                                            else
+                                                "0"
+                                        ]
+                                        []
+                                    , td
+                                        [ id "col3"
+                                        , class "finalRow"
+                                        , style "height" <|
+                                            if 313 - (Array.length pl.songs * 16) > 0 then
+                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
+
+                                            else
+                                                "0"
+                                        ]
+                                        []
+                                    , td
+                                        [ id "col4"
+                                        , class "finalRow"
+                                        , style "height" <|
+                                            if 313 - (Array.length pl.songs * 16) > 0 then
+                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
+
+                                            else
+                                                "0"
+                                        ]
+                                        []
+                                    , td
+                                        [ id "col5"
+                                        , class "finalRow"
+                                        , style "height" <|
+                                            if 313 - (Array.length pl.songs * 16) > 0 then
+                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
+
+                                            else
+                                                "0"
+                                        ]
+                                        []
                                     ]
                                ]
                    )
