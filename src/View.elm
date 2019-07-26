@@ -11,114 +11,6 @@ import Html.Lazy exposing (lazy)
 import Json.Decode as Decode
 
 
-renderTable : Playlist -> Html Msg
-renderTable pl =
-    -- index comes from the map not from the model. will this lead to problems?
-    div [ class "TracklistContainer" ]
-        [ table [ class "TracklistHeader" ]
-            [ tr []
-                [ th [ id "col1head" ]
-                    [ div [ class "thBorderRight" ]
-                        [ text " " ]
-                    ]
-                , th [ class "thBorderParent", id "col2head" ]
-                    [ text "Number                        "
-                    , div [ class "thBorderRight" ]
-                        [ text " " ]
-                    ]
-                , th [ id "col3head" ]
-                    [ text "Title                        "
-                    , div [ class "thBorderRight" ]
-                        [ text " " ]
-                    ]
-                , th [ id "col4head" ]
-                    [ text "Duration                        "
-                    , div [ class "thBorderRight" ]
-                        [ text " " ]
-                    ]
-                , th [ id "col5head" ]
-                    []
-                ]
-            ]
-        , table [ class "Tracklist" ]
-            [ pl.songs
-                |> Array.indexedMap
-                    (\index song ->
-                        tr [ onClick (ChooseSong index) ]
-                            [ td [] []
-                            , td [] [ text (String.fromInt index) ]
-                            , td [] [ text song.name ]
-                            , td [] [ text song.duration ]
-                            , td [] []
-                            ]
-                    )
-                |> Array.toList
-                |> (\l ->
-                        l
-                            ++ [ tr []
-                                    [ td
-                                        [ id "col1"
-                                        , class "finalRow"
-                                        , style "height" <|
-                                            if 313 - (Array.length pl.songs * 16) > 0 then
-                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
-
-                                            else
-                                                "0"
-                                        ]
-                                        []
-                                    , td
-                                        [ id "col2"
-                                        , class "finalRow"
-                                        , style "height" <|
-                                            if 313 - (Array.length pl.songs * 16) > 0 then
-                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
-
-                                            else
-                                                "0"
-                                        ]
-                                        []
-                                    , td
-                                        [ id "col3"
-                                        , class "finalRow"
-                                        , style "height" <|
-                                            if 313 - (Array.length pl.songs * 16) > 0 then
-                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
-
-                                            else
-                                                "0"
-                                        ]
-                                        []
-                                    , td
-                                        [ id "col4"
-                                        , class "finalRow"
-                                        , style "height" <|
-                                            if 313 - (Array.length pl.songs * 16) > 0 then
-                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
-
-                                            else
-                                                "0"
-                                        ]
-                                        []
-                                    , td
-                                        [ id "col5"
-                                        , class "finalRow"
-                                        , style "height" <|
-                                            if 313 - (Array.length pl.songs * 16) > 0 then
-                                                (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
-
-                                            else
-                                                "0"
-                                        ]
-                                        []
-                                    ]
-                               ]
-                   )
-                |> tbody [ class "scrollContent" ]
-            ]
-        ]
-
-
 view : Model -> Browser.Document Msg
 view model =
     case model of
@@ -253,6 +145,75 @@ view model =
             { title = "Jukebox"
             , body = [ text msg ]
             }
+
+
+renderTable : Playlist -> Html Msg
+renderTable pl =
+    -- index comes from the map not from the model. will this lead to problems?
+    div [ class "TracklistContainer" ]
+        [ table [ class "TracklistHeader" ]
+            [ tr []
+                [ th [ id "col1head" ]
+                    [ div [ class "thBorderRight" ]
+                        [ text " " ]
+                    ]
+                , th [ class "thBorderParent", id "col2head" ]
+                    [ text "Number                        "
+                    , div [ class "thBorderRight" ]
+                        [ text " " ]
+                    ]
+                , th [ id "col3head" ]
+                    [ text "Title                        "
+                    , div [ class "thBorderRight" ]
+                        [ text " " ]
+                    ]
+                , th [ id "col4head" ]
+                    [ text "Duration                        "
+                    , div [ class "thBorderRight" ]
+                        [ text " " ]
+                    ]
+                , th [ id "col5head" ]
+                    []
+                ]
+            ]
+        , table [ class "Tracklist" ]
+            [ pl.songs
+                |> Array.indexedMap
+                    (\index song ->
+                        tr [ onClick (ChooseSong index) ]
+                            [ td [] []
+                            , td [] [ text (String.fromInt index) ]
+                            , td [] [ text song.name ]
+                            , td [] [ text song.duration ]
+                            , td [] []
+                            ]
+                    )
+                |> Array.toList
+                |> (\l -> l ++ finalRow pl)
+                |> tbody [ class "scrollContent" ]
+            ]
+        ]
+
+
+finalRow : Playlist -> List (Html msg)
+finalRow pl =
+    let
+        stl =
+            style "height" <|
+                if 313 - (Array.length pl.songs * 16) > 0 then
+                    (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
+
+                else
+                    "0"
+    in
+    [ tr []
+        [ td [ id "col1", class "finalRow", stl ] []
+        , td [ id "col2", class "finalRow", stl ] []
+        , td [ id "col3", class "finalRow", stl ] []
+        , td [ id "col4", class "finalRow", stl ] []
+        , td [ id "col5", class "finalRow", stl ] []
+        ]
+    ]
 
 
 aboutWindow =
