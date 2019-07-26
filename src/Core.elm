@@ -1,4 +1,4 @@
-module Core exposing (Model(..), Msg(..), Playlist, Song, currentSong, next, previous, secondsToString)
+module Core exposing (Model(..), Msg(..), Playlist, Song, chooseSong, currentSong, next, previous, secondsToString)
 
 import Array exposing (Array)
 import Draggable
@@ -52,46 +52,32 @@ type Msg
     | Progress Float
 
 
-next : Model -> Model
-next model =
-    case model of
-        Success { playlist, volume, dragState } ->
-            if playlist.index == Array.length playlist.songs - 1 then
-                Success { playlist = { playlist | index = 0 }, volume = volume, dragState = dragState }
+next : Playlist -> Playlist
+next playlist =
+    if playlist.index == Array.length playlist.songs - 1 then
+        { playlist | index = 0 }
 
-            else
-                Success { playlist = { playlist | index = playlist.index + 1 }, volume = volume, dragState = dragState }
-
-        Error _ ->
-            model
+    else
+        { playlist | index = playlist.index + 1 }
 
 
-previous : Model -> Model
-previous model =
-    case model of
-        Success { playlist, volume, dragState } ->
-            if playlist.index == 0 then
-                Success
-                    { playlist = { playlist | index = Array.length playlist.songs - 1 }
-                    , volume = volume
-                    , dragState = dragState
-                    }
+previous : Playlist -> Playlist
+previous playlist =
+    if playlist.index == 0 then
+        { playlist | index = Array.length playlist.songs - 1 }
 
-            else
-                Success { playlist = { playlist | index = playlist.index - 1 }, volume = volume, dragState = dragState }
-
-        Error _ ->
-            model
+    else
+        { playlist | index = playlist.index - 1 }
 
 
-currentSong : Model -> Song
-currentSong model =
-    case model of
-        Success { playlist } ->
-            Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get playlist.index playlist.songs
+currentSong : Playlist -> Song
+currentSong playlist =
+    Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get playlist.index playlist.songs
 
-        Error _ ->
-            { name = "", link = "", duration = "" }
+
+chooseSong : Playlist -> Int -> Playlist
+chooseSong pl songIndex =
+    { pl | index = songIndex }
 
 
 secondsToString : Float -> String

@@ -66,18 +66,18 @@ main =
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case model of
-        Success { playlist, volume, dragState } ->
+update msg model_ =
+    case model_ of
+        Success ({ playlist, volume, dragState } as model) ->
             case msg of
                 Next ->
-                    update Play (next model)
+                    update Play { model | playlist = next model.playlist }
 
                 Previous ->
-                    update Play (previous model)
+                    update Play { model | playlist = previous model.playlist }
 
                 Shuffle ->
-                    ( model, generate Shuffled (shuffle playlist.songs) )
+                    ( model, generate Shuffled (shuffle model.playlist.songs) )
 
                 Shuffled shuffledList ->
                     ( Success
@@ -85,7 +85,7 @@ update msg model =
                         , volume = volume
                         , dragState = dragState
                         }
-                    , Cmd.batch []
+                    , Cmd.none
                     )
 
                 Load link ->
@@ -94,41 +94,35 @@ update msg model =
                 Loaded result ->
                     case result of
                         Ok pl ->
-                            ( Success { playlist = pl, volume = volume, dragState = dragState }, Cmd.none )
+                            ( Success { model | playlist = pl }, Cmd.none )
 
                         Err err ->
                             ( Error <| errorToString err, Cmd.none )
 
                 ChooseSong songIndex ->
-                    update Play <|
-                        Success
-                            { playlist = { playlist | index = songIndex }
-                            , volume = volume
-                            , dragState = dragState
-                            }
+                    update Play <| chooseSong model.playlist songIndex
 
                 ChangeVolume vol ->
-                    ( Success { playlist = playlist, volume = vol, dragState = dragState }
+                    ( Success { model | volume = vol }
                     , control ("volume " ++ String.fromFloat vol)
                     )
 
                 Play ->
-                    ( model, control ("play " ++ (currentSong model).link) )
+                    ( model, control ("play " ++ (currentSong playlist).link) )
 
                 TogglePause ->
                     ( model, control "togglePause" )
 
                 OnDragBy ( dx, dy ) ->
                     ( Success
-                        { playlist = playlist
-                        , volume = volume
-                        , dragState =
-                            { dragState
-                                | position =
-                                    ( round (toFloat (Tuple.first dragState.position) + dx)
-                                    , round (toFloat (Tuple.second dragState.position) + dy)
-                                    )
-                            }
+                        { model
+                            | dragState =
+                                { dragState
+                                    | position =
+                                        ( round (toFloat (Tuple.first dragState.position) + dx)
+                                        , round (toFloat (Tuple.second dragState.position) + dy)
+                                        )
+                                }
                         }
                     , Cmd.none
                     )
@@ -136,27 +130,23 @@ update msg model =
                 DragMsg dragMsg ->
                     let
                         ( newDragState, m ) =
-                            Draggable.update dragConfig dragMsg dragState
+                            Draggable.update dragConfig dragMsg model.dragState
                     in
                     ( Success
-                        { playlist = playlist
-                        , volume = volume
-                        , dragState = { position = dragState.position, drag = newDragState.drag }
+                        { model
+                            | dragState = { position = model.dragState.position, drag = newDragState.drag }
                         }
                     , m
                     )
 
                 Progress val ->
                     ( Success
-                        { playlist = { playlist | progress = val }
-                        , volume = volume
-                        , dragState = dragState
-                        }
+                        { model | playlist = { playlist | progress = val } }
                     , Cmd.none
                     )
 
         Error _ ->
-            ( model, Cmd.none )
+            ( model_, Cmd.none )
 
 
 loadJson : String -> Cmd Msg
