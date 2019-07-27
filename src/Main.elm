@@ -42,6 +42,7 @@ init _ =
             { index = 0
             , progress = 0
             , shuffledSongs = Nothing
+            , playing = False
             , name = "Empty"
             , songs = Array.empty
             }
@@ -108,10 +109,14 @@ update msg model_ =
                     )
 
                 Play ->
-                    ( Success model, control ("play " ++ (currentSong playlist).link) )
+                    ( Success { model | playlist = { playlist | playing = True } }
+                    , control ("play " ++ (currentSong playlist).link)
+                    )
 
                 TogglePause ->
-                    ( Success model, control "togglePause" )
+                    ( Success { model | playlist = { playlist | playing = not playlist.playing } }
+                    , control "togglePause"
+                    )
 
                 OnDragBy ( dx, dy ) ->
                     ( Success

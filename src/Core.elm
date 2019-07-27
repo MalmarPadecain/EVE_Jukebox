@@ -17,6 +17,7 @@ type alias Playlist =
     { index : Int
     , progress : Float
     , shuffledSongs : Maybe (Array Song)
+    , playing : Bool
     , name : String
     , songs : Array Song
     }
@@ -100,7 +101,7 @@ chooseSong pl songIndex =
 
 playlistDecoder : Decoder Playlist
 playlistDecoder =
-    map2 (Playlist 0 0 Nothing)
+    map2 (Playlist 0 0 Nothing False)
         (field "name" string)
         (field "songs"
             (array

@@ -49,7 +49,15 @@ view model =
                         [ div [ class "controlBtnContainer" ]
                             [ img [ class "controlBtn", src "images/btnBack.jpg", onClick Previous ]
                                 []
-                            , img [ class "controlBtn", src "images/btnPlay.jpg", onClick TogglePause ]
+                            , img
+                                [ class "controlBtn"
+                                , if playlist.playing then
+                                    src "images/btnPause.jpg"
+
+                                  else
+                                    src "images/btnPlay.jpg"
+                                , onClick TogglePause
+                                ]
                                 []
                             , img [ class "controlBtn", src "images/btnFwd.jpg", onClick Next ]
                                 []
