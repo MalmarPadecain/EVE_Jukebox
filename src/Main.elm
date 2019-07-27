@@ -5,7 +5,6 @@ import Browser
 import Core exposing (..)
 import Draggable
 import Http
-import Json.Decode exposing (Decoder, array, field, map2, map3, string)
 import Platform.Sub as Sub
 import Random exposing (generate)
 import Random.Array exposing (shuffle)
@@ -68,7 +67,7 @@ main =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model_ =
     case model_ of
-        Success ({ playlist, volume, dragState } as model) ->
+        Success ({ playlist, dragState } as model) ->
             case msg of
                 Next ->
                     update Play (Success { model | playlist = next model.playlist })
@@ -85,10 +84,7 @@ update msg model_ =
 
                 Shuffled shuffledList ->
                     ( Success
-                        { playlist = { playlist | index = 0, shuffledSongs = Just shuffledList }
-                        , volume = volume
-                        , dragState = dragState
-                        }
+                        { model | playlist = { playlist | index = 0, shuffledSongs = Just shuffledList } }
                     , Cmd.none
                     )
 
@@ -157,23 +153,8 @@ loadJson : String -> Cmd Msg
 loadJson link =
     Http.get
         { url = link
-        , expect = Http.expectJson Loaded songDecoder
+        , expect = Http.expectJson Loaded playlistDecoder
         }
-
-
-songDecoder : Decoder Playlist
-songDecoder =
-    map2 (Playlist 0 0 Nothing)
-        (field "name" string)
-        (field "songs"
-            (array
-                (map3 Song
-                    (field "name" string)
-                    (field "duration" string)
-                    (field "link" string)
-                )
-            )
-        )
 
 
 errorToString : Http.Error -> String

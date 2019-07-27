@@ -1,8 +1,9 @@
-module Core exposing (Model(..), Msg(..), Playlist, Song, chooseSong, currentSong, next, previous, secondsToString)
+module Core exposing (Model(..), Msg(..), Playlist, Song, chooseSong, currentSong, next, playlistDecoder, previous)
 
 import Array exposing (Array)
 import Draggable
 import Http
+import Json.Decode exposing (Decoder, array, field, map2, map3, string)
 
 
 type alias Song =
@@ -88,15 +89,16 @@ chooseSong pl songIndex =
     { pl | index = songIndex }
 
 
-secondsToString : Float -> String
-secondsToString seconds =
-    let
-        sec =
-            remainderBy 60 (floor seconds)
-
-        min =
-            floor seconds // 60
-    in
-    String.fromInt min
-        ++ ":"
-        ++ String.padLeft 2 '0' (String.fromInt sec)
+playlistDecoder : Decoder Playlist
+playlistDecoder =
+    map2 (Playlist 0 0 Nothing)
+        (field "name" string)
+        (field "songs"
+            (array
+                (map3 Song
+                    (field "name" string)
+                    (field "duration" string)
+                    (field "link" string)
+                )
+            )
+        )

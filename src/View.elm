@@ -253,3 +253,17 @@ aboutWindow =
                 ]
             ]
         ]
+
+
+secondsToString : Float -> String
+secondsToString seconds =
+    let
+        sec =
+            remainderBy 60 (floor seconds)
+
+        min =
+            floor seconds // 60
+    in
+    String.fromInt min
+        ++ ":"
+        ++ String.padLeft 2 '0' (String.fromInt sec)
