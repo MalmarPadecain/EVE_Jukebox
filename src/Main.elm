@@ -42,7 +42,7 @@ init _ =
         { playlist =
             { index = 0
             , progress = 0
-            , shuffled = False
+            , shuffledSongs = Nothing
             , name = "Empty"
             , songs = Array.empty
             }
@@ -71,17 +71,21 @@ update msg model_ =
         Success ({ playlist, volume, dragState } as model) ->
             case msg of
                 Next ->
-                    update Play { model | playlist = next model.playlist }
+                    update Play (Success { model | playlist = next model.playlist })
 
                 Previous ->
-                    update Play { model | playlist = previous model.playlist }
+                    update Play (Success { model | playlist = previous model.playlist })
 
                 Shuffle ->
-                    ( model, generate Shuffled (shuffle model.playlist.songs) )
+                    if playlist.shuffledSongs == Nothing then
+                        ( Success model, generate Shuffled (shuffle playlist.songs) )
+
+                    else
+                        ( Success { model | playlist = { playlist | shuffledSongs = Nothing } }, Cmd.none )
 
                 Shuffled shuffledList ->
                     ( Success
-                        { playlist = { playlist | songs = shuffledList, index = 0, shuffled = True }
+                        { playlist = { playlist | index = 0, shuffledSongs = Just shuffledList }
                         , volume = volume
                         , dragState = dragState
                         }
@@ -89,7 +93,7 @@ update msg model_ =
                     )
 
                 Load link ->
-                    ( model, loadJson link )
+                    ( Success model, loadJson link )
 
                 Loaded result ->
                     case result of
@@ -100,7 +104,7 @@ update msg model_ =
                             ( Error <| errorToString err, Cmd.none )
 
                 ChooseSong songIndex ->
-                    update Play <| chooseSong model.playlist songIndex
+                    update Play <| Success { model | playlist = chooseSong model.playlist songIndex }
 
                 ChangeVolume vol ->
                     ( Success { model | volume = vol }
@@ -108,10 +112,10 @@ update msg model_ =
                     )
 
                 Play ->
-                    ( model, control ("play " ++ (currentSong playlist).link) )
+                    ( Success model, control ("play " ++ (currentSong playlist).link) )
 
                 TogglePause ->
-                    ( model, control "togglePause" )
+                    ( Success model, control "togglePause" )
 
                 OnDragBy ( dx, dy ) ->
                     ( Success
@@ -159,7 +163,7 @@ loadJson link =
 
 songDecoder : Decoder Playlist
 songDecoder =
-    map2 (Playlist 0 0 False)
+    map2 (Playlist 0 0 Nothing)
         (field "name" string)
         (field "songs"
             (array

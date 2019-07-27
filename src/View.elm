@@ -42,7 +42,7 @@ view model =
                             [ div [ class "NowPlaying", id "TimeElapsed" ]
                                 [ text <| secondsToString playlist.progress ]
                             , div [ class "NowPlaying", id "SongName" ]
-                                [ text (currentSong model).name ]
+                                [ text (currentSong playlist).name ]
                             ]
                         ]
                     , div [ class "jukeboxMain", id "buttonList" ]
@@ -56,11 +56,11 @@ view model =
                             , img
                                 [ class "controlBtn"
                                 , id "btnShuffle"
-                                , if playlist.shuffled then
-                                    src "images/btnShuffleOn.jpg"
+                                , if playlist.shuffledSongs == Nothing then
+                                    src "images/btnShuffleOff.jpg"
 
                                   else
-                                    src "images/btnShuffleOff.jpg"
+                                    src "images/btnShuffleOn.jpg"
                                 , onClick Shuffle
                                 ]
                                 []

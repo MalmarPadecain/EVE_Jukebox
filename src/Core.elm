@@ -15,7 +15,7 @@ type alias Song =
 type alias Playlist =
     { index : Int
     , progress : Float
-    , shuffled : Bool
+    , shuffledSongs : Maybe (Array Song)
     , name : String
     , songs : Array Song
     }
@@ -72,7 +72,15 @@ previous playlist =
 
 currentSong : Playlist -> Song
 currentSong playlist =
-    Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get playlist.index playlist.songs
+    let
+        songs =
+            if playlist.shuffledSongs == Nothing then
+                playlist.songs
+
+            else
+                Maybe.withDefault Array.empty playlist.shuffledSongs
+    in
+    Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get playlist.index songs
 
 
 chooseSong : Playlist -> Int -> Playlist
