@@ -159,6 +159,7 @@ loadJson link =
 
 errorToString : Http.Error -> String
 errorToString e =
+    --    not sure if this is actually needed.
     case e of
         Http.BadUrl url ->
             "Bad URL: " ++ url

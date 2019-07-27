@@ -147,6 +147,8 @@ view model =
             }
 
 
+{-| Turns a list into a div with a header table and a content table.
+-}
 renderTable : Playlist -> Html Msg
 renderTable pl =
     -- index comes from the map not from the model. will this lead to problems?
@@ -182,7 +184,7 @@ renderTable pl =
                     (\index song ->
                         tr [ onClick (ChooseSong index) ]
                             [ td [] []
-                            , td [] [ text (String.fromInt index) ]
+                            , td [] [ text (String.fromInt (index + 1)) ]
                             , td [] [ text song.name ]
                             , td [] [ text song.duration ]
                             , td [] []
@@ -195,6 +197,10 @@ renderTable pl =
         ]
 
 
+{-| The final row of the content table.
+This is needed to set the width of all cells
+and to make sure it fills the entirety of the remaining space in small playlists
+-}
 finalRow : Playlist -> List (Html msg)
 finalRow pl =
     let
@@ -255,11 +261,20 @@ aboutWindow =
         ]
 
 
+{-| Transforms a time value as received from audio.currentTime to a human readable string
+
+    secondsToString 2.0 == "0:02"
+
+    secondsToString 60.1 == "1:00"
+
+    secondsToString 100.0 == "1:40"
+
+-}
 secondsToString : Float -> String
 secondsToString seconds =
     let
         sec =
-            remainderBy 60 (floor seconds)
+            remainderBy 60 (round seconds)
 
         min =
             floor seconds // 60

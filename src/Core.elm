@@ -53,6 +53,8 @@ type Msg
     | Progress Float
 
 
+{-| Moves the index of the playlist one step further. If it hits the end it loops around.
+-}
 next : Playlist -> Playlist
 next playlist =
     if playlist.index == Array.length playlist.songs - 1 then
@@ -62,6 +64,8 @@ next playlist =
         { playlist | index = playlist.index + 1 }
 
 
+{-| Moves the index of the playlist one step back. If it hits the beginning it loops around
+-}
 previous : Playlist -> Playlist
 previous playlist =
     if playlist.index == 0 then
@@ -71,6 +75,9 @@ previous playlist =
         { playlist | index = playlist.index - 1 }
 
 
+{-| Returns the Song at the current position.
+If an illegal int is given it returns { name = "", link = "", duration = "" }
+-}
 currentSong : Playlist -> Song
 currentSong playlist =
     let
@@ -84,6 +91,8 @@ currentSong playlist =
     Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get playlist.index songs
 
 
+{-| Sets the index to the given value. No checks are performed.
+-}
 chooseSong : Playlist -> Int -> Playlist
 chooseSong pl songIndex =
     { pl | index = songIndex }
