@@ -74,7 +74,11 @@ update msg model_ =
                     update Play (Success { model | playlist = next model.playlist })
 
                 Previous ->
-                    update Play (Success { model | playlist = previous model.playlist })
+                    if playlist.progress < 5 then
+                        update Play (Success { model | playlist = previous model.playlist })
+
+                    else
+                        update Play model_
 
                 Shuffle ->
                     if playlist.shuffledSongs == Nothing then
