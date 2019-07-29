@@ -17,6 +17,9 @@ type alias Playlist =
     { index : Int
     , progress : Float
     , shuffledSongs : Maybe (Array Song)
+
+    -- after shuffling or unshffling the currentSong changes immediately but the playing song stays the same
+    , tmpCurrentSong : Maybe Song
     , playing : Bool
     , name : String
     , songs : Array Song
@@ -55,9 +58,14 @@ type Msg
 
 
 {-| Moves the index of the playlist one step further. If it hits the end it loops around.
+Also sets tmpCurrentSong to Nothing
 -}
 next : Playlist -> Playlist
-next playlist =
+next p =
+    let
+        playlist =
+            { p | tmpCurrentSong = Nothing }
+    in
     if playlist.index == Array.length playlist.songs - 1 then
         { playlist | index = 0 }
 
@@ -101,7 +109,7 @@ chooseSong pl songIndex =
 
 playlistDecoder : Decoder Playlist
 playlistDecoder =
-    map2 (Playlist 0 0 Nothing False)
+    map2 (Playlist 0 0 Nothing Nothing False)
         (field "name" string)
         (field "songs"
             (array

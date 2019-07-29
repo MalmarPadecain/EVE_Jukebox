@@ -42,7 +42,7 @@ view model =
                             [ div [ class "NowPlaying", id "TimeElapsed" ]
                                 [ text <| secondsToString playlist.progress ]
                             , div [ class "NowPlaying", id "SongName" ]
-                                [ text (currentSong playlist).name ]
+                                [ text <| .name <| Maybe.withDefault (currentSong playlist) playlist.tmpCurrentSong ]
                             ]
                         ]
                     , div [ class "jukeboxMain", id "buttonList" ]

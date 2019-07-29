@@ -42,6 +42,7 @@ init _ =
             { index = 0
             , progress = 0
             , shuffledSongs = Nothing
+            , tmpCurrentSong = Nothing
             , playing = False
             , name = "Empty"
             , songs = Array.empty
@@ -88,7 +89,19 @@ update msg model_ =
 
                 Shuffled shuffledList ->
                     ( Success
-                        { model | playlist = { playlist | index = 0, shuffledSongs = Just shuffledList } }
+                        { model
+                            | playlist =
+                                { playlist
+                                    | index = 0
+                                    , shuffledSongs = Just shuffledList
+                                    , tmpCurrentSong =
+                                        if playlist.tmpCurrentSong == Nothing then
+                                            Just <| currentSong playlist
+
+                                        else
+                                            playlist.tmpCurrentSong
+                                }
+                        }
                     , Cmd.none
                     )
 
