@@ -191,7 +191,11 @@ renderTable pl =
                 |> Array.indexedMap
                     (\index song ->
                         tr [ onClick (ChooseSong index) ]
-                            [ td [] []
+                            [ if index == pl.index then
+                                td [] [ text "►" ]
+
+                              else
+                                td [] []
                             , td [] [ text (String.fromInt (index + 1)) ]
                             , td [] [ text song.name ]
                             , td [] [ text song.duration ]
