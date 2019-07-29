@@ -191,7 +191,7 @@ renderTable pl =
                 |> Array.indexedMap
                     (\index song ->
                         tr [ onClick (ChooseSong index) ]
-                            [ if index == pl.index then
+                            [ if song == currentSong pl then
                                 td [] [ text "►" ]
 
                               else
