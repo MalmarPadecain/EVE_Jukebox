@@ -219,7 +219,7 @@ finalRow pl =
         stl =
             style "height" <|
                 if 313 - (Array.length pl.songs * 16) > 0 then
-                    (String.fromInt <| 313 - (Array.length pl.songs * 16)) ++ "px"
+                    (String.fromInt <| 303 - (Array.length pl.songs * 16)) ++ "px"
 
                 else
                     "0"
