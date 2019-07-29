@@ -37,7 +37,7 @@ dragConfig =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Success
+    Success
         { playlist =
             { index = 0
             , progress = 0
@@ -52,8 +52,7 @@ init _ =
             , drag = Draggable.init
             }
         }
-    , loadJson "./playlists/EVE_Soundtrack.json"
-    )
+        |> update (Load "./playlists/EVE_Soundtrack.json")
 
 
 main =
@@ -99,7 +98,9 @@ update msg model_ =
                 Loaded result ->
                     case result of
                         Ok pl ->
-                            ( Success { model | playlist = pl }, Cmd.none )
+                            ( Success { model | playlist = pl }
+                            , control ("load " ++ (currentSong pl).link)
+                            )
 
                         Err err ->
                             ( Error <| errorToString err, Cmd.none )

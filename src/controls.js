@@ -2,6 +2,9 @@ window.app.ports.control.subscribe(function (msg) {
     let command = msg.split(' ')[0];
     let params = msg.split(' ').slice(1);
     switch (command) {
+        case "load":
+            load(params[0]);
+            break;
         case "togglePause":
             togglePause();
             break;
@@ -14,10 +17,15 @@ window.app.ports.control.subscribe(function (msg) {
     }
 });
 
-play = function (link) {
+load = function (link) {
     const audio = document.getElementById("audio");
     audio.src = link;
     audio.load();
+};
+
+play = function (link) {
+    const audio = document.getElementById("audio");
+    load(link);
     audio.play();
 };
 
