@@ -42,7 +42,7 @@ init _ =
             { index = 0
             , progress = 0
             , shuffledSongs = Nothing
-            , tmpCurrentSong = Nothing
+            , currentSong = Nothing
             , playing = False
             , name = "Empty"
             , songs = Array.empty
@@ -94,12 +94,6 @@ update msg model_ =
                                 { playlist
                                     | index = 0
                                     , shuffledSongs = Just shuffledList
-                                    , tmpCurrentSong =
-                                        if playlist.tmpCurrentSong == Nothing then
-                                            Just <| currentSong playlist
-
-                                        else
-                                            playlist.tmpCurrentSong
                                 }
                         }
                     , Cmd.none

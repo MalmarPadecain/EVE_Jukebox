@@ -42,7 +42,7 @@ view model =
                             [ div [ class "NowPlaying", id "TimeElapsed" ]
                                 [ text <| secondsToString playlist.progress ]
                             , div [ class "NowPlaying", id "SongName" ]
-                                [ text <| .name <| Maybe.withDefault (currentSong playlist) playlist.tmpCurrentSong ]
+                                [ text <| .name <| Maybe.withDefault (currentSong playlist) playlist.currentSong ]
                             ]
                         ]
                     , div [ class "jukeboxMain", id "buttonList" ]
@@ -114,15 +114,23 @@ view model =
                         [ div [ class "PlaylistContainer" ]
                             [ div [ class "Playlist", onClick (Load "./playlists/EVE_Soundtrack.json") ]
                                 [ text "EVE Soundtrack" ]
-                            , div [ class "Playlist" ]
-                                [ text "Login Screens" ]
-                            , div [ class "Playlist" ]
-                                [ text "EVE Valkyrie" ]
-                            , div [ class "Playlist" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/Mission.json") ]
+                                [ text "Mission Music" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/Login.json") ]
+                                [ text "Login Themes" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/Cinematic.json") ]
+                                [ text "Cinematic Themes" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/Permaband.json") ]
+                                [ text "Permaband" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/Miscellaneous.json") ]
+                                [ text "Misc Tracks" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/Upbeat.json") ]
+                                [ text "Upbeat Music" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/Peace_Logs.json") ]
                                 [ text "Peace Logs" ]
-                            , div [ class "Playlist" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/War_Logs.json") ]
                                 [ text "War Logs" ]
-                            , div [ class "Playlist" ]
+                            , div [ class "Playlist", onClick (Load "./playlists/Dead_Logs.json") ]
                                 [ text "Dead Logs" ]
                             ]
                         , lazy renderTable playlist
@@ -191,7 +199,7 @@ renderTable pl =
                 |> Array.indexedMap
                     (\index song ->
                         tr [ onClick (ChooseSong index) ]
-                            [ if song == currentSong pl then
+                            [ if song == Maybe.withDefault { name = "", duration = "", link = "" } pl.currentSong then
                                 td [] [ text "►" ]
 
                               else

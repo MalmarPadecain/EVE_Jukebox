@@ -19,7 +19,7 @@ type alias Playlist =
     , shuffledSongs : Maybe (Array Song)
 
     -- after shuffling or unshffling the currentSong changes immediately but the playing song stays the same
-    , tmpCurrentSong : Maybe Song
+    , currentSong : Maybe Song
     , playing : Bool
     , name : String
     , songs : Array Song
@@ -61,27 +61,41 @@ type Msg
 Also sets tmpCurrentSong to Nothing
 -}
 next : Playlist -> Playlist
-next p =
+next playlist =
     let
-        playlist =
-            { p | tmpCurrentSong = Nothing }
-    in
-    if playlist.index == Array.length playlist.songs - 1 then
-        { playlist | index = 0 }
+        newIndex =
+            if playlist.index == Array.length playlist.songs - 1 then
+                0
 
-    else
-        { playlist | index = playlist.index + 1 }
+            else
+                playlist.index + 1
+    in
+    case playlist.shuffledSongs of
+        Nothing ->
+            { playlist | index = newIndex, currentSong = Just <| songAt playlist.songs newIndex }
+
+        Just songs ->
+            { playlist | index = newIndex, currentSong = Just <| songAt songs newIndex }
 
 
 {-| Moves the index of the playlist one step back. If it hits the beginning it loops around
 -}
 previous : Playlist -> Playlist
 previous playlist =
-    if playlist.index == 0 then
-        { playlist | index = Array.length playlist.songs - 1 }
+    let
+        newIndex =
+            if playlist.index == 0 then
+                Array.length playlist.songs - 1
 
-    else
-        { playlist | index = playlist.index - 1 }
+            else
+                playlist.index - 1
+    in
+    case playlist.shuffledSongs of
+        Nothing ->
+            { playlist | index = newIndex, currentSong = Just <| songAt playlist.songs newIndex }
+
+        Just songs ->
+            { playlist | index = newIndex, currentSong = Just <| songAt songs newIndex }
 
 
 {-| Returns the Song at the current position.
@@ -100,11 +114,21 @@ currentSong playlist =
     Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get playlist.index songs
 
 
+songAt : Array Song -> Int -> Song
+songAt songs i =
+    Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get i songs
+
+
 {-| Sets the index to the given value. No checks are performed.
 -}
 chooseSong : Playlist -> Int -> Playlist
-chooseSong pl songIndex =
-    { pl | index = songIndex }
+chooseSong playlist songIndex =
+    case playlist.shuffledSongs of
+        Nothing ->
+            { playlist | index = songIndex, currentSong = Just <| songAt playlist.songs songIndex }
+
+        Just songs ->
+            { playlist | index = songIndex, currentSong = Just <| songAt songs songIndex }
 
 
 playlistDecoder : Decoder Playlist

@@ -1,42 +1,42 @@
 [
     {
-        "name": "EVE Soundtrack"
+        "name": "EVE Soundtrack",
         "file": "EVE_Soundtrack.json"
     },
     {
-        "name": "Mission Music"
+        "name": "Mission Music",
         "file": "Mission.json"
     },
     {
-        "name": "Login Themes"
+        "name": "Login Themes",
         "file": "Login.json"
     },
     {
-        "name": "Cinematic Themes"
+        "name": "Cinematic Themes",
         "file": "Cinematic.json"
     },
     {
-        "name": "Permaband"
+        "name": "Permaband",
         "file": "Permaband.json"
     },
     {
-        "name": "Misc Tracks"
+        "name": "Misc Tracks",
         "file": "Miscellaneous.json"
     },
     {
-        "name": "Upbeat Music"
+        "name": "Upbeat Music",
         "file": "Upbeat.json"
     },
     {
-        "name": "Peace Logs"
+        "name": "Peace Logs",
         "file": "Peace_Logs.json"
     },
     {
-        "name": "War Logs"
+        "name": "War Logs",
         "file": "War_Logs.json"
     },
     {
-        "name": "Dead Logs"
+        "name": "Dead Logs",
         "file": "Dead_Logs.json"
     }
 ]
