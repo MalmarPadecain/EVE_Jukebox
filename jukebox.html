@@ -19,13 +19,33 @@
       <div class="modalText">
         <hr>
         <p>
-          Bring back the good old times of EVE with this recreation of the EVE Jukebox using CSS.
+          Bring back the good old times of EVE with this recreation of the EVE Jukebox using CSS. If you find any problems please let us know on Discord at Laura#1479 or Malmar Padecain#0659
         </p>
+        <div class="playlistDescriptionContainer">
+        <div class="playlistDescription">
+          <ul><b class="orangeText">EVE Soundtrack:</b> The original soundtrack as it was in the Crucible jukebox in 2011.</ul>
+          <ul><b class="orangeText">Mission Music:</b> All of the music found in missions across New Eden. Mostly rock music.</ul>
+          <ul><b class="orangeText">Login Themes:</b> A chronological list of expansion themes, or "login music".</ul>
+          <ul><b class="orangeText">Cinematic Themes:</b> Music from trailers.</ul>
+          <ul><b class="orangeText">Permaband:</b> Only the best band this side of Jita.</ul>
+        </div>
+        <div class="playlistDescription">
+          <ul><b class="orangeText">Misc Tracks:</b> Various tracks that didn't fit anywhere else.</ul>
+          <ul><b class="orangeText">Upbeat Music:</b> Our own selection of fast-paced music for combat and such.</ul>
+          <ul><b class="orangeText">Peace Logs:</b> Fan-made ambient & downtempo music.</ul>
+          <ul><b class="orangeText">War Logs:</b> Fan made drum and bass or dubstep.</ul>
+          <ul><b class="orangeText">Dead Logs:</b> Fan made dark ambient/drone music.</ul>
+        </div>
+      </div>
+      <hr>
         <br />
-        <p id="smallText">
+        <p class="smallText">
           EVE Online and the EVE logo are the registered trademarks of CCP hf. All rights are reserved worldwide. All other trademarks are the property of their respective owners. EVE Online, the EVE logo, EVE and all associated logos and designs are the intellectual
           property of CCP hf. All artwork, screenshots, characters, vehicles, storylines, world facts or other recognizable features of the intellectual property relating to these trademarks are likewise the intellectual property of CCP hf. CCP is in no way
           responsible for the content on or functioning of this website, nor can it be liable for any damage arising from the use of this website.
+        </p>
+        <p class="smallText">
+          Most of the music here is property of CCP Games and can be better accessed in a more modern interface at their <a class="orangeText" href="https://soundcloud.com/ccpgames">Soundcloud</a>
         </p>
         <br />
         <p id="stylingBy">
@@ -33,7 +53,7 @@
           <br />
           <a id="stylingBy" href="https://evewho.com/pilot/Malhia+Fehrnah">Backend by Malmar Padecain</a>
           <br />
-          <a id="gitLink" href="https://github.com/MalmarPadecain/EVE_Jukebox">This is an open source project!</a>
+          <a class="orangeText" href="https://github.com/MalmarPadecain/EVE_Jukebox">This is an open source project!</a>
         </p>
       </div>
     </div>
@@ -61,7 +81,10 @@
     </div>
     <div class="jukeboxMain" id="buttonList">
       <div class="controlBtnContainer">
-        <img src="images/btnBack.jpg" class="controlBtn"><img src="images/btnPlay.jpg" class="controlBtn"><img src="images/btnFwd.jpg" class="controlBtn"><img src="images/btnShuffleOff.jpg" class="controlBtn" id="btnShuffle">
+        <div class="controlBtn" id="btnBack"></div>
+        <div class="controlBtn" id="btnPlay"></div>
+        <div class="controlBtn" id="btnFwd"></div>
+        <div class="controlBtn" id="btnShuffle"></div>
       </div>
       <div class="volumeContainer">
         <div class="volumeSymbol">
@@ -86,7 +109,7 @@
         <div class="Playlist">
           EVE Soundtrack
         </div>
-        <div class="Playlist">
+        <div class="Playlist" id="selectedPlaylist">
           Login Screens
         </div>
         <div class="Playlist">
