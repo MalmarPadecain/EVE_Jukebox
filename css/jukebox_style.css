@@ -118,6 +118,11 @@ body {
   color: white;
 }
 
+#selectedPlaylist {
+  background: rgba(160, 160, 160, 0.35) 8%;
+  color: white;
+}
+
 .TracklistContainer {
   flex-grow: 4.2;
   display: flex;
@@ -184,14 +189,86 @@ body {
   outline: none;
 }
 
+.EVEButton:active {
+  transform: translate(0px, 2px);
+}
+
+
+.controlBtnContainer {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+}
+
 .controlBtn {
   box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.18);
   margin-left: 2px;
   border: 1px solid rgba(215, 215, 215, 0)
 }
 
+#btnBack {
+  background-image: url("../images/btnBack.jpg");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+}
+
+#btnPlay {
+  background-image: url("../images/btnPlay.jpg");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+}
+
+#btnFwd {
+  background-image: url("../images/btnFwd.jpg");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+}
+
 #btnShuffle {
+  background-image: url("../images/btnShuffleOff.jpg");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
   margin-left: 8px;
+}
+
+#btnBack:hover {
+    background-image: url("../images/btnBackHover.jpg");
+}
+
+#btnPlay:hover {
+    background-image: url("../images/btnPlayHover.jpg");
+}
+
+#btnFwd:hover {
+    background-image: url("../images/btnFwdHover.jpg");
+}
+
+#btnShuffle:hover {
+    background-image: url("../images/btnShuffleOffHover.jpg");
+}
+
+#btnBack:active {
+    background-image: url("../images/btnBack.jpg");
+    transform: translate(0px, 2px);
+}
+
+#btnPlay:active {
+    background-image: url("../images/btnPlay.jpg");
+    transform: translate(0px, 2px);
+}
+
+#btnFwd:active {
+    background-image: url("../images/btnFwd.jpg");
+    transform: translate(0px, 2px);
+}
+
+#btnShuffle:active {
+    background-image: url("../images/btnShuffleOff.jpg");
+    transform: translate(0px, 2px);
 }
 
 .volumeContainer {
@@ -245,11 +322,6 @@ body {
   cursor: pointer;
   outline: none;
   box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.7);
-}
-
-.controlBtnContainer {
-  align-self: flex-start;
-  display: inline-block;
 }
 
 #buttonList {
@@ -507,7 +579,7 @@ html>body tbody.scrollContent td + td + td {
 }
 
 .modal-window>div {
-  width: 400px;
+  width: 550px;
   position: relative;
   margin: 10% auto;
   padding: 2rem;
@@ -545,6 +617,25 @@ html>body tbody.scrollContent td + td + td {
   font-family: EveSans, Sans-Serif;
 }
 
+.playlistDescriptionContainer{
+  flex-direction: row;
+  display:flex;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.playlistDescription {
+  font-size: 13px;
+  flex-grow: 1;
+}
+
+ul{
+  margin-top:5px;
+  margin-bottom: 7px;
+  padding-left: 0;
+  padding-right: 10px;
+}
+
 #About {
   font-family: EVESans, Sans-Serif;
   text-decoration: none;
@@ -552,7 +643,7 @@ html>body tbody.scrollContent td + td + td {
   font-weight: 400;
 }
 
-#smallText {
+.smallText {
   font-weight: 200;
   font-size: 9px;
   text-align: justify;
@@ -563,9 +654,8 @@ html>body tbody.scrollContent td + td + td {
   color: white;
 }
 
-#gitLink {
+.orangeText {
   color: orange;
-  font-size: 10px;
 }
 
 a {
