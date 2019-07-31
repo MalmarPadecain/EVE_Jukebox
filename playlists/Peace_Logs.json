@@ -2,109 +2,69 @@
   "name": "Peace Logs",
   "songs": [
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Pieces Of Shrapnel",
+      "link": "https://www.modenstudios.com/EVE/music/01.%20RealX%20-%20Pieces%20Of%20Shrapnel.mp3",
+      "duration": "6:03"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Outer Ring Excavations",
+      "link": "https://www.modenstudios.com/EVE/music/02.%20Niraia%20-%20Outer%20Ring%20Excavations.mp3",
+      "duration": "4:28"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "The Story Begin",
+      "link": "https://www.modenstudios.com/EVE/music/03.%20Egri%20Lorenz%20-%20The%20Story%20Begin.mp3",
+      "duration": "2:20"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "The Paths They Chose",
+      "link": "https://www.modenstudios.com/EVE/music/04.%20Sergrunt%20-%20The%20Paths%20They%20Chose.mp3",
+      "duration": "4:48"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Digital Wormhole",
+      "link": "https://www.modenstudios.com/EVE/music/05.%20Emika%20Neosignal%20-%20Digital%20Wormhole.mp3",
+      "duration": "3:56"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Salute Hallur",
+      "link": "https://www.modenstudios.com/EVE/music/06.%20Emika%20Neosignal%20-%20Salute%20Hallur.mp3",
+      "duration": "2:19"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Temporal Flux",
+      "link": "https://www.modenstudios.com/EVE/music/07.%20Aegis%20Systems%20-%20Temporal%20Flux.mp3",
+      "duration": "5:12"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Long Ride to HZFJ-M",
+      "link": "https://www.modenstudios.com/EVE/music/08.%20Timshishkin%20-%20Long%20Ride%20to%20HZFJ-M.mp3",
+      "duration": "5:02"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Çoundless sphere",
+      "link": "https://www.modenstudios.com/EVE/music/09.%20Soundtch%20-%20%C3%87oundless%20sphere.mp3",
+      "duration": "4:28"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "ATMO",
+      "link": "https://www.modenstudios.com/EVE/music/10.%20Soundtch%20-%20ATMO.mp3",
+      "duration": "5:00"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Centermass",
+      "link": "https://www.modenstudios.com/EVE/music/11.%20Timshishkin%20-%20Centermass.mp3",
+      "duration": "4:58"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Guiding Light the Cyno",
+      "link": "https://www.modenstudios.com/EVE/music/12.%20Midnight%20Caretakers%20-%20Guiding%20Light%20the%20Cyno.mp3",
+      "duration": "7:26"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Thrust",
+      "link": "https://www.modenstudios.com/EVE/music/13.%20Midnight%20Caretakers%20-%20Thrust.mp3",
+      "duration": "6:18"
     }
   ]
 }

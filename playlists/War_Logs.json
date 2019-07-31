@@ -2,109 +2,84 @@
   "name": "War Logs",
   "songs": [
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Intro for the War Side",
+      "link": "https://www.modenstudios.com/EVE/music/01.%20Darkelina%20Sia%20-%20Intro%20for%20the%20War%20Side.mp3",
+      "duration": "3:02"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Contaminated",
+      "link": "https://www.modenstudios.com/EVE/music/02.%20Aegis%20Systems%20-%20Contaminated.mp3",
+      "duration": "5:14"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Firefield",
+      "link": "https://www.modenstudios.com/EVE/music/03.%20...Und%20Null%20Sekunden%20-%20Firefield%20(feat.%20Sergrunt).mp3",
+      "duration": "3:16"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Fight Is Our Destiny",
+      "link": "https://www.modenstudios.com/EVE/music/04.%20Darkelina%20Sia%20-%20Fight%20Is%20Our%20Destiny.mp3",
+      "duration": "2:33"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Capital Fleet Is Approaching",
+      "link": "https://www.modenstudios.com/EVE/music/05.%20Darkelina%20Sia%20-%20Capital%20Fleet%20Is%20Approaching.mp3",
+      "duration": "2:40"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Ice",
+      "link": "https://www.modenstudios.com/EVE/music/06.%20Lord%20Lacrima%20-%20Ice.mp3",
+      "duration": "4:23"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Ore",
+      "link": "https://www.modenstudios.com/EVE/music/07.%20Lord%20Lacrima%20-%20Ore.mp3",
+      "duration": "4:12"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Warp To Null",
+      "link": "https://www.modenstudios.com/EVE/music/08.%20Radio%20Envy%20-%20Warp%20To%20Null.mp3",
+      "duration": "4:14"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Now or Never",
+      "link": "https://www.modenstudios.com/EVE/music/09.%20Dante%20deLio%20-%20Now%20or%20Never.mp3",
+      "duration": "4:20"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Demolition",
+      "link": "https://www.modenstudios.com/EVE/music/10.%20Dante%20deLio%20-%20Demolition.mp3",
+      "duration": "5:05"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Sansha",
+      "link": "https://www.modenstudios.com/EVE/music/11.%20Andro%20&%20Jumper%20-%20Sansha.mp3",
+      "duration": "3:27"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Armada Shards",
+      "link": "https://www.modenstudios.com/EVE/music/12.%20Sergrunt%20-%20Armada%20Shards.mp3",
+      "duration": "2:08"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Pursuit",
+      "link": "https://www.modenstudios.com/EVE/music/13.%20Dante%20deLio%20-%20Pursuit.mp3",
+      "duration": "4:05"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Downblast",
+      "link": "https://www.modenstudios.com/EVE/music/14.%20Sergrunt%20-%20Downblast.mp3",
+      "duration": "3:46"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Eternity",
+      "link": "https://www.modenstudios.com/EVE/music/15.%20Alex%20Rasher%20-%20Eternity.mp3",
+      "duration": "3:26"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Wind Rises",
+      "link": "https://www.modenstudios.com/EVE/music/16.%20Amoebacrew%20-%20Wind%20Rises.mp3",
+      "duration": "3:21"
     }
   ]
 }
