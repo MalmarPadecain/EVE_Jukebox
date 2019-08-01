@@ -2,14 +2,339 @@
   "name": "EVE Soundtrack",
   "songs": [
     {
-      "name": "Unidentified Phenomenon",
-      "link": "https://www.modenstudios.com/EVE/music/Unidentified%20Phenomenon.mp3",
-      "duration": "4:30"
+      "name": "Miner Stories",
+      "link": "https://www.modenstudios.com/EVE/music/Miner%20Stories.mp3",
+      "duration": "6:12"
     },
     {
-      "name": "The Day After the Strom",
-      "link": "https://www.modenstudios.com/EVE/music/The%20Day%20After%20the%20Storm.mp3",
+      "name": "Hidden Mementos",
+      "link": "https://www.modenstudios.com/EVE/music/Hidden%20Mementos.mp3",
+      "duration": "5:49"
+    },
+    {
+      "name": "War Relics",
+      "link": "https://www.modenstudios.com/EVE/music/War%20Relics.mp3",
+      "duration": "5:28"
+    },
+    {
+      "name": "Red Glowing Dust",
+      "link": "https://www.modenstudios.com/EVE/music/Red%20Glowing%20Dust.mp3",
+      "duration": "4:55"
+    },
+    {
+      "name": "Costs of Conflict",
+      "link": "https://www.modenstudios.com/EVE/music/Costs%20of%20Conflict.mp3",
+      "duration": "6:01"
+    },
+    {
+      "name": "Jovian Riddle",
+      "link": "https://www.modenstudios.com/EVE/music/Jovian%20Riddle.mp3",
+      "duration": "5:02"
+    },
+    {
+      "name": "Lost Wormhole",
+      "link": "https://www.modenstudios.com/EVE/music/Lost%20Wormhole.mp3",
+      "duration": "5:25"
+    },
+    {
+      "name": "Below the Asteroids",
+      "link": "https://www.modenstudios.com/EVE/music/Below%20the%20Asteroids.mp3",
+      "duration": "4:12"
+    },
+    {
+      "name": "Forsaken Ruins",
+      "link": "https://www.modenstudios.com/EVE/music/Forsaken%20Ruins.mp3",
+      "duration": "6:07"
+    },
+    {
+      "name": "Surplus of Rare Artifacts",
+      "link": "https://www.modenstudios.com/EVE/music/Surplus%20of%20Rare%20Artifacts.mp3",
+      "duration": "8:13"
+    },
+    {
+      "name": "The Green Nebula",
+      "link": "https://www.modenstudios.com/EVE/music/The%20Green%20Nebula.mp3",
+      "duration": "4:48"
+    },
+    {
+      "name": "Primordial Star Clouds",
+      "link": "https://www.modenstudios.com/EVE/music/Primordial%20Star%20Clouds.mp3",
+      "duration": "4:09"
+    },
+    {
+      "name": "The Jovian Front",
+      "link": "https://www.modenstudios.com/EVE/music/The%20Jovian%20Front.mp3",
+      "duration": "3:55"
+    },
+    {
+      "name": "My Other Residency",
+      "link": "https://www.modenstudios.com/EVE/music/My%20Other%20Residency.mp3",
+      "duration": "3:40"
+    },
+    {
+      "name": "Merchants, Looters, and Ghosts",
+      "link": "https://www.modenstudios.com/EVE/music/Merchants,%20Looters,%20and%20Ghosts.mp3",
       "duration": "4:56"
+    },
+    {
+      "name": "Safe Trade Routes",
+      "link": "https://www.modenstudios.com/EVE/music/Safe%20Trade%20Routes.mp3",
+      "duration": "5:44"
+    },
+    {
+      "name": "Last Power Cell",
+      "link": "https://www.modenstudios.com/EVE/music/Last%20Power%20Cell.mp3",
+      "duration": "4:54"
+    },
+    {
+      "name": "EVE of Battle",
+      "link": "https://www.modenstudios.com/EVE/music/EVE%20of%20Battle.mp3",
+      "duration": "4:15"
+    },
+    {
+      "name": "Nouvelle Rouvenor Hero",
+      "link": "https://www.modenstudios.com/EVE/music/Nouvelle%20Rouvenor%20Hero.mp3",
+      "duration": "4:31"
+    },
+    {
+      "name": "Inter-Spatial-Flexure",
+      "link": "https://www.modenstudios.com/EVE/music/Inter-Spatial-Flexure.mp3",
+      "duration": "6:06"
+    },
+    {
+      "name": "Infinite Distortion of Space and Time",
+      "link": "https://www.modenstudios.com/EVE/music/Infinite%20Distortion%20of%20Space%20and%20Time.mp3",
+      "duration": "7:24"
+    },
+    {
+      "name": "Tomorrows Neverending Yesterday",
+      "link": "https://www.modenstudios.com/EVE/music/Tomorrows%20Neverending%20Yesterday.mp3",
+      "duration": "5:54"
+    },
+    {
+      "name": "Gallentean Refuge",
+      "link": "https://www.modenstudios.com/EVE/music/Gallentean%20Refuge.mp3",
+      "duration": "4:56"
+    },
+    {
+      "name": "Love, Honour and Obey",
+      "link": "https://www.modenstudios.com/EVE/music/Love,%20Honour%20and%20Obey.mp3",
+      "duration": "5:40"
+    },
+    {
+      "name": "Everyday Zone",
+      "link": "https://www.modenstudios.com/EVE/music/Everyday%20Zone.mp3",
+      "duration": "5:37"
+    },
+    {
+      "name": "Object Almost Accomplished",
+      "link": "https://www.modenstudios.com/EVE/music/Object%20Almost%20Accomplished.mp3",
+      "duration": "7:41"
+    },
+    {
+      "name": "Ride Out the Storm",
+      "link": "https://www.modenstudios.com/EVE/music/Ride%20Out%20the%20Storm.mp3",
+      "duration": "6:25"
+    },
+    {
+      "name": "At the End of the Your Journey",
+      "link": "https://www.modenstudios.com/EVE/music/At%20the%20End%20of%20the%20Your%20Journey.mp3",
+      "duration": "4:56"
+    },
+    {
+      "name": "Do You Know Where You Are?",
+      "link": "https://www.modenstudios.com/EVE/music/Do%20You%20Know%20Where%20You%20Are_.mp3",
+      "duration": "5:49"
+    },
+    {
+      "name": "Home at Last",
+      "link": "https://www.modenstudios.com/EVE/music/Home%20at%20Last.mp3",
+      "duration": "4:28"
+    },
+    {
+      "name": "Miners Heaven",
+      "link": "https://www.modenstudios.com/EVE/music/Miners%20Heaven.mp3",
+      "duration": "4:49"
+    },
+    {
+      "name": "Quaesitum Finished",
+      "link": "https://www.modenstudios.com/EVE/music/Quaesitum%20Finished.mp3",
+      "duration": "4:37"
+    },
+    {
+      "name": "My Own Binary System",
+      "link": "https://www.modenstudios.com/EVE/music/My%20Own%20Binary%20System.mp3",
+      "duration": "5:22"
+    },
+    {
+      "name": "Something Old, Something New",
+      "link": "https://www.modenstudios.com/EVE/music/Something%20Old,%20Something%20New.mp3",
+      "duration": "3:42"
+    },
+    {
+      "name": "I Saw Your Ship",
+      "link": "https://www.modenstudios.com/EVE/music/I%20Saw%20Your%20Ship.mp3",
+      "duration": "4:55"
+    },
+    {
+      "name": "We Fight Proud for the Holder",
+      "link": "https://www.modenstudios.com/EVE/music/We%20Fight%20Proud%20for%20the%20Holder.mp3",
+      "duration": "3:16"
+    },
+    {
+      "name": "The Hunt",
+      "link": "https://www.modenstudios.com/EVE/music/The%20Hunt.mp3",
+      "duration": "5:20"
+    },
+    {
+      "name": "Amongst Allies",
+      "link": "https://www.modenstudios.com/EVE/music/Amongst%20Allies.mp3",
+      "duration": "5:36"
+    },
+    {
+      "name": "Theme of the Universe",
+      "link": "https://www.modenstudios.com/EVE/music/Theme%20of%20the%20Universe.mp3",
+      "duration": "6:26"
+    },
+    {
+      "name": "Defenders of the Orphic World",
+      "link": "https://www.modenstudios.com/EVE/music/Defenders%20of%20the%20Orphic%20World.mp3",
+      "duration": "5:13"
+    },
+    {
+      "name": "Treasure the Obscure",
+      "link": "https://www.modenstudios.com/EVE/music/Treasure%20the%20Obscure.mp3",
+      "duration": "5:25"
+    },
+    {
+      "name": "Rose of Victory",
+      "link": "https://www.modenstudios.com/EVE/music/Rose%20of%20Victory.mp3",
+      "duration": "5:46"
+    },
+    {
+      "name": "It's Full of Stars",
+      "link": "https://www.modenstudios.com/EVE/music/It's%20Full%20of%20Stars.mp3",
+      "duration": "5:00"
+    },
+    {
+      "name": "Smoke From Down Below",
+      "link": "https://www.modenstudios.com/EVE/music/Smoke%20From%20Down%20Below.mp3",
+      "duration": "5:23"
+    },
+    {
+      "name": "...But Still We Go On",
+      "link": "https://www.modenstudios.com/EVE/music/But%20Still%20We%20Go%20On.mp3",
+      "duration": "8:08"
+    },
+    {
+      "name": "In the Depth of Space",
+      "link": "https://www.modenstudios.com/EVE/music/In%20the%20Depth%20of%20Space.mp3",
+      "duration": "4:58"
+    },
+    {
+      "name": "Minmatar Rebel Alliance",
+      "link": "https://www.modenstudios.com/EVE/music/Minmatar%20Rebel%20Alliance.mp3",
+      "duration": "5:01"
+    },
+    {
+      "name": "All Which Was Lost Has Now Been Regained",
+      "link": "https://www.modenstudios.com/EVE/music/All%20Which%20Was%20Lost%20Has%20Now%20Been%20Regained.mp3",
+      "duration": "5:46"
+    },
+    {
+      "name": "Borderlines",
+      "link": "https://www.modenstudios.com/EVE/music/Borderlines.mp3",
+      "duration": "4:57"
+    },
+    {
+      "name": "Wonderlands of the Mind",
+      "link": "https://www.modenstudios.com/EVE/music/Wonderlands%20of%20the%20Mind.mp3",
+      "duration": "5:00"
+    },
+    {
+      "name": "Omens",
+      "link": "https://www.modenstudios.com/EVE/music/Omens.mp3",
+      "duration": "5:04"
+    },
+    {
+      "name": "The Solitary Pilot",
+      "link": "https://www.modenstudios.com/EVE/music/The%20Solitary%20Pilot.mp3",
+      "duration": "5:30"
+    },
+    {
+      "name": "Times of Sanguinity",
+      "link": "https://www.modenstudios.com/EVE/music/Times%20of%20Sanguinity.mp3",
+      "duration": "5:21"
+    },
+    {
+      "name": "Doomed Forever",
+      "link": "https://www.modenstudios.com/EVE/music/Doomed%20Forever.mp3",
+      "duration": "5:00"
+    },
+    {
+      "name": "Path of the Cursed",
+      "link": "https://www.modenstudios.com/EVE/music/Path%20of%20the%20Cursed.mp3",
+      "duration": "5:25"
+    },
+    {
+      "name": "On the Outskirts",
+      "link": "https://www.modenstudios.com/EVE/music/On%20the%20Outskirts.mp3",
+      "duration": "5:42"
+    },
+    {
+      "name": "Forgotten Places",
+      "link": "https://www.modenstudios.com/EVE/music/Forgotten%20Places.mp3",
+      "duration": "5:36"
+    },
+    {
+      "name": "Precious Ore",
+      "link": "https://www.modenstudios.com/EVE/music/Precious%20Ore.mp3",
+      "duration": "5:01"
+    },
+    {
+      "name": "It Ends Here",
+      "link": "https://www.modenstudios.com/EVE/music/It%20Ends%20Here.mp3",
+      "duration": "5:18"
+    },
+    {
+      "name": "Shifting the Balance of Power",
+      "link": "https://www.modenstudios.com/EVE/music/Shifting%20the%20Balance%20of%20Power.mp3",
+      "duration": "5:00"
+    },
+    {
+      "name": "Where Evil Lurks",
+      "link": "https://www.modenstudios.com/EVE/music/Where%20Evil%20Lurks.mp3",
+      "duration": "5:22"
+    },
+    {
+      "name": "Point of No Return",
+      "link": "https://www.modenstudios.com/EVE/music/Point%20of%20No%20Return.mp3",
+      "duration": "5:03"
+    },
+    {
+      "name": "Theme From Jita",
+      "link": "https://www.modenstudios.com/EVE/music/Theme%20From%20Jita.mp3",
+      "duration": "5:18"
+    },
+    {
+      "name": "New Moon",
+      "link": "https://www.modenstudios.com/EVE/music/New%20Moon.mp3",
+      "duration": "5:21"
+    },
+    {
+      "name": "Seek and You Shall Find",
+      "link": "https://www.modenstudios.com/EVE/music/Seek%20and%20You%20Shall%20Find.mp3",
+      "duration": "5:18"
+    },
+    {
+      "name": "Learning From the Past",
+      "link": "https://www.modenstudios.com/EVE/music/Learning%20From%20the%20Past.mp3",
+      "duration": "4:54"
+    },
+    {
+      "name": "Close to a Holy Place",
+      "link": "https://www.modenstudios.com/EVE/music/Close%20to%20a%20Holy%20Place.mp3",
+      "duration": "5:45"
     }
   ]
 }

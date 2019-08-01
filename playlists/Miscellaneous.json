@@ -1,0 +1,70 @@
+{
+  "name": "Misc Tracks",
+  "songs": [
+    {
+      "name": "The Next Life Part 1 (Valkyrie)",
+      "link": "https://www.modenstudios.com/EVE/music/The%20Next%20Life%20Part%201.mp3",
+      "duration": "2:11"
+    },
+    {
+      "name": "The Next Life Part 2 (Valkyrie)",
+      "link": "https://www.modenstudios.com/EVE/music/The%20Next%20Life%20Part%202.mp3",
+      "duration": "3:01"
+    },
+    {
+      "name": "She's Gone (Valkyrie)",
+      "link": "https://www.modenstudios.com/EVE/music/She's%20Gone.mp3",
+      "duration": "2:43"
+    },
+    {
+      "name": "Amarr Theme",
+      "link": "https://www.modenstudios.com/EVE/music/Amarr%20Theme.mp3",
+      "duration": "1:26"
+    },
+    {
+      "name": "Caldari Theme",
+      "link": "https://www.modenstudios.com/EVE/music/Caldari%20Theme.mp3",
+      "duration": "1:38"
+    },
+    {
+      "name": "Gallente Theme",
+      "link": "https://www.modenstudios.com/EVE/music/Gallente%20Theme.mp3",
+      "duration": "1:18"
+    },
+    {
+      "name": "Minmatar Theme",
+      "link": "https://www.modenstudios.com/EVE/music/Minmatar%20Theme.mp3",
+      "duration": "1:46"
+    },
+    {
+      "name": "Unidentified Phenomenon",
+      "link": "https://www.modenstudios.com/EVE/music/Unidentified%20Phenomenon.mp3",
+      "duration": "4:30"
+    },
+    {
+      "name": "The Day After the Storm",
+      "link": "https://www.modenstudios.com/EVE/music/The%20Day%20After%20the%20Storm.mp3",
+      "duration": "4:56"
+    },
+    {
+      "name": "Pirates Den",
+      "link": "https://www.modenstudios.com/EVE/music/Pirates%20Den.mp3",
+      "duration": "5:00"
+    },
+    {
+      "name": "Is Anybody Out There",
+      "link": "https://www.modenstudios.com/EVE/music/Is%20Anybody%20Out%20There.mp3",
+      "duration": "4:55"
+    },
+    {
+      "name": "Gas Giant",
+      "link": "https://www.modenstudios.com/EVE/music/Gas%20Giant.mp3",
+      "duration": "4:50"
+    },
+    {
+      "name": "Rocket (Alliance Tournament Intro)",
+      "link": "https://www.modenstudios.com/EVE/music/Rocket.mp3",
+      "duration": "0:39"
+    }
+  ]
+}
