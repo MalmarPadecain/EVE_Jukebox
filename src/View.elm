@@ -5,7 +5,7 @@ import Browser
 import Core exposing (..)
 import Draggable
 import Html exposing (Html, a, audio, b, br, button, div, h1, hr, img, input, p, source, table, tbody, td, text, th, tr, ul, video)
-import Html.Attributes exposing (autoplay, class, href, id, loop, max, min, src, step, style, title, type_, value)
+import Html.Attributes exposing (attribute, autoplay, class, href, id, loop, max, min, src, step, style, title, type_, value)
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
 import Json.Decode as Decode
@@ -156,6 +156,7 @@ view model =
                         []
                     ]
                 , videoDiv
+                , div [ id "overviewWrapper" ] []
                 ]
             }
 
@@ -345,7 +346,7 @@ aboutWindow =
 videoDiv : Html msg
 videoDiv =
     div [ id "videoWrapper" ]
-        [ video [ id "film", style "z-index" "8", autoplay True, loop True ]
+        [ video [ id "film", style "z-index" "8", autoplay True, loop True, attribute "muted" "" ]
             [ source [ src "video/minmatarStation.mp4", type_ "video/mp4" ] []
             ]
         ]
