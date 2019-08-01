@@ -231,6 +231,13 @@
   width: 20px;
 }
 
+#btnPause {
+  background-image: url("../images/btnPause.jpg");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+}
+
 #btnFwd {
   background-image: url("../images/btnFwd.jpg");
   background-repeat: no-repeat;
@@ -238,8 +245,16 @@
   width: 20px;
 }
 
-#btnShuffle {
+#btnShuffleOff {
   background-image: url("../images/btnShuffleOff.jpg");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+  margin-left: 8px;
+}
+
+#btnShuffleOn {
+  background-image: url("../images/btnShuffleOn.jpg");
   background-repeat: no-repeat;
   height: 20px;
   width: 20px;
@@ -254,12 +269,20 @@
     background-image: url("../images/btnPlayHover.jpg");
 }
 
+#btnPause:hover {
+    background-image: url("../images/btnPauseHover.jpg");
+}
+
 #btnFwd:hover {
     background-image: url("../images/btnFwdHover.jpg");
 }
 
-#btnShuffle:hover {
+#btnShuffleOff:hover {
     background-image: url("../images/btnShuffleOffHover.jpg");
+}
+
+#btnShuffleOn:hover {
+    background-image: url("../images/btnShuffleOnHover.jpg");
 }
 
 #btnBack:active {
@@ -272,13 +295,23 @@
     transform: translate(0px, 2px);
 }
 
+#btnPause:active {
+    background-image: url("../images/btnPause.jpg");
+    transform: translate(0px, 2px);
+}
+
 #btnFwd:active {
     background-image: url("../images/btnFwd.jpg");
     transform: translate(0px, 2px);
 }
 
-#btnShuffle:active {
+#btnShuffleOff:active {
     background-image: url("../images/btnShuffleOff.jpg");
+    transform: translate(0px, 2px);
+}
+
+#btnShuffleOn:active {
+    background-image: url("../images/btnShuffleOn.jpg");
     transform: translate(0px, 2px);
 }
 
