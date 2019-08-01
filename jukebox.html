@@ -10,7 +10,9 @@
 
 <body>
 
-  <!--<div id="About"><a href="#open-modal">About: EVE Online Jukebox Project</a></div>-->
+  <script>
+document.getElementById("film").removeAttribute('controls');
+</script>
 
   <div id="open-modal" class="modal-window">
     <div>
@@ -58,7 +60,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="jukeboxWrapper">
     <div class="jukeboxMain" id="TitleBox">
@@ -576,6 +577,12 @@
     </div>
   </div>
 
+  <div id="videoWrapper">
+    <video id="film" style="z-index:8;" autoplay muted loop>
+      <source src="video/minmatarStation.mp4" type="video/mp4">
+    </video>
+  </div>
+
   <!--<a href="https://i.imgur.com/FOtZvBc.jpg">Sample Image here</a><br />
 <a href="https://i.imgur.com/5xiI33J.jpg">CSS Layout Image here</a>
 
@@ -585,6 +592,8 @@
 <p id="progress"></p>
 <button id="pause" onclick="pause()">Pause</button>
 -->
+
+
 </body>
 
 </html>
