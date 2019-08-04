@@ -9,6 +9,7 @@ import Html.Attributes exposing (attribute, autoplay, class, href, id, loop, max
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
 import Json.Decode as Decode
+import Playlist exposing (..)
 
 
 view : Model -> Browser.Document Msg

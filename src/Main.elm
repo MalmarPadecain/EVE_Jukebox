@@ -6,6 +6,7 @@ import Core exposing (..)
 import Draggable
 import Http
 import Platform.Sub as Sub
+import Playlist exposing (..)
 import Random exposing (generate)
 import Random.Array exposing (shuffle)
 import View exposing (..)
