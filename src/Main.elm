@@ -1,6 +1,5 @@
 port module Main exposing (control, main, progress, update)
 
-import Array exposing (Array)
 import Browser
 import Core exposing (..)
 import Draggable
@@ -8,7 +7,7 @@ import Http
 import Platform.Sub as Sub
 import Playlist exposing (..)
 import Random exposing (generate)
-import Random.Array exposing (shuffle)
+import Random.List exposing (shuffle)
 import View exposing (..)
 
 
@@ -40,19 +39,25 @@ init : () -> ( Model, Cmd Msg )
 init _ =
     Success
         { playlist =
-            { index = 0
-            , progress = 0
-            , shuffledSongs = Nothing
-            , currentSong = Nothing
+            { progress = 0
             , playing = False
-            , name = "Empty"
-            , songs = Array.empty
+            , core =
+                { name = "Empty"
+                , link = ""
+                }
+            , order =
+                { current = { index = 0, name = "", duration = "", link = "" }
+                , previous = []
+                , next = []
+                }
+            , displayOrder = [ { index = 0, name = "", duration = "", link = "" } ]
             }
         , volume = 100
         , dragState =
             { position = ( 0, 0 )
             , drag = Draggable.init
             }
+        , shuffled = False
         }
         |> update (Load "./playlists/EVE_Soundtrack.json")
 
@@ -82,32 +87,36 @@ update msg model_ =
                         update Play model_
 
                 Shuffle ->
-                    if playlist.shuffledSongs == Nothing then
-                        ( Success model, generate Shuffled (shuffle playlist.songs) )
+                    if model.shuffled then
+                        ( Success { model | playlist = unshuffle playlist, shuffled = False }, Cmd.none )
 
                     else
-                        ( Success { model | playlist = { playlist | shuffledSongs = Nothing } }, Cmd.none )
+                        ( Success model, generate Shuffled (shuffle playlist.order.next) )
 
                 Shuffled shuffledList ->
                     ( Success
                         { model
                             | playlist =
                                 { playlist
-                                    | index = 0
-                                    , shuffledSongs = Just shuffledList
+                                    | order =
+                                        { current = playlist.order.current
+                                        , next = shuffledList
+                                        , previous = List.reverse shuffledList
+                                        }
                                 }
+                            , shuffled = True
                         }
                     , Cmd.none
                     )
 
                 Load link ->
-                    ( Success model, loadJson link )
+                    ( Success model, loadJson link playlist.core.name )
 
                 Loaded result ->
                     case result of
                         Ok pl ->
                             ( Success { model | playlist = pl }
-                            , control ("load " ++ (currentSong pl).link)
+                            , control ("load " ++ playlist.order.current.link)
                             )
 
                         Err err ->
@@ -123,7 +132,7 @@ update msg model_ =
 
                 Play ->
                     ( Success { model | playlist = { playlist | playing = True } }
-                    , control ("play " ++ (currentSong playlist).link)
+                    , control ("play " ++ playlist.order.current.link)
                     )
 
                 TogglePause ->
@@ -167,11 +176,11 @@ update msg model_ =
             ( model_, Cmd.none )
 
 
-loadJson : String -> Cmd Msg
-loadJson link =
+loadJson : String -> String -> Cmd Msg
+loadJson link name =
     Http.get
         { url = link
-        , expect = Http.expectJson Loaded playlistDecoder
+        , expect = Http.expectJson Loaded <| playlistDecoder link name
         }
 
 

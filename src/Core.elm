@@ -1,6 +1,5 @@
 module Core exposing (Model(..), Msg(..))
 
-import Array exposing (Array)
 import Draggable
 import Http
 import Playlist exposing (..)
@@ -17,6 +16,7 @@ type Model
         { playlist : Playlist
         , volume : Float
         , dragState : DragState
+        , shuffled : Bool
         }
     | Error String
 
@@ -25,10 +25,10 @@ type Msg
     = Next
     | Previous
     | Shuffle
-    | Shuffled (Array Song)
+    | Shuffled (List Song)
     | Load String
     | Loaded (Result Http.Error Playlist)
-    | ChooseSong Int
+    | ChooseSong Song
     | ChangeVolume Float
     | Play
     | TogglePause
