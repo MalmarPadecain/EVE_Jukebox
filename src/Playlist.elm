@@ -1,113 +1,165 @@
-module Playlist exposing (Playlist, Song, chooseSong, currentSong, next, playlistDecoder, previous, songAt)
+module Playlist exposing (PlayOrder, Playlist, Song, chooseSong, next, playlistDecoder, previous, unshuffle)
 
-import Array exposing (Array)
-import Json.Decode exposing (Decoder, array, field, map2, map3, string)
+import Json.Decode exposing (Decoder, andThen, fail, list, string, succeed)
+import Json.Decode.Pipeline exposing (hardcoded, required)
+import List exposing (indexedMap, reverse, sortBy)
+
+
+type alias ProtoSong =
+    { name : String
+    , link : String
+    , duration : String
+    }
 
 
 type alias Song =
-    { name : String
+    { index : Int
+    , name : String
     , duration : String
     , link : String
     }
 
 
-type alias Playlist =
-    { index : Int
-    , progress : Float
-    , shuffledSongs : Maybe (Array Song)
-
-    -- after shuffling or unshffling the currentSong changes immediately but the playing song stays the same
-    , currentSong : Maybe Song
-    , playing : Bool
-    , name : String
-    , songs : Array Song
+type alias PlayOrder =
+    { current : Song
+    , previous : List Song
+    , next : List Song
     }
 
 
-{-| Moves the index of the playlist one step further. If it hits the end it loops around.
-Also sets tmpCurrentSong to Nothing
+type alias PlaylistCore =
+    { name : String
+    , link : String
+    }
+
+
+type alias Playlist =
+    { progress : Float
+    , playing : Bool
+    , core : PlaylistCore
+    , order : PlayOrder
+    , displayOrder : List Song
+    }
+
+
+{-| Helper to create Playlists without the need to create PlayOrder manually
 -}
-next : Playlist -> Playlist
-next playlist =
-    let
-        newIndex =
-            if playlist.index == Array.length playlist.songs - 1 then
-                0
-
-            else
-                playlist.index + 1
-    in
-    case playlist.shuffledSongs of
-        Nothing ->
-            { playlist | index = newIndex, currentSong = Just <| songAt playlist.songs newIndex }
-
-        Just songs ->
-            { playlist | index = newIndex, currentSong = Just <| songAt songs newIndex }
-
-
-{-| Moves the index of the playlist one step back. If it hits the beginning it loops around
--}
-previous : Playlist -> Playlist
-previous playlist =
-    let
-        newIndex =
-            if playlist.index == 0 then
-                Array.length playlist.songs - 1
-
-            else
-                playlist.index - 1
-    in
-    case playlist.shuffledSongs of
-        Nothing ->
-            { playlist | index = newIndex, currentSong = Just <| songAt playlist.songs newIndex }
-
-        Just songs ->
-            { playlist | index = newIndex, currentSong = Just <| songAt songs newIndex }
-
-
-{-| Returns the Song at the current position.
-If an illegal int is given it returns { name = "", link = "", duration = "" }
--}
-currentSong : Playlist -> Song
-currentSong playlist =
+makePlaylist : String -> String -> List ProtoSong -> Result String Playlist
+makePlaylist pName pLink protoSongs =
     let
         songs =
-            if playlist.shuffledSongs == Nothing then
-                playlist.songs
-
-            else
-                Maybe.withDefault Array.empty playlist.shuffledSongs
+            indexedMap (\i { name, link, duration } -> Song i name duration link) protoSongs
     in
-    Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get playlist.index songs
+    case songs of
+        [] ->
+            Err "songs must not be empty."
+
+        s :: ss ->
+            Ok
+                { progress = 0
+                , playing = False
+                , core =
+                    { name = pName
+                    , link = pLink
+                    }
+                , order =
+                    { current = s
+                    , previous = reverse ss
+                    , next = ss
+                    }
+                , displayOrder = indexedMap (\i { name, link, duration } -> Song i name duration link) protoSongs
+                }
 
 
-songAt : Array Song -> Int -> Song
-songAt songs i =
-    Maybe.withDefault { name = "", link = "", duration = "" } <| Array.get i songs
+unshuffle : Playlist -> Playlist
+unshuffle ({ order } as playlist) =
+    let
+        sortedSongList =
+            sortBy .index (order.current :: order.next)
+
+        newPL =
+            case sortedSongList of
+                [] ->
+                    playlist
+
+                x :: xs ->
+                    { playlist
+                        | order =
+                            { current = x
+                            , next = xs
+                            , previous = reverse xs
+                            }
+                    }
+    in
+    chooseSong newPL order.current
 
 
-{-| Sets the index to the given value. No checks are performed.
+{-| -}
+next : Playlist -> Playlist
+next playlist =
+    case playlist.order.next of
+        x :: xs ->
+            { playlist
+                | order =
+                    { current = x
+                    , previous = playlist.order.current :: reverse xs
+                    , next = xs ++ [ playlist.order.current ]
+                    }
+            }
+
+        [] ->
+            playlist
+
+
+{-| -}
+previous : Playlist -> Playlist
+previous playlist =
+    case playlist.order.previous of
+        x :: xs ->
+            { playlist
+                | order =
+                    { current = x
+                    , previous = xs ++ [ playlist.order.current ]
+                    , next = playlist.order.current :: reverse xs
+                    }
+            }
+
+        [] ->
+            playlist
+
+
+{-| Sets current to song.
+If song is not in the list this will result in infinite recursion!
 -}
-chooseSong : Playlist -> Int -> Playlist
-chooseSong playlist songIndex =
-    case playlist.shuffledSongs of
-        Nothing ->
-            { playlist | index = songIndex, currentSong = Just <| songAt playlist.songs songIndex }
+chooseSong : Playlist -> Song -> Playlist
+chooseSong playlist song =
+    if playlist.order.current == song then
+        playlist
 
-        Just songs ->
-            { playlist | index = songIndex, currentSong = Just <| songAt songs songIndex }
+    else
+        chooseSong (next playlist) song
 
 
-playlistDecoder : Decoder Playlist
-playlistDecoder =
-    map2 (Playlist 0 0 Nothing Nothing False)
-        (field "name" string)
-        (field "songs"
-            (array
-                (map3 Song
-                    (field "name" string)
-                    (field "duration" string)
-                    (field "link" string)
-                )
+protoSongDecoder : Decoder ProtoSong
+protoSongDecoder =
+    succeed ProtoSong
+        |> required "name" string
+        |> required "link" string
+        |> required "duration" string
+
+
+playlistDecoder : String -> String -> Decoder Playlist
+playlistDecoder name link =
+    succeed makePlaylist
+        |> hardcoded name
+        |> hardcoded link
+        |> required "songs" (list protoSongDecoder)
+        |> andThen
+            (\result ->
+                case result of
+                    Err s ->
+                        fail s
+
+                    Ok pl ->
+                        succeed pl
             )
-        )

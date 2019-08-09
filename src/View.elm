@@ -1,6 +1,5 @@
 module View exposing (renderTable, view)
 
-import Array
 import Browser
 import Core exposing (..)
 import Draggable
@@ -15,7 +14,7 @@ import Playlist exposing (..)
 view : Model -> Browser.Document Msg
 view model =
     case model of
-        Success { playlist, volume, dragState } ->
+        Success { playlist, volume, dragState, shuffled } ->
             { title = "Jukebox"
             , body =
                 [ div
@@ -43,7 +42,7 @@ view model =
                             [ div [ class "NowPlaying", id "TimeElapsed" ]
                                 [ text <| secondsToString playlist.progress ]
                             , div [ class "NowPlaying", id "SongName" ]
-                                [ text <| .name <| Maybe.withDefault (currentSong playlist) playlist.currentSong ]
+                                [ text playlist.order.current.name ]
                             ]
                         ]
                     , div [ class "jukeboxMain", id "buttonList" ]
@@ -64,11 +63,11 @@ view model =
                                 []
                             , div
                                 [ class "controlBtn"
-                                , if playlist.shuffledSongs == Nothing then
-                                    id "btnShuffleOff"
+                                , if shuffled then
+                                    id "btnShuffleOn"
 
                                   else
-                                    id "btnShuffleOn"
+                                    id "btnShuffleOff"
                                 , onClick Shuffle
                                 ]
                                 []
@@ -112,25 +111,25 @@ view model =
                         ]
                     , div [ class "jukeboxMain", id "ListContainer" ]
                         [ div [ class "PlaylistContainer" ]
-                            [ div [ class "Playlist", onClick (Load "./playlists/EVE_Soundtrack.json") ]
+                            [ div [ class "PlaylistTest", onClick (Load "./playlists/EVE_Soundtrack.json") ]
                                 [ text "EVE Soundtrack" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/Mission.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/Mission.json") ]
                                 [ text "Mission Music" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/Login.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/Login.json") ]
                                 [ text "Login Themes" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/Cinematic.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/Cinematic.json") ]
                                 [ text "Cinematic Themes" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/Permaband.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/Permaband.json") ]
                                 [ text "Permaband" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/Miscellaneous.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/Miscellaneous.json") ]
                                 [ text "Misc Tracks" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/Upbeat.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/Upbeat.json") ]
                                 [ text "Upbeat Music" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/Peace_Logs.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/Peace_Logs.json") ]
                                 [ text "Peace Logs" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/War_Logs.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/War_Logs.json") ]
                                 [ text "War Logs" ]
-                            , div [ class "Playlist", onClick (Load "./playlists/Dead_Logs.json") ]
+                            , div [ class "PlaylistTest", onClick (Load "./playlists/Dead_Logs.json") ]
                                 [ text "Dead Logs" ]
                             ]
                         , lazy renderTable playlist
@@ -199,22 +198,21 @@ renderTable pl =
                 ]
             ]
         , table [ class "Tracklist" ]
-            [ pl.songs
-                |> Array.indexedMap
-                    (\index song ->
-                        tr [ onClick (ChooseSong index) ]
-                            [ if song == Maybe.withDefault { name = "", duration = "", link = "" } pl.currentSong then
+            [ pl.displayOrder
+                |> List.map
+                    (\song ->
+                        tr [ onClick (ChooseSong song) ]
+                            [ if song == pl.order.current then
                                 td [] [ text "►" ]
 
                               else
                                 td [] []
-                            , td [] [ text (String.fromInt (index + 1)) ]
+                            , td [] [ text (String.fromInt (song.index + 1)) ]
                             , td [] [ text song.name ]
                             , td [] [ text song.duration ]
                             , td [] []
                             ]
                     )
-                |> Array.toList
                 |> (\l -> l ++ finalRow pl)
                 |> tbody [ class "scrollContent" ]
             ]
@@ -230,8 +228,8 @@ finalRow pl =
     let
         stl =
             style "height" <|
-                if 313 - (Array.length pl.songs * 16) > 0 then
-                    (String.fromInt <| 303 - (Array.length pl.songs * 16)) ++ "px"
+                if 313 - (List.length pl.displayOrder * 16) > 0 then
+                    (String.fromInt <| 303 - (List.length pl.displayOrder * 16)) ++ "px"
 
                 else
                     "0"
