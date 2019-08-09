@@ -14,8 +14,8 @@
 
 <body>
 
-  <div id="open-modal" class="modal-window">
-    <div>
+  <div id="open-about" class="modal-window">
+    <div class="modalInner">
       <a href="#modal-close" title="Close" class="modal-close">CLOSE &times;</a>
       <h1 class="modalText">The EVE Online Jukebox Project</h1>
       <div class="modalText">
@@ -23,15 +23,20 @@
         <p>
           Bring back the good old times of EVE with this recreation of the EVE Jukebox using CSS. If you find any problems please let us know on Discord at Laura#1479 or Malmar Padecain#0659
         </p>
-        <div class="playlistDescriptionContainer">
-        <div class="playlistDescription">
+        <p>
+          <a id="stylingBy" href="">For general frequently asked questions or feedback, see the the release notes here.</a>
+        </p>
+        <hr />
+        <div class="modalFlexContainer">
+        <div class="modalFlex">
           <ul><b class="orangeText">EVE Soundtrack: </b>The original soundtrack as it was in the Crucible jukebox in 2011.</ul>
           <ul><b class="orangeText">Mission Music: </b>All of the music found in missions across New Eden. Mostly rock music.</ul>
           <ul><b class="orangeText">Login Themes: </b>A chronological list of expansion themes, or "login music".</ul>
           <ul><b class="orangeText">Cinematic Themes: </b>Music from trailers.</ul>
           <ul><b class="orangeText">Permaband: </b>Only the best band this side of Jita.</ul>
+          <ul><b class="orangeText">Orchestral: </b>The 10-year anniversary music from Fanfest 2013</ul>
         </div>
-        <div class="playlistDescription">
+        <div class="modalFlex">
           <ul><b class="orangeText">Misc Tracks: </b>Various tracks that didn't fit anywhere else.</ul>
           <ul><b class="orangeText">Upbeat Music: </b>Our own selection of fast-paced music for combat and such.</ul>
           <ul><b class="orangeText">Peace Logs: </b>Fan-made ambient & downtempo music.</ul>
@@ -57,6 +62,60 @@
           <br />
           <a class="orangeText" href="https://github.com/MalmarPadecain/EVE_Jukebox">This is an open source project!</a>
         </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="open-opt" class="modal-window">
+    <div class="modalInner">
+      <a href="#modal-close" title="Close" class="modal-close">CLOSE &times;</a>
+      <h1 class="modalText">Jukebox Options</h1>
+      <div class="modalText">
+        <hr>
+        <p>
+          Here you can select the background that you see behind the jukebox as captured 2011 style. We recommend a still image if you're on a limited-data connection.
+        </p>
+        <hr />
+        <h3>Video Backgrounds</h3>
+        <div class="modalFlexContainer">
+          <div class="modalFlex">
+            <div class="radioButtonTitle">Minmatar</div>
+            <ul class=""><input type="radio" name="backgroundSelect" value="minmatarBalcony"> Balcony</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="minmatarHangar"> Hangar [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="minmatarHangar"> Room [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="minmatarBalconyStill"> Still Image</ul>
+          </div>
+          <div class="modalFlex">
+            <div class="radioButtonTitle">Gallente</div>
+            <ul class="orangeText"><input type="radio" name="backgroundSelect" value="gallenteBalcony"> Balcony</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="gallenteHangar"> Hangar [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="gallenteHangar"> Room [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="gallenteBalconyStill"> Still Image</ul>
+          </div>
+          <div class="modalFlex">
+            <div class="radioButtonTitle">Amarr</div>
+            <ul class=""><input type="radio" name="backgroundSelect" value="amarrBalcony"> Balcony [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="amarrHangar"> Hangar [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="amarrHangar"> Room [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="amarrBalconyStill"> Still Image</ul>
+          </div>
+      </div>
+        <div class="modalFlexContainer">
+          <div class="modalFlex">
+            <div class="radioButtonTitle">Caldari</div>
+            <ul class=""><input type="radio" name="backgroundSelect" value="caldariBalcony"> Balcony [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="caldariHangar"> Hangar [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="caldariHangar"> Room [WIP]</ul>
+            <ul class=""><input type="radio" name="backgroundSelect" value="amarrBalconyStill"> Still Image</ul>
+          </div>
+          <div class="modalFlex" id="flexFinal">
+            More backgrounds soon!
+          </div>
+        </div>
+        <hr />
+        <div id="ApplyBtnContainer">
+          <a href="#modal-close"><button class="ApplyButton">Apply</button></a>
+        </div>
       </div>
     </div>
   </div>
@@ -568,11 +627,17 @@
     <div class="jukeboxMain" id="BtnContainer">
       <div class="NewBtnContainer">
         <div id="newBtn">
-          <button class="EVEButton">Opt</button>
+          <a href="#open-opt">
+            <button class="EVEButton">Opt</button>
+          </a>
         </div>
       </div>
       <div class="AddBtnContainer">
-        <div id="About"><a href="#open-modal"><button class="EVEButton">About</button></a></div>
+        <div id="About">
+          <a href="#open-about">
+            <button class="EVEButton">About</button>
+          </a>
+        </div>
       </div>
     </div>
   </div>
