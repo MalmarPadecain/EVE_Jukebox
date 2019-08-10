@@ -14,7 +14,7 @@ import Playlist exposing (..)
 view : Model -> Browser.Document Msg
 view model =
     case model of
-        Success { playlist, volume, dragState, shuffled } ->
+        Success { playlist, volume, dragState, shuffled, playlistList } ->
             { title = "Jukebox"
             , body =
                 [ div
@@ -111,27 +111,7 @@ view model =
                         ]
                     , div [ class "jukeboxMain", id "ListContainer" ]
                         [ div [ class "PlaylistContainer" ]
-                            [ div [ class "PlaylistTest", onClick (Load "./playlists/EVE_Soundtrack.json") ]
-                                [ text "EVE Soundtrack" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/Mission.json") ]
-                                [ text "Mission Music" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/Login.json") ]
-                                [ text "Login Themes" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/Cinematic.json") ]
-                                [ text "Cinematic Themes" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/Permaband.json") ]
-                                [ text "Permaband" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/Miscellaneous.json") ]
-                                [ text "Misc Tracks" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/Upbeat.json") ]
-                                [ text "Upbeat Music" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/Peace_Logs.json") ]
-                                [ text "Peace Logs" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/War_Logs.json") ]
-                                [ text "War Logs" ]
-                            , div [ class "PlaylistTest", onClick (Load "./playlists/Dead_Logs.json") ]
-                                [ text "Dead Logs" ]
-                            ]
+                            (renderPlaylistList playlistList)
                         , lazy renderTable playlist
                         ]
                     , div [ class "jukeboxMain", id "BtnContainer" ]
@@ -164,6 +144,11 @@ view model =
             { title = "Jukebox"
             , body = [ text msg ]
             }
+
+
+renderPlaylistList : List PlaylistCore -> List (Html Msg)
+renderPlaylistList list =
+    List.map (\plc -> div [ class "PlaylistTest", onClick (Load plc.link) ] [ text plc.name ]) list
 
 
 {-| Turns a list into a div with a header table and a content table.

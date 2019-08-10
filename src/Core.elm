@@ -17,12 +17,15 @@ type Model
         , volume : Float
         , dragState : DragState
         , shuffled : Bool
+        , playlistList : List PlaylistCore
         }
     | Error String
 
 
 type Msg
-    = Next
+    = Init
+    | PlaylistsLoaded (Result Http.Error (List PlaylistCore))
+    | Next
     | Previous
     | Shuffle
     | Shuffled (List Song)

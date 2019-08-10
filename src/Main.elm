@@ -58,8 +58,9 @@ init _ =
             , drag = Draggable.init
             }
         , shuffled = False
+        , playlistList = []
         }
-        |> update (Load "./playlists/EVE_Soundtrack.json")
+        |> update Init
 
 
 main =
@@ -76,6 +77,20 @@ update msg model_ =
     case model_ of
         Success ({ playlist, dragState } as model) ->
             case msg of
+                Init ->
+                    ( Success model, loadPlaylistList )
+
+                PlaylistsLoaded result ->
+                    case result of
+                        Ok ((x :: _) as list) ->
+                            update (Load x.link) (Success { model | playlistList = list })
+
+                        Ok [] ->
+                            ( Error "No playlists found.", Cmd.none )
+
+                        Err err ->
+                            ( Error <| errorToString err, Cmd.none )
+
                 Next ->
                     update Play (Success { model | playlist = next model.playlist })
 
@@ -110,7 +125,7 @@ update msg model_ =
                     )
 
                 Load link ->
-                    ( Success model, loadJson link playlist.core.name )
+                    ( Success model, loadPlaylist link playlist.core.name )
 
                 Loaded result ->
                     case result of
@@ -176,11 +191,19 @@ update msg model_ =
             ( model_, Cmd.none )
 
 
-loadJson : String -> String -> Cmd Msg
-loadJson link name =
+loadPlaylist : String -> String -> Cmd Msg
+loadPlaylist link name =
     Http.get
-        { url = link
+        { url = "playlists/" ++ link
         , expect = Http.expectJson Loaded <| playlistDecoder link name
+        }
+
+
+loadPlaylistList : Cmd Msg
+loadPlaylistList =
+    Http.get
+        { url = "playlists/playlists.json"
+        , expect = Http.expectJson PlaylistsLoaded <| playlistListDecoder
         }
 
 

@@ -1,4 +1,4 @@
-module Playlist exposing (PlayOrder, Playlist, Song, chooseSong, next, playlistDecoder, previous, unshuffle)
+module Playlist exposing (PlayOrder, Playlist, PlaylistCore, Song, chooseSong, next, playlistDecoder, playlistListDecoder, previous, unshuffle)
 
 import Json.Decode exposing (Decoder, andThen, fail, list, string, succeed)
 import Json.Decode.Pipeline exposing (hardcoded, required)
@@ -169,3 +169,17 @@ playlistDecoder name link =
                     Ok pl ->
                         succeed pl
             )
+
+
+playlistListDecoder : Decoder (List PlaylistCore)
+playlistListDecoder =
+    --    list
+    --        (map2 PlaylistCore
+    --            (field "name" string)
+    --            (field "file" string)
+    --        )
+    list
+        (succeed PlaylistCore
+            |> required "name" string
+            |> required "file" string
+        )
