@@ -51,6 +51,7 @@ init _ =
                 , next = []
                 }
             , displayOrder = [ { index = 0, name = "", duration = "", link = "" } ]
+            , orderedBy = ( Number, Asc )
             }
         , volume = 100
         , dragState =
@@ -123,6 +124,48 @@ update msg model_ =
                         }
                     , Cmd.none
                     )
+
+                Order field ->
+                    if field == Tuple.first playlist.orderedBy then
+                        ( Success { model | playlist = flipDisplayOrder playlist }, Cmd.none )
+
+                    else
+                        case field of
+                            Number ->
+                                ( Success
+                                    { model
+                                        | playlist =
+                                            { playlist
+                                                | displayOrder = List.sortBy .index playlist.displayOrder
+                                                , orderedBy = ( field, Asc )
+                                            }
+                                    }
+                                , Cmd.none
+                                )
+
+                            Title ->
+                                ( Success
+                                    { model
+                                        | playlist =
+                                            { playlist
+                                                | displayOrder = List.sortBy .name playlist.displayOrder
+                                                , orderedBy = ( field, Asc )
+                                            }
+                                    }
+                                , Cmd.none
+                                )
+
+                            Duration ->
+                                ( Success
+                                    { model
+                                        | playlist =
+                                            { playlist
+                                                | displayOrder = List.sortBy .duration playlist.displayOrder
+                                                , orderedBy = ( field, Asc )
+                                            }
+                                    }
+                                , Cmd.none
+                                )
 
                 Load link ->
                     ( Success model, loadPlaylist link playlist.core.name )

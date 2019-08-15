@@ -154,8 +154,40 @@ renderPlaylistList list =
 {-| Turns a list into a div with a header table and a content table.
 -}
 renderTable : Playlist -> Html Msg
-renderTable pl =
-    -- index comes from the map not from the model. will this lead to problems?
+renderTable playlist =
+    let
+        ( orderedBy, direction ) =
+            playlist.orderedBy
+
+        orderSign =
+            case direction of
+                Asc ->
+                    "🞁"
+
+                Desc ->
+                    "🞃"
+
+        numberText =
+            if orderedBy == Number then
+                "Number " ++ orderSign
+
+            else
+                "Number"
+
+        titleText =
+            if orderedBy == Title then
+                "Title " ++ orderSign
+
+            else
+                "Title"
+
+        durationText =
+            if orderedBy == Duration then
+                "Duration " ++ orderSign
+
+            else
+                "Duration"
+    in
     div [ class "TracklistContainer" ]
         [ table [ class "TracklistHeader" ]
             [ tr []
@@ -163,18 +195,18 @@ renderTable pl =
                     [ div [ class "thBorderRight" ]
                         [ text " " ]
                     ]
-                , th [ class "thBorderParent", id "col2head" ]
-                    [ text "Number                        "
+                , th [ class "thBorderParent", id "col2head", onClick <| Order Number ]
+                    [ text numberText
                     , div [ class "thBorderRight" ]
                         [ text " " ]
                     ]
-                , th [ id "col3head" ]
-                    [ text "Title                        "
+                , th [ id "col3head", onClick <| Order Title ]
+                    [ text titleText
                     , div [ class "thBorderRight" ]
                         [ text " " ]
                     ]
-                , th [ id "col4head" ]
-                    [ text "Duration                        "
+                , th [ id "col4head", onClick <| Order Duration ]
+                    [ text durationText
                     , div [ class "thBorderRight" ]
                         [ text " " ]
                     ]
@@ -183,11 +215,11 @@ renderTable pl =
                 ]
             ]
         , table [ class "Tracklist" ]
-            [ pl.displayOrder
+            [ playlist.displayOrder
                 |> List.map
                     (\song ->
                         tr [ onClick (ChooseSong song) ]
-                            [ if song == pl.order.current then
+                            [ if song == playlist.order.current then
                                 td [] [ text "►" ]
 
                               else
@@ -198,7 +230,7 @@ renderTable pl =
                             , td [] []
                             ]
                     )
-                |> (\l -> l ++ finalRow pl)
+                |> (\l -> l ++ finalRow playlist)
                 |> tbody [ class "scrollContent" ]
             ]
         ]

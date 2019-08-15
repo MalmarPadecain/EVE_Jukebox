@@ -29,6 +29,7 @@ type Msg
     | Previous
     | Shuffle
     | Shuffled (List Song)
+    | Order OrderBy
     | Load String
     | Loaded (Result Http.Error Playlist)
     | ChooseSong Song

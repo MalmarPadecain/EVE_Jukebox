@@ -1,4 +1,4 @@
-module Playlist exposing (PlayOrder, Playlist, PlaylistCore, Song, chooseSong, next, playlistDecoder, playlistListDecoder, previous, unshuffle)
+module Playlist exposing (Order(..), OrderBy(..), PlayOrder, Playlist, PlaylistCore, Song, chooseSong, flipDisplayOrder, next, playlistDecoder, playlistListDecoder, previous, unshuffle)
 
 import Json.Decode exposing (Decoder, andThen, fail, list, string, succeed)
 import Json.Decode.Pipeline exposing (hardcoded, required)
@@ -39,7 +39,19 @@ type alias Playlist =
     , core : PlaylistCore
     , order : PlayOrder
     , displayOrder : List Song
+    , orderedBy : ( OrderBy, Order )
     }
+
+
+type OrderBy
+    = Number
+    | Title
+    | Duration
+
+
+type Order
+    = Asc
+    | Desc
 
 
 {-| Helper to create Playlists without the need to create PlayOrder manually
@@ -68,6 +80,7 @@ makePlaylist pName pLink protoSongs =
                     , next = ss
                     }
                 , displayOrder = indexedMap (\i { name, link, duration } -> Song i name duration link) protoSongs
+                , orderedBy = ( Number, Asc )
                 }
 
 
@@ -142,6 +155,20 @@ chooseSong playlist song =
 
     else
         chooseSong (next playlist) song
+
+
+flipDisplayOrder : Playlist -> Playlist
+flipDisplayOrder playlist =
+    let
+        ( orderedBy, direction ) =
+            playlist.orderedBy
+    in
+    case direction of
+        Asc ->
+            { playlist | orderedBy = ( orderedBy, Desc ), displayOrder = reverse playlist.displayOrder }
+
+        Desc ->
+            { playlist | orderedBy = ( orderedBy, Asc ), displayOrder = reverse playlist.displayOrder }
 
 
 protoSongDecoder : Decoder ProtoSong
