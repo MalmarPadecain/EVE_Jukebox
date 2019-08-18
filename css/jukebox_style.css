@@ -16,6 +16,7 @@
 	height: 100%;
 	position: relative;
 }
+
 #videoWrapper video {
 	top:0; left:0;
 	width:  100%;
@@ -27,10 +28,14 @@
 	min-width:  100%;
 	min-height: 100%;
 	position: absolute;
-	background-image: url("../images/originalOverview2.png");
+	background-image: url("../images/originalOverview.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	z-index: 20;
+}
+
+#overviewWrapperHidden {
+	display: none;
 }
 
 .jukeboxWrapper {
@@ -214,7 +219,6 @@
 .EVEButton:active {
   transform: translate(0px, 2px);
 }
-
 
 .controlBtnContainer {
   align-self: flex-start;
@@ -405,16 +409,10 @@
   margin-top: 5px;
 }
 
-
-/* width */
-
 ::-webkit-scrollbar {
   width: 7px;
   background: rgba(68, 68, 68, 0.4);
 }
-
-
-/* Track */
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
@@ -425,22 +423,13 @@
   background: rgba(0, 0, 0, 0.1);
 }
 
-
-/* Handle */
-
 ::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 2px 2px #565656;
   border: solid 1px #0000003d;
   border-right: solid 0.51px rgba(220, 220, 220, 0.5);
 }
 
-
-/* Handle on hover */
-
 ::-webkit-scrollbar-thumb:hover {}
-
-
-/* Buttons */
 
 ::-webkit-scrollbar-button:single-button {
   background-color: #bbbbbb00;
@@ -450,16 +439,10 @@
   width: 6px;
 }
 
-
-/* Up */
-
 ::-webkit-scrollbar-button:single-button:vertical:decrement {
   border-width: 0 3.5px 3.5px 3.5px;
   border-color: transparent transparent #c3c3c3 transparent;
 }
-
-
-/* Down */
 
 ::-webkit-scrollbar-button:single-button:vertical:increment {
   border-width: 3.5px 3.5px 0 3.5px;
@@ -598,21 +581,6 @@ html>body tbody.scrollContent {
   overflow-y: scroll;
 }
 
-
-/* define width of TD elements: 1st, 2nd, and 3rd respectively.
-html>body tbody.scrollContent td {
-	width: 200px
-}
-
-html>body tbody.scrollContent td + td {
-	width: 240px
-}
-
-html>body tbody.scrollContent td + td + td {
-	width: 300px
-}
-*/
-
 .modal-window {
   position: fixed;
   background-color: rgba(56, 54, 54, 0.75);
@@ -637,7 +605,10 @@ html>body tbody.scrollContent td + td + td {
   width: 550px;
   position: relative;
   margin: 10% auto;
-  padding: 2rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	padding-top: 1rem;
+	padding-bottom: 0.5rem;
   background: #444343;
   color: #eae8e6;
 }
@@ -672,14 +643,14 @@ html>body tbody.scrollContent td + td + td {
   font-family: EveSans, Sans-Serif;
 }
 
-.playlistDescriptionContainer{
+.modalFlexContainer{
   flex-direction: row;
   display:flex;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 14px;
+  margin-bottom: 14px;
 }
 
-.playlistDescription {
+.modalFlex {
   font-size: 13px;
   flex-grow: 1;
 }
@@ -689,6 +660,11 @@ ul{
   margin-bottom: 7px;
   padding-left: 0;
   padding-right: 10px;
+}
+
+input[type="radio"] {
+  margin-top: 1px;
+  vertical-align: top;
 }
 
 #About {
@@ -713,7 +689,49 @@ ul{
   color: orange;
 }
 
+.radioButtonTitle {
+	font-weight: 700;
+	padding-left: 28px;
+}
+
+#flexFinal {
+	padding-top: 45px;
+	font-size: 14px;
+	font-style: italic;
+}
+
+#ApplyBtnContainer {
+	padding-left: 45%;
+	padding-top: 5px;
+}
+
 a {
   text-decoration: none;
   color: Black;
+}
+
+h3 {
+	margin-top: 10px;
+	margin-bottom: 1px;
+}
+
+.modalInner {
+	padding-bottom: 8px;
+}
+
+.ApplyButton {
+	background-color: #3a3a3a;
+	border-radius: 5px;
+  border: 2px solid #9c9c9c;
+	padding: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+	font-family: EveSans;
+  margin: 4px 2px;
+  cursor: pointer;
 }
