@@ -55,7 +55,7 @@ init _ =
             }
         , volume = 100
         , dragState =
-            { position = ( 0, 0 )
+            { position = ( 200, 100 )
             , drag = Draggable.init
             }
         , shuffled = False
@@ -199,13 +199,27 @@ update msg model_ =
                     )
 
                 OnDragBy ( dx, dy ) ->
+                    let
+                        ( x, y ) =
+                            model.dragState.position
+
+                        newX =
+                            toFloat x + dx
+
+                        newY =
+                            if toFloat y + dy < 0 then
+                                0
+
+                            else
+                                toFloat y + dy
+                    in
                     ( Success
                         { model
                             | dragState =
                                 { dragState
                                     | position =
-                                        ( round (toFloat (Tuple.first dragState.position) + dx)
-                                        , round (toFloat (Tuple.second dragState.position) + dy)
+                                        ( round newX
+                                        , round newY
                                         )
                                 }
                         }
