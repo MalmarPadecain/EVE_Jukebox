@@ -3,8 +3,8 @@ module View exposing (renderTable, view)
 import Browser
 import Core exposing (..)
 import Draggable
-import Html exposing (Html, a, audio, b, br, button, div, h1, hr, img, input, p, source, table, tbody, td, text, th, tr, ul, video)
-import Html.Attributes exposing (attribute, autoplay, class, href, id, loop, max, min, src, step, style, title, type_, value)
+import Html exposing (Html, a, audio, b, br, button, div, h1, h3, hr, img, input, p, source, table, tbody, td, text, th, tr, ul, video)
+import Html.Attributes exposing (attribute, autoplay, class, href, id, loop, max, min, name, src, step, style, title, type_, value)
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
 import Json.Decode as Decode
@@ -117,18 +117,24 @@ view model =
                     , div [ class "jukeboxMain", id "BtnContainer" ]
                         [ div [ class "NewBtnContainer" ]
                             [ div [ id "newBtn" ]
-                                [ button [ class "EVEButton" ]
-                                    [ text "Opt" ]
+                                [ a [ href "#open-opt" ]
+                                    [ button
+                                        [ class "EVEButton" ]
+                                        [ text "Opt" ]
+                                    ]
                                 ]
                             ]
                         , div [ class "AddBtnContainer" ]
-                            [ a [ class "EVEButton", href "#open-modal" ]
-                                [ button [ class "EVEButton" ]
-                                    [ text "About" ]
+                            [ div [ id "about" ]
+                                [ a [ href "#open-about" ]
+                                    [ button [ class "EVEButton" ]
+                                        [ text "About" ]
+                                    ]
                                 ]
                             ]
                         ]
                     , aboutWindow
+                    , optionWindow
                     , audio
                         [ id "audio"
                         , on "ended" (Decode.succeed Next)
@@ -262,8 +268,8 @@ finalRow pl =
 
 
 aboutWindow =
-    div [ class "modal-window", id "open-modal" ]
-        [ div []
+    div [ class "modal-window", id "open-about" ]
+        [ div [ class "modalInner" ]
             [ a [ class "modal-close", href "#modal-close", title "Close" ]
                 [ text "CLOSE ×" ]
             , h1 [ class "modalText" ]
@@ -273,60 +279,61 @@ aboutWindow =
                     []
                 , p []
                     [ text "Bring back the good old times of EVE with this recreation of the EVE Jukebox using CSS. If you find any problems please let us know on Discord at Laura#1479 or Malmar Padecain#0659        " ]
-                , div [ class "playlistDescriptionContainer" ]
-                    [ div [ class "playlistDescription" ]
-                        [ ul []
-                            [ b [ class "orangeText" ]
-                                [ text "EVE Soundtrack: " ]
-                            , text "The original soundtrack as it was in the Crucible jukebox in 2011."
-                            ]
-                        , ul []
-                            [ b [ class "orangeText" ]
-                                [ text "Mission Music: " ]
-                            , text "All of the music found in missions across New Eden. Mostly rock music."
-                            ]
-                        , ul []
-                            [ b [ class "orangeText" ]
-                                [ text "Login Themes: " ]
-                            , text "A chronological list of expansion themes, or \"login music\"."
-                            ]
-                        , ul []
-                            [ b [ class "orangeText" ]
-                                [ text "Cinematic Themes: " ]
-                            , text "Music from trailers."
-                            ]
-                        , ul []
-                            [ b [ class "orangeText" ]
-                                [ text "Permaband: " ]
-                            , text "Only the best band this side of Jita."
-                            ]
+                , ul []
+                    [ b [ class "orangeText" ]
+                        [ text "EVE Soundtrack: " ]
+                    , text "The original soundtrack as it was in the Crucible jukebox in 2011."
+                    ]
+                , ul []
+                    [ b [ class "orangeText" ]
+                        [ text "Mission Music: " ]
+                    , text "All of the music found in missions across New Eden. Mostly rock music."
+                    ]
+                , ul []
+                    [ b [ class "orangeText" ]
+                        [ text "Login Themes: " ]
+                    , text "A chronological list of expansion themes, or \"login music\"."
+                    ]
+                , ul []
+                    [ b [ class "orangeText" ]
+                        [ text "Cinematic Themes: " ]
+                    , text "Music from trailers."
+                    ]
+                , ul []
+                    [ b [ class "orangeText" ]
+                        [ text "Permaband: " ]
+                    , text "Only the best band this side of Jita."
+                    ]
+                , ul []
+                    [ b [ class "orangeText" ]
+                        [ text "Orchestral: " ]
+                    , text "The 10-year anniversary music from Fanfest 2013"
+                    ]
+                , div [ class "modalFlex" ]
+                    [ ul []
+                        [ b [ class "orangeText" ]
+                            [ text "Misc Tracks: " ]
+                        , text "Various tracks that didn't fit anywhere else."
                         ]
-                    , div [ class "playlistDescription" ]
-                        [ ul []
-                            [ b [ class "orangeText" ]
-                                [ text "Misc Tracks: " ]
-                            , text "Various tracks that didn't fit anywhere else."
-                            ]
-                        , ul []
-                            [ b [ class "orangeText" ]
-                                [ text "Upbeat Music: " ]
-                            , text "Our own selection of fast-paced music for combat and such."
-                            ]
-                        , ul []
-                            [ b [ class "orangeText" ]
-                                [ text "Peace Logs: " ]
-                            , text "Fan-made ambient and downtempo music."
-                            ]
-                        , ul []
-                            [ b [ class "orangeText" ]
-                                [ text "War Logs: " ]
-                            , text "Fan made drum and bass or dubstep."
-                            ]
-                        , ul []
-                            [ b [ class "orangeText" ]
-                                [ text "Dead Logs: " ]
-                            , text "Fan made dark ambient/drone music."
-                            ]
+                    , ul []
+                        [ b [ class "orangeText" ]
+                            [ text "Upbeat Music: " ]
+                        , text "Our own selection of fast-paced music for combat and such."
+                        ]
+                    , ul []
+                        [ b [ class "orangeText" ]
+                            [ text "Peace Logs: " ]
+                        , text "Fan-made ambient and downtempo music."
+                        ]
+                    , ul []
+                        [ b [ class "orangeText" ]
+                            [ text "War Logs: " ]
+                        , text "Fan made drum and bass or dubstep."
+                        ]
+                    , ul []
+                        [ b [ class "orangeText" ]
+                            [ text "Dead Logs: " ]
+                        , text "Fan made dark ambient/drone music."
                         ]
                     ]
                 , hr []
@@ -353,6 +360,137 @@ aboutWindow =
                         []
                     , a [ class "orangeText", href "https://github.com/MalmarPadecain/EVE_Jukebox" ]
                         [ text "This is an open source project!" ]
+                    ]
+                ]
+            ]
+        ]
+
+
+optionWindow =
+    div [ class "modal-window", id "open-opt" ]
+        [ div [ class "modalInner" ]
+            [ a [ class "modal-close", href "#modal-close", title "Close" ]
+                [ text "CLOSE ×" ]
+            , h1 [ class "modalText" ]
+                [ text "Jukebox Options" ]
+            , div [ class "modalText" ]
+                [ hr []
+                    []
+                , p []
+                    [ text "Here you can select the background that you see behind the jukebox as captured 2011 style. We recommend a still image if you're on a limited-data connection.        " ]
+                , hr []
+                    []
+                , h3 []
+                    [ text "Video Backgrounds" ]
+                , div [ class "modalFlexContainer" ]
+                    [ div [ class "modalFlex" ]
+                        [ div [ class "radioButtonTitle" ]
+                            [ text "Minmatar" ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "minmatarBalcony" ]
+                                []
+                            , text "Balcony"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "minmatarHangar" ]
+                                []
+                            , text "Hangar [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "minmatarHangar" ]
+                                []
+                            , text "Room [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "minmatarBalconyStill" ]
+                                []
+                            , text "Still Image"
+                            ]
+                        ]
+                    , div [ class "modalFlex" ]
+                        [ div [ class "radioButtonTitle" ]
+                            [ text "Gallente" ]
+                        , ul [ class "orangeText" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "gallenteBalcony" ]
+                                []
+                            , text "Balcony"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "gallenteHangar" ]
+                                []
+                            , text "Hangar [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "gallenteHangar" ]
+                                []
+                            , text "Room [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "gallenteBalconyStill" ]
+                                []
+                            , text "Still Image"
+                            ]
+                        ]
+                    , div [ class "modalFlex" ]
+                        [ div [ class "radioButtonTitle" ]
+                            [ text "Amarr" ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "amarrBalcony" ]
+                                []
+                            , text "Balcony [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "amarrHangar" ]
+                                []
+                            , text "Hangar [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "amarrHangar" ]
+                                []
+                            , text "Room [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "amarrBalconyStill" ]
+                                []
+                            , text "Still Image"
+                            ]
+                        ]
+                    ]
+                , div [ class "modalFlexContainer" ]
+                    [ div [ class "modalFlex" ]
+                        [ div [ class "radioButtonTitle" ]
+                            [ text "Caldari" ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "caldariBalcony" ]
+                                []
+                            , text "Balcony [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "caldariHangar" ]
+                                []
+                            , text "Hangar [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "caldariHangar" ]
+                                []
+                            , text "Room [WIP]"
+                            ]
+                        , ul [ class "" ]
+                            [ input [ name "backgroundSelect", type_ "radio", value "amarrBalconyStill" ]
+                                []
+                            , text "Still Image"
+                            ]
+                        ]
+                    , div [ class "modalFlex", id "flexFinal" ]
+                        [ text "More backgrounds soon!          " ]
+                    ]
+                , hr []
+                    []
+                , div [ id "ApplyBtnContainer" ]
+                    [ a [ href "#modal-close" ]
+                        [ button [ class "ApplyButton" ]
+                            [ text "Apply" ]
+                        ]
                     ]
                 ]
             ]
