@@ -3,8 +3,8 @@ module View exposing (renderTable, view)
 import Browser
 import Core exposing (..)
 import Draggable
-import Html exposing (Html, a, audio, b, br, button, div, h1, h3, hr, img, input, p, source, table, tbody, td, text, th, tr, ul, video)
-import Html.Attributes exposing (attribute, autoplay, class, href, id, loop, max, min, name, src, step, style, title, type_, value)
+import Html exposing (Html, a, audio, b, br, button, div, h1, h3, hr, img, input, p, table, tbody, td, text, th, tr, ul, video)
+import Html.Attributes exposing (checked, class, href, id, max, min, name, src, step, style, title, type_, value)
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
 import Json.Decode as Decode
@@ -14,7 +14,7 @@ import Playlist exposing (..)
 view : Model -> Browser.Document Msg
 view model =
     case model of
-        Success { playlist, volume, dragState, shuffled, playlistList } ->
+        Success { playlist, volume, dragState, shuffled, playlistList, selectedBackground, appliedBackground } ->
             { title = "Jukebox"
             , body =
                 [ div
@@ -134,14 +134,14 @@ view model =
                             ]
                         ]
                     , aboutWindow
-                    , optionWindow
+                    , optionWindow selectedBackground
                     , audio
                         [ id "audio"
                         , on "ended" (Decode.succeed Next)
                         ]
                         []
                     ]
-                , videoDiv
+                , videoDiv appliedBackground
                 , div [ id "overviewWrapper" ] []
                 ]
             }
@@ -366,7 +366,8 @@ aboutWindow =
         ]
 
 
-optionWindow =
+optionWindow : Background -> Html Msg
+optionWindow background =
     div [ class "modal-window", id "open-opt" ]
         [ div [ class "modalInner" ]
             [ a [ class "modal-close", href "#modal-close", title "Close" ]
@@ -377,7 +378,7 @@ optionWindow =
                 [ hr []
                     []
                 , p []
-                    [ text "Here you can select the background that you see behind the jukebox as captured 2011 style. We recommend a still image if you're on a limited-data connection.        " ]
+                    [ text "Here you can select the background that you see behind the jukebox as captured 2011 style. We recommend a still image if you're on a limited-data connection." ]
                 , hr []
                     []
                 , h3 []
@@ -387,22 +388,58 @@ optionWindow =
                         [ div [ class "radioButtonTitle" ]
                             [ text "Minmatar" ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "minmatarBalcony" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Balcony Minmatar)
+                                , if background == Balcony Minmatar then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Balcony"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "minmatarHangar" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Hangar Minmatar)
+                                , if background == Hangar Minmatar then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Hangar [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "minmatarHangar" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Room Minmatar)
+                                , if background == Room Minmatar then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Room [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "minmatarBalconyStill" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Still Minmatar)
+                                , if background == Still Minmatar then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Still Image"
                             ]
@@ -410,23 +447,59 @@ optionWindow =
                     , div [ class "modalFlex" ]
                         [ div [ class "radioButtonTitle" ]
                             [ text "Gallente" ]
-                        , ul [ class "orangeText" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "gallenteBalcony" ]
+                        , ul [ class "" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Balcony Gallente)
+                                , if background == Balcony Gallente then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Balcony"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "gallenteHangar" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Hangar Gallente)
+                                , if background == Hangar Gallente then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Hangar [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "gallenteHangar" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Room Gallente)
+                                , if background == Room Gallente then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Room [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "gallenteBalconyStill" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Still Gallente)
+                                , if background == Still Gallente then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Still Image"
                             ]
@@ -435,22 +508,58 @@ optionWindow =
                         [ div [ class "radioButtonTitle" ]
                             [ text "Amarr" ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "amarrBalcony" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Balcony Amarr)
+                                , if background == Balcony Amarr then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Balcony [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "amarrHangar" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Hangar Amarr)
+                                , if background == Hangar Amarr then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Hangar [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "amarrHangar" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Room Amarr)
+                                , if background == Room Amarr then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Room [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "amarrBalconyStill" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Still Amarr)
+                                , if background == Still Amarr then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Still Image"
                             ]
@@ -461,34 +570,70 @@ optionWindow =
                         [ div [ class "radioButtonTitle" ]
                             [ text "Caldari" ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "caldariBalcony" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Balcony Caldari)
+                                , if background == Balcony Caldari then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Balcony [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "caldariHangar" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Hangar Caldari)
+                                , if background == Hangar Caldari then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Hangar [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "caldariHangar" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Room Caldari)
+                                , if background == Room Caldari then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Room [WIP]"
                             ]
                         , ul [ class "" ]
-                            [ input [ name "backgroundSelect", type_ "radio", value "amarrBalconyStill" ]
+                            [ input
+                                [ name "backgroundSelect"
+                                , type_ "radio"
+                                , onInput (\_ -> SelectBackground <| Still Caldari)
+                                , if background == Still Caldari then
+                                    checked True
+
+                                  else
+                                    checked False
+                                ]
                                 []
                             , text "Still Image"
                             ]
                         ]
                     , div [ class "modalFlex", id "flexFinal" ]
-                        [ text "More backgrounds soon!          " ]
+                        [ text "More backgrounds soon!" ]
                     ]
                 , hr []
                     []
                 , div [ id "ApplyBtnContainer" ]
                     [ a [ href "#modal-close" ]
-                        [ button [ class "ApplyButton" ]
+                        [ button [ class "ApplyButton", onClick ApplyBackground ]
                             [ text "Apply" ]
                         ]
                     ]
@@ -497,13 +642,16 @@ optionWindow =
         ]
 
 
-videoDiv : Html msg
-videoDiv =
-    div [ id "videoWrapper" ]
-        [ video [ id "film", style "z-index" "8", autoplay True, loop True, attribute "muted" "" ]
-            [ source [ src "video/minmatarStation.mp4", type_ "video/mp4" ] []
-            ]
-        ]
+videoDiv : Background -> Html msg
+videoDiv background =
+    case background of
+        Still _ ->
+            div [ id "videoWrapper" ]
+                [ img [ id "still", style "z-index" "8" ] [] ]
+
+        _ ->
+            div [ id "videoWrapper" ]
+                [ video [ id "video", style "z-index" "8" ] [] ]
 
 
 {-| Transforms a time value as received from audio.currentTime to a human readable string

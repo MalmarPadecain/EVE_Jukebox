@@ -14,6 +14,9 @@ window.app.ports.control.subscribe(function (msg) {
         case "volume":
             changeVolume(params[0]);
             break;
+        case "background":
+            changeBackground(params[0]);
+            break;
     }
 });
 
@@ -41,6 +44,19 @@ togglePause = function () {
 changeVolume = function (volume) {
     const audio = document.getElementById("audio");
     audio.volume = volume / 100;
+};
+
+changeBackground = function (path) {
+    window.requestAnimationFrame(() => {
+        const video = document.getElementById("video");
+        const still = document.getElementById("still");
+        if (video) {
+            video.src = path;
+            video.play();
+        } else {
+            still.src = path;
+        }
+    });
 };
 
 updateProgress = function () {

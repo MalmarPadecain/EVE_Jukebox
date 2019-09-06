@@ -60,6 +60,8 @@ init _ =
             }
         , shuffled = False
         , playlistList = []
+        , selectedBackground = Still Minmatar
+        , appliedBackground = Still Minmatar
         }
         |> update Init
 
@@ -196,6 +198,14 @@ update msg model_ =
                 TogglePause ->
                     ( Success { model | playlist = { playlist | playing = not playlist.playing } }
                     , control "togglePause"
+                    )
+
+                SelectBackground background ->
+                    ( Success { model | selectedBackground = background }, Cmd.none )
+
+                ApplyBackground ->
+                    ( Success { model | appliedBackground = model.selectedBackground }
+                    , control ("background " ++ resolveBackground model.selectedBackground)
                     )
 
                 OnDragBy ( dx, dy ) ->
