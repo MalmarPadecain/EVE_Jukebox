@@ -81,7 +81,7 @@ update msg model_ =
         Success ({ playlist, dragState } as model) ->
             case msg of
                 Init ->
-                    ( Success model, loadPlaylistList )
+                    ( Success model, Cmd.batch [ loadPlaylistList, control "background ./video/minmatarStill.png" ] )
 
                 PlaylistsLoaded result ->
                     case result of
