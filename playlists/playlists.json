@@ -4,6 +4,10 @@
         "file": "EVE_Soundtrack.json"
     },
     {
+        "name": "Orchestral Soundtrack",
+        "file": "EVE_Orchestral.json"
+    },
+    {
         "name": "Mission Music",
         "file": "Mission.json"
     },

@@ -3,67 +3,67 @@
   "songs": [
     {
       "name": "Krittika",
-      "link": "https://www.modenstudios.com/EVE/music/01.%20Flesh%20to%20Stone%20-%20Krittika.mp3",
+      "link": "/music/01.%20Flesh%20to%20Stone%20-%20Krittika.mp3",
       "duration": "5:29"
     },
     {
       "name": "Punarvasu",
-      "link": "https://www.modenstudios.com/EVE/music/02.%20Flesh%20to%20Stone%20-%20Punarvasu.mp3",
+      "link": "/music/02.%20Flesh%20to%20Stone%20-%20Punarvasu.mp3",
       "duration": "5:52"
     },
     {
       "name": "Drones Drift",
-      "link": "https://www.modenstudios.com/EVE/music/03....Und%20Null%20Sekunden%20-%20Drones%20Drift.mp3",
+      "link": "/music/03....Und%20Null%20Sekunden%20-%20Drones%20Drift.mp3",
       "duration": "3:49"
     },
     {
       "name": "W-Space & Time Dilation",
-      "link": "https://www.modenstudios.com/EVE/music/04....Und%20Null%20Sekunden%20-%20W-Space%20&%20Time%20Dilation.mp3",
+      "link": "/music/04....Und%20Null%20Sekunden%20-%20W-Space%20&%20Time%20Dilation.mp3",
       "duration": "4:48"
     },
     {
       "name": "Glare Crust",
-      "link": "https://www.modenstudios.com/EVE/music/05.%20Lightwarrior%20-%20Glare%20Crust.mp3",
+      "link": "/music/05.%20Lightwarrior%20-%20Glare%20Crust.mp3",
       "duration": "4:45"
     },
     {
       "name": "Mekhios Graveyard",
-      "link": "https://www.modenstudios.com/EVE/music/06.%20Andro%20&%20Jumper%20-%20Mekhios%20Graveyard.mp3",
+      "link": "/music/06.%20Andro%20&%20Jumper%20-%20Mekhios%20Graveyard.mp3",
       "duration": "5:12"
     },
     {
       "name": "State of Industry",
-      "link": "https://www.modenstudios.com/EVE/music/07.%20Sergrunt%20-%20State%20of%20Industry.mp3",
+      "link": "/music/07.%20Sergrunt%20-%20State%20of%20Industry.mp3",
       "duration": "3:55"
     },
     {
       "name": "First Empress Kiss",
-      "link": "https://www.modenstudios.com/EVE/music/08.%20Sergrunt%20-%20First%20Empress%20Kiss.mp3",
+      "link": "/music/08.%20Sergrunt%20-%20First%20Empress%20Kiss.mp3",
       "duration": "3:29"
     },
     {
       "name": "New Eden Passion",
-      "link": "https://www.modenstudios.com/EVE/music/09.%20Darkelina%20Sia%20-%20New%20Eden%20Passion.mp3",
+      "link": "/music/09.%20Darkelina%20Sia%20-%20New%20Eden%20Passion.mp3",
       "duration": "4:44"
     },
     {
       "name": "New Order and Old Ice",
-      "link": "https://www.modenstudios.com/EVE/music/10.%20Desolo%20Sub%20Humus%20-%20New%20Order%20and%20Old%20Ice.mp3",
+      "link": "/music/10.%20Desolo%20Sub%20Humus%20-%20New%20Order%20and%20Old%20Ice.mp3",
       "duration": "5:04"
     },
     {
       "name": "So there is morning",
-      "link": "https://www.modenstudios.com/EVE/music/11.%20Alex%20Rasher%20-%20So%20there%20is%20morning.mp3",
+      "link": "/music/11.%20Alex%20Rasher%20-%20So%20there%20is%20morning.mp3",
       "duration": "3:47"
     },
     {
       "name": "Space Is Too Bright",
-      "link": "https://www.modenstudios.com/EVE/music/12.%20Quizybuck%20-%20Space%20Is%20Too%20Bright.mp3",
+      "link": "/music/12.%20Quizybuck%20-%20Space%20Is%20Too%20Bright.mp3",
       "duration": "3:24"
     },
     {
       "name": "Tribal End",
-      "link": "https://www.modenstudios.com/EVE/music/13.%20Sergrunt%20-%20Tribal%20End.mp3",
+      "link": "/music/13.%20Sergrunt%20-%20Tribal%20End.mp3",
       "duration": "6:14"
     }
   ]
