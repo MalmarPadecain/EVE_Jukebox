@@ -175,14 +175,14 @@ renderTable playlist =
 
         numberText =
             if orderedBy == Number then
-                "Number " ++ orderSign
+                "Number\u{00A0}" ++ orderSign
 
             else
                 "Number"
 
         titleText =
             if orderedBy == Title then
-                "Title " ++ orderSign
+                "Title\u{00A0}" ++ orderSign
 
             else
                 "Title"
