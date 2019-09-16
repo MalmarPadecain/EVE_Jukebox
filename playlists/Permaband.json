@@ -2,109 +2,34 @@
   "name": "Permaband",
   "songs": [
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Killing is Just a Means",
+      "link": "/music/Killing%20is%20Just%20a%20Means.mp3",
+      "duration": "4:41"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Warp To The Dance Floor",
+      "link": "/music/Warp%20To%20The%20Dance%20Floor.mp3",
+      "duration": "2:23"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Wrecking Machine",
+      "link": "/music/Wrecking%20Machine.mp3",
+      "duration": "3:56"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Fly With Us",
+      "link": "/music/Fly%20With%20Us.mp3",
+      "duration": "4:29"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "HTFU",
+      "link": "/music/HTFU.mp3",
+      "duration": "3:59"
     },
     {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
-    },
-    {
-      "name": "",
-      "link": "",
-      "duration": ""
+      "name": "Keep Clickin",
+      "link": "/music/Keep%20Clickin.mp3",
+      "duration": "3:23"
     }
   ]
 }

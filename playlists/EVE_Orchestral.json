@@ -1,0 +1,60 @@
+{
+  "name": "Orchestral Soundtrack",
+  "songs": [
+    {
+      "name": "Stellar Shadows",
+      "link": "/music/01-Stellar%20Shadows-EVE%20SYMPHONY.mp3",
+      "duration": "8:26"
+    },
+    {
+      "name": "Below The Asteroids",
+      "link": "/music/02-Below%20the%20Asteroids-EVE%20SYMPHONY.mp3",
+      "duration": "4:15"
+    },
+    {
+      "name": "Shifting the Balance of Power",
+      "link": "/music/03-Shifting%20the%20Balance%20of%20Power-EVE%20SYMPHONY.mp3",
+      "duration": "5:00"
+    },
+    {
+      "name": "Rose of Victory",
+      "link": "/music/04-Rose%20of%20Victory-EVE%20SYMPHONY.mp3",
+      "duration": "4:19"
+    },
+    {
+      "name": "I Saw Your Ship",
+      "link": "/music/05-I%20Saw%20Your%20Ship-EVE%20SYMPHONY.mp3",
+      "duration": "5:17"
+    },
+    {
+      "name": "All Which Was Lost Has Now Been Regained",
+      "link": "/music/06-All%20Which%20was%20Lost-EVE%20SYMPHONY.mp3",
+      "duration": "4:59"
+    },
+    {
+      "name": "Surplus of Rare Artifacts",
+      "link": "/music/07-Surplus%20of%20Rare%20Artifacts-EVE%20SYMPHONY.mp3",
+      "duration": "6:22"
+    },
+    {
+      "name": "It Ends Here",
+      "link": "/music/08-It%20Ends%20Here-EVE%20SYMPHONY.mp3",
+      "duration": "3:24"
+    },
+    {
+      "name": "The Jovian Front",
+      "link": "/music/09-The%20Jovian%20Front-EVE%20SYMPHONY.mp3",
+      "duration": "3:40"
+    },
+    {
+      "name": "Smoke from Down Below",
+      "link": "/music/10-Smoke%20from%20Down%20Below-EVE%20SYMPHONY.mp3",
+      "duration": "4:12"
+    },
+    {
+      "name": "Merchants and Looters",
+      "link": "/music/11-Merchants%20and%20Looters-EVE%20SYMPHONY.mp3",
+      "duration": "3:43"
+    }
+  ]
+}
