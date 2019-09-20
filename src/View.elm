@@ -317,11 +317,6 @@ aboutWindow =
                         ]
                     , ul []
                         [ b [ class "orangeText" ]
-                            [ text "Upbeat Music: " ]
-                        , text "Our own selection of fast-paced music for combat and such."
-                        ]
-                    , ul []
-                        [ b [ class "orangeText" ]
                             [ text "Peace Logs: " ]
                         , text "Fan-made ambient and downtempo music."
                         ]
