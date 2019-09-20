@@ -168,10 +168,10 @@ renderTable playlist =
         orderSign =
             case direction of
                 Asc ->
-                    "🞁"
+                    "🞃"
 
                 Desc ->
-                    "🞃"
+                    "🞁"
 
         numberText =
             if orderedBy == Number then
