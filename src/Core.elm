@@ -32,7 +32,7 @@ type Msg
     | Shuffle
     | Shuffled (List Song)
     | Order OrderBy
-    | Load String
+    | Load PlaylistCore
     | Loaded (Result Http.Error Playlist)
     | ChooseSong Song
     | ChangeVolume Float

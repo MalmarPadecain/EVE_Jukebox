@@ -86,7 +86,7 @@ update msg model_ =
                 PlaylistsLoaded result ->
                     case result of
                         Ok ((x :: _) as list) ->
-                            update (Load x.link) (Success { model | playlistList = list })
+                            update (Load x) (Success { model | playlistList = list })
 
                         Ok [] ->
                             ( Error "No playlists found.", Cmd.none )
@@ -169,8 +169,8 @@ update msg model_ =
                                 , Cmd.none
                                 )
 
-                Load link ->
-                    ( Success model, loadPlaylist link playlist.core.name )
+                Load core ->
+                    ( Success model, loadPlaylist core )
 
                 Loaded result ->
                     case result of
@@ -258,11 +258,11 @@ update msg model_ =
             ( model_, Cmd.none )
 
 
-loadPlaylist : String -> String -> Cmd Msg
-loadPlaylist link name =
+loadPlaylist : PlaylistCore -> Cmd Msg
+loadPlaylist core =
     Http.get
-        { url = "playlists/" ++ link
-        , expect = Http.expectJson Loaded <| playlistDecoder link name
+        { url = "playlists/" ++ core.link
+        , expect = Http.expectJson Loaded <| playlistDecoder core.name core.link
         }
 
 

@@ -111,7 +111,7 @@ view model =
                         ]
                     , div [ class "jukeboxMain", id "ListContainer" ]
                         [ div [ class "PlaylistContainer" ]
-                            (renderPlaylistList playlistList)
+                            (renderPlaylistList playlistList playlist)
                         , lazy renderTable playlist
                         ]
                     , div [ class "jukeboxMain", id "BtnContainer" ]
@@ -152,9 +152,17 @@ view model =
             }
 
 
-renderPlaylistList : List PlaylistCore -> List (Html Msg)
-renderPlaylistList list =
-    List.map (\plc -> div [ class "PlaylistTest", onClick (Load plc.link) ] [ text plc.name ]) list
+renderPlaylistList : List PlaylistCore -> Playlist -> List (Html Msg)
+renderPlaylistList list pl =
+    List.map
+        (\plc ->
+            if plc.name == pl.core.name then
+                div [ class "Playlist", id "selectedPlaylist", onClick (Load plc) ] [ text plc.name ]
+
+            else
+                div [ class "Playlist", onClick (Load plc) ] [ text plc.name ]
+        )
+        list
 
 
 {-| Turns a list into a div with a header table and a content table.
