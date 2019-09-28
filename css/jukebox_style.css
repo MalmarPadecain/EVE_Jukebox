@@ -23,15 +23,55 @@
 	position: absolute;
 }
 
-#overviewWrapper {
+#overviewWrapperNeocomUpper {
 	top:0; left:0;
-	min-width:  100%;
-	min-height: 100%;
 	position: absolute;
-	background-image: url("../images/originalOverview.png");
+	background-image: url("../images/originalOverviewNeocomUpper.png");
 	background-repeat: no-repeat;
-	background-size: cover;
 	z-index: 20;
+	min-width:  40px;
+	min-height: 780px;
+}
+
+#overviewWrapperNeocomLower {
+	bottom:0; left:0;
+	position: absolute;
+	background-image: url("../images/originalOverviewNeocomLower.png");
+	background-repeat: no-repeat;
+	z-index: 20;
+	min-width:  40px;
+	min-height: 150px;
+}
+
+#overviewWrapperNeocomBackground {
+	top:0; left:0;
+	position: absolute;
+	background-image: url("../images/OriginalOverviewNeocomBackground.jpg");
+	background-repeat: no-repeat;
+	z-index: 19;
+	min-width:  40px;
+	min-height: 2000px;
+}
+
+#overviewWrapperLocal {
+	bottom:0; left:40px;
+	position: absolute;
+	background-image: url("../images/originalOverviewLocal.png");
+	background-repeat: no-repeat;
+	z-index: 20;
+	min-width:  458px;
+	min-height: 315px;
+}
+
+#overviewWrapperStation {
+	position:absolute;
+	right:0;
+	top:0;
+	background-image: url("../images/originalOverviewStation.png");
+	background-repeat: no-repeat;
+	z-index: 20;
+	min-width:  265px;
+	min-height: 980px;
 }
 
 #overviewWrapperHidden {

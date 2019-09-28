@@ -142,7 +142,11 @@ view model =
                         []
                     ]
                 , videoDiv appliedBackground
-                , div [ id "overviewWrapper" ] []
+                , div [ class "overviewWrapper", id "overviewWrapperNeocomUpper" ] []
+                , div [ class "overviewWrapper", id "overviewWrapperNeocomLower" ] []
+                , div [ class "overviewWrapper", id "overviewWrapperNeocomBackground" ] []
+                , div [ class "overviewWrapper", id "overviewWrapperLocal" ] []
+                , div [ class "overviewWrapper", id "overviewWrapperStation" ] []
                 ]
             }
 
