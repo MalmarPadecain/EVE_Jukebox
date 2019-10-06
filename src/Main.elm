@@ -175,7 +175,7 @@ update msg model_ =
                 Loaded result ->
                     case result of
                         Ok pl ->
-                            ( Success { model | playlist = pl }
+                            ( Success { model | playlist = pl, shuffled = False }
                             , control ("load " ++ playlist.order.current.link)
                             )
 
