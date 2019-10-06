@@ -60,8 +60,8 @@ init _ =
             }
         , shuffled = False
         , playlistList = []
-        , selectedBackground = Still Minmatar
-        , appliedBackground = Still Minmatar
+        , selectedBackground = Still Gallente
+        , appliedBackground = Still Gallente
         }
         |> update Init
 
