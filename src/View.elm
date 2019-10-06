@@ -236,17 +236,23 @@ renderTable playlist =
             [ playlist.displayOrder
                 |> List.map
                     (\song ->
-                        tr [ onClick (ChooseSong song) ]
-                            [ if song == playlist.order.current then
-                                td [] [ text "►" ]
+                        if song == playlist.order.current then
+                            tr [ onClick (ChooseSong song), id "selectedSong" ]
+                                [ td [] [ text "►" ]
+                                , td [] [ text (String.fromInt (song.index + 1)) ]
+                                , td [] [ text song.name ]
+                                , td [] [ text song.duration ]
+                                , td [] []
+                                ]
 
-                              else
-                                td [] []
-                            , td [] [ text (String.fromInt (song.index + 1)) ]
-                            , td [] [ text song.name ]
-                            , td [] [ text song.duration ]
-                            , td [] []
-                            ]
+                        else
+                            tr [ onClick (ChooseSong song) ]
+                                [ td [] []
+                                , td [] [ text (String.fromInt (song.index + 1)) ]
+                                , td [] [ text song.name ]
+                                , td [] [ text song.duration ]
+                                , td [] []
+                                ]
                     )
                 |> (\l -> l ++ finalRow playlist)
                 |> tbody [ class "scrollContent" ]
