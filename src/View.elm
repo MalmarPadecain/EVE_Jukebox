@@ -4,7 +4,7 @@ import Browser
 import Core exposing (..)
 import Draggable
 import Html exposing (Html, a, audio, b, br, button, div, h1, h3, hr, img, input, p, table, tbody, td, text, th, tr, ul, video)
-import Html.Attributes exposing (checked, class, href, id, max, min, name, src, step, style, title, type_, value)
+import Html.Attributes exposing (attribute, autoplay, checked, class, href, id, loop, max, min, name, src, step, style, title, type_, value)
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
 import Json.Decode as Decode
@@ -664,7 +664,7 @@ videoDiv background =
 
         _ ->
             div [ id "videoWrapper" ]
-                [ video [ id "video", style "z-index" "8" ] [] ]
+                [ video [ id "video", style "z-index" "8", autoplay True, loop True, attribute "muted" "true" ] [] ]
 
 
 {-| Transforms a time value as received from audio.currentTime to a human readable string
