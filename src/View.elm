@@ -4,7 +4,7 @@ import Browser
 import Core exposing (..)
 import Draggable
 import Html exposing (Html, a, audio, b, br, button, div, h1, h3, hr, img, input, p, table, tbody, td, text, th, tr, ul, video)
-import Html.Attributes exposing (attribute, autoplay, checked, class, href, id, loop, max, min, name, src, step, style, title, type_, value)
+import Html.Attributes exposing (attribute, autoplay, checked, class, href, id, loop, name, src, step, style, title, type_, value)
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
 import Json.Decode as Decode
@@ -83,8 +83,8 @@ view model =
                                 [ input
                                     [ class "slider"
                                     , id "myRange"
-                                    , max "100"
-                                    , min "0"
+                                    , Html.Attributes.max "100"
+                                    , Html.Attributes.min "0"
                                     , step "1"
                                     , type_ "range"
                                     , value <| String.fromFloat volume
