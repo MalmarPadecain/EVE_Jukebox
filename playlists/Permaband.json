@@ -2,23 +2,23 @@
   "name": "Permaband",
   "songs": [
     {
-      "name": "Killing%20is%20Just%20a%20Means",
-      "link": "/music/Killing is Just a Means",
+      "name": "Killing is Just a Means",
+      "link": "/music/Killing%20is%20Just%20a%20Means",
       "duration": "4:41"
     },
     {
-      "name": "Warp%20To%20The%20Dance%20Floor",
-      "link": "/music/Warp To The Dance Floor.mp3",
+      "name": "Warp To The Dance Floor",
+      "link": "/music/Warp%20To%20The%20Dance%20Floor.mp3",
       "duration": "2:23"
     },
     {
-      "name": "Wrecking%20Machine",
-      "link": "/music/Wrecking Machine.mp3",
+      "name": "Wrecking Machine",
+      "link": "/music/Wrecking%20Machine.mp3",
       "duration": "3:56"
     },
     {
-      "name": "Wrecking%20Machine%20(Female%20vocals)",
-      "link": "/music/Wrecking Machine (Female vocals).mp3",
+      "name": "Wrecking Machine (Female vocals)",
+      "link": "/music/Wrecking%20Machine%20(Female%20vocals).mp3",
       "duration": "2:05"
     },
     {
