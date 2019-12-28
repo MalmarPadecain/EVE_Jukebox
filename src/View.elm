@@ -14,7 +14,7 @@ import Playlist exposing (..)
 view : Model -> Browser.Document Msg
 view model =
     case model of
-        Success { playlist, volume, dragState, shuffled, playlistList, selectedBackground, appliedBackground } ->
+        Ok { playlist, volume, dragState, shuffled, playlistList, selectedBackground, appliedBackground } ->
             { title = "Jukebox"
             , body =
                 [ div
@@ -150,7 +150,7 @@ view model =
                 ]
             }
 
-        Error msg ->
+        Err msg ->
             { title = "Jukebox"
             , body = [ text msg ]
             }

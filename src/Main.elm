@@ -20,13 +20,13 @@ port progress : (Float -> msg) -> Sub msg
 subscriptions : Model -> Sub Msg
 subscriptions model =
     case model of
-        Success { dragState } ->
+        Ok { dragState } ->
             Sub.batch
                 [ Draggable.subscriptions DragMsg dragState.drag
                 , progress Progress
                 ]
 
-        Error _ ->
+        Err _ ->
             Sub.none
 
 
@@ -37,7 +37,7 @@ dragConfig =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    Success
+    Ok
         { playlist =
             { progress = 0
             , playing = False
@@ -78,41 +78,41 @@ main =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model_ =
     case model_ of
-        Success ({ playlist, dragState } as model) ->
+        Ok ({ playlist, dragState } as model) ->
             case msg of
                 Init ->
-                    ( Success model, Cmd.batch [ loadPlaylistList, control "background ./video/gallenteStill.png" ] )
+                    ( Ok model, Cmd.batch [ loadPlaylistList, control "background ./video/gallenteStill.png" ] )
 
                 PlaylistsLoaded result ->
                     case result of
                         Ok ((x :: _) as list) ->
-                            update (LoadPlaylist x) (Success { model | playlistList = list })
+                            update (LoadPlaylist x) (Ok { model | playlistList = list })
 
                         Ok [] ->
-                            ( Error "No playlists found.", Cmd.none )
+                            ( Err "No playlists found.", Cmd.none )
 
                         Err err ->
-                            ( Error <| errorToString err, Cmd.none )
+                            ( Err <| errorToString err, Cmd.none )
 
                 Next ->
-                    update Play (Success { model | playlist = next model.playlist })
+                    update Play (Ok { model | playlist = next model.playlist })
 
                 Previous ->
                     if playlist.progress < 5 then
-                        update Play (Success { model | playlist = previous model.playlist })
+                        update Play (Ok { model | playlist = previous model.playlist })
 
                     else
                         update Play model_
 
                 Shuffle ->
                     if model.shuffled then
-                        ( Success { model | playlist = unshuffle playlist, shuffled = False }, Cmd.none )
+                        ( Ok { model | playlist = unshuffle playlist, shuffled = False }, Cmd.none )
 
                     else
-                        ( Success model, generate Shuffled (shuffle playlist.order.next) )
+                        ( Ok model, generate Shuffled (shuffle playlist.order.next) )
 
                 Shuffled shuffledList ->
-                    ( Success
+                    ( Ok
                         { model
                             | playlist =
                                 { playlist
@@ -129,12 +129,12 @@ update msg model_ =
 
                 Order field ->
                     if field == Tuple.first playlist.orderedBy then
-                        ( Success { model | playlist = flipDisplayOrder playlist }, Cmd.none )
+                        ( Ok { model | playlist = flipDisplayOrder playlist }, Cmd.none )
 
                     else
                         case field of
                             Number ->
-                                ( Success
+                                ( Ok
                                     { model
                                         | playlist =
                                             { playlist
@@ -146,7 +146,7 @@ update msg model_ =
                                 )
 
                             Title ->
-                                ( Success
+                                ( Ok
                                     { model
                                         | playlist =
                                             { playlist
@@ -158,7 +158,7 @@ update msg model_ =
                                 )
 
                             Duration ->
-                                ( Success
+                                ( Ok
                                     { model
                                         | playlist =
                                             { playlist
@@ -170,41 +170,41 @@ update msg model_ =
                                 )
 
                 LoadPlaylist core ->
-                    ( Success model, loadPlaylist core )
+                    ( Ok model, loadPlaylist core )
 
                 PlaylistLoaded result ->
                     case result of
                         Ok pl ->
-                            ( Success { model | playlist = pl, shuffled = False }
+                            ( Ok { model | playlist = pl, shuffled = False }
                             , control ("load " ++ playlist.order.current.link)
                             )
 
                         Err err ->
-                            ( Error <| errorToString err, Cmd.none )
+                            ( Err <| errorToString err, Cmd.none )
 
                 ChooseSong songIndex ->
-                    update Play <| Success { model | playlist = chooseSong model.playlist songIndex }
+                    update Play <| Ok { model | playlist = chooseSong model.playlist songIndex }
 
                 ChangeVolume vol ->
-                    ( Success { model | volume = vol }
+                    ( Ok { model | volume = vol }
                     , control ("volume " ++ String.fromFloat vol)
                     )
 
                 Play ->
-                    ( Success { model | playlist = { playlist | playing = True } }
+                    ( Ok { model | playlist = { playlist | playing = True } }
                     , control ("play " ++ playlist.order.current.link)
                     )
 
                 TogglePause ->
-                    ( Success { model | playlist = { playlist | playing = not playlist.playing } }
+                    ( Ok { model | playlist = { playlist | playing = not playlist.playing } }
                     , control "togglePause"
                     )
 
                 SelectBackground background ->
-                    ( Success { model | selectedBackground = background }, Cmd.none )
+                    ( Ok { model | selectedBackground = background }, Cmd.none )
 
                 ApplyBackground ->
-                    ( Success { model | appliedBackground = model.selectedBackground }
+                    ( Ok { model | appliedBackground = model.selectedBackground }
                     , control ("background " ++ resolveBackground model.selectedBackground)
                     )
 
@@ -223,7 +223,7 @@ update msg model_ =
                             else
                                 toFloat y + dy
                     in
-                    ( Success
+                    ( Ok
                         { model
                             | dragState =
                                 { dragState
@@ -241,7 +241,7 @@ update msg model_ =
                         ( newDragState, m ) =
                             Draggable.update dragConfig dragMsg model.dragState
                     in
-                    ( Success
+                    ( Ok
                         { model
                             | dragState = { position = model.dragState.position, drag = newDragState.drag }
                         }
@@ -249,12 +249,12 @@ update msg model_ =
                     )
 
                 Progress val ->
-                    ( Success
+                    ( Ok
                         { model | playlist = { playlist | progress = val } }
                     , Cmd.none
                     )
 
-        Error _ ->
+        Err _ ->
             ( model_, Cmd.none )
 
 

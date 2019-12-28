@@ -1,4 +1,4 @@
-module Core exposing (Background(..), Faction(..), Model(..), Msg(..), resolveBackground)
+module Core exposing (Background(..), Faction(..), Model, Msg(..), resolveBackground)
 
 import Draggable
 import Http
@@ -11,8 +11,8 @@ type alias DragState =
     }
 
 
-type Model
-    = Success
+type alias Model =
+    Result String
         { playlist : Playlist
         , volume : Float
         , dragState : DragState
@@ -21,7 +21,6 @@ type Model
         , selectedBackground : Background
         , appliedBackground : Background
         }
-    | Error String
 
 
 type Msg
