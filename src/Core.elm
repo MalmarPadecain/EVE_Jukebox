@@ -32,8 +32,8 @@ type Msg
     | Shuffle
     | Shuffled (List Song)
     | Order OrderBy
-    | Load PlaylistCore
-    | Loaded (Result Http.Error Playlist)
+    | LoadPlaylist PlaylistCore
+    | PlaylistLoaded (Result Http.Error Playlist)
     | ChooseSong Song
     | ChangeVolume Float
     | Play
