@@ -4,10 +4,12 @@ import Browser
 import Core exposing (..)
 import Draggable
 import Http
+import Json.Decode as Decode exposing (Decoder)
 import Platform.Sub as Sub
 import Playlist exposing (..)
 import Random exposing (generate)
 import Random.List exposing (shuffle)
+import Task exposing (Task)
 import View exposing (..)
 
 
@@ -37,7 +39,7 @@ dragConfig =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    Ok
+    ( Ok
         { playlist =
             { progress = 0
             , playing = False
@@ -63,7 +65,8 @@ init _ =
         , selectedBackground = Still Gallente
         , appliedBackground = Still Gallente
         }
-        |> update Init
+    , Cmd.batch [ Task.attempt PlaylistsLoaded loadPlaylistList, control "background ./video/gallenteStill.png" ]
+    )
 
 
 main =
@@ -80,13 +83,10 @@ update msg model_ =
     case model_ of
         Ok ({ playlist, dragState } as model) ->
             case msg of
-                Init ->
-                    ( Ok model, Cmd.batch [ loadPlaylistList, control "background ./video/gallenteStill.png" ] )
-
                 PlaylistsLoaded result ->
                     case result of
                         Ok ((x :: _) as list) ->
-                            update (LoadPlaylist x) (Ok { model | playlistList = list })
+                            ( Ok { model | playlistList = list }, Task.attempt PlaylistLoaded (loadPlaylist x) )
 
                         Ok [] ->
                             ( Err "No playlists found.", Cmd.none )
@@ -170,7 +170,7 @@ update msg model_ =
                                 )
 
                 LoadPlaylist core ->
-                    ( Ok model, loadPlaylist core )
+                    ( Ok model, Task.attempt PlaylistLoaded (loadPlaylist core) )
 
                 PlaylistLoaded result ->
                     case result of
@@ -258,20 +258,53 @@ update msg model_ =
             ( model_, Cmd.none )
 
 
-loadPlaylist : PlaylistCore -> Cmd Msg
+loadPlaylist : PlaylistCore -> Task Http.Error Playlist
 loadPlaylist core =
-    Http.get
-        { url = "playlists/" ++ core.link
-        , expect = Http.expectJson PlaylistLoaded <| playlistDecoder core.name core.link
+    Http.task
+        { method = "GET"
+        , headers = []
+        , url = "playlists/" ++ core.link
+        , body = Http.emptyBody
+        , resolver = Http.stringResolver <| handleJsonResponse <| playlistDecoder core.name core.link
+        , timeout = Nothing
         }
 
 
-loadPlaylistList : Cmd Msg
+loadPlaylistList : Task Http.Error (List PlaylistCore)
 loadPlaylistList =
-    Http.get
-        { url = "playlists/playlists.json"
-        , expect = Http.expectJson PlaylistsLoaded <| playlistListDecoder
+    Http.task
+        { method = "GET"
+        , headers = []
+        , url = "playlists/playlists.json"
+        , body = Http.emptyBody
+        , resolver = Http.stringResolver <| handleJsonResponse <| playlistListDecoder
+        , timeout = Nothing
         }
+
+
+handleJsonResponse : Decoder a -> Http.Response String -> Result Http.Error a
+handleJsonResponse decoder response =
+    -- from https://korban.net/posts/elm/2019-02-15-combining-http-requests-with-task-in-elm/
+    case response of
+        Http.BadUrl_ url ->
+            Err (Http.BadUrl url)
+
+        Http.Timeout_ ->
+            Err Http.Timeout
+
+        Http.BadStatus_ { statusCode } _ ->
+            Err (Http.BadStatus statusCode)
+
+        Http.NetworkError_ ->
+            Err Http.NetworkError
+
+        Http.GoodStatus_ _ body ->
+            case Decode.decodeString decoder body of
+                Err _ ->
+                    Err (Http.BadBody body)
+
+                Ok result ->
+                    Ok result
 
 
 errorToString : Http.Error -> String

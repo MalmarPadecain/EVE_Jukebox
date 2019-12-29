@@ -24,8 +24,7 @@ type alias Model =
 
 
 type Msg
-    = Init
-    | PlaylistsLoaded (Result Http.Error (List PlaylistCore))
+    = PlaylistsLoaded (Result Http.Error (List PlaylistCore))
     | Next
     | Previous
     | Shuffle
