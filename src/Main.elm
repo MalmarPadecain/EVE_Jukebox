@@ -95,14 +95,32 @@ update msg model_ =
                             ( Err <| errorToString err, Cmd.none )
 
                 Next ->
-                    update Play (Ok { model | playlist = next model.playlist })
+                    let
+                        newPlaylist =
+                            next model.playlist
+                    in
+                    ( Ok
+                        { model
+                            | playlist = newPlaylist
+                        }
+                    , control ("play " ++ newPlaylist.order.current.link)
+                    )
 
                 Previous ->
                     if playlist.progress < 5 then
-                        update Play (Ok { model | playlist = previous model.playlist })
+                        let
+                            newPlaylist =
+                                previous model.playlist
+                        in
+                        ( Ok
+                            { model
+                                | playlist = newPlaylist
+                            }
+                        , control ("play " ++ newPlaylist.order.current.link)
+                        )
 
                     else
-                        update Play model_
+                        ( model_, control ("play " ++ model.playlist.order.current.link) )
 
                 Shuffle ->
                     if model.shuffled then
@@ -183,16 +201,21 @@ update msg model_ =
                             ( Err <| errorToString err, Cmd.none )
 
                 ChooseSong songIndex ->
-                    update Play <| Ok { model | playlist = chooseSong model.playlist songIndex }
+                    let
+                        newPlaylist =
+                            chooseSong model.playlist songIndex
+                                |> (\pl -> { pl | playing = True })
+                    in
+                    ( Ok
+                        { model
+                            | playlist = newPlaylist
+                        }
+                    , control ("play " ++ newPlaylist.order.current.link)
+                    )
 
                 ChangeVolume vol ->
                     ( Ok { model | volume = vol }
                     , control ("volume " ++ String.fromFloat vol)
-                    )
-
-                Play ->
-                    ( Ok { model | playlist = { playlist | playing = True } }
-                    , control ("play " ++ playlist.order.current.link)
                     )
 
                 TogglePause ->

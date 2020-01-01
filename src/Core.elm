@@ -34,7 +34,6 @@ type Msg
     | PlaylistLoaded (Result Http.Error Playlist)
     | ChooseSong Song
     | ChangeVolume Float
-    | Play
     | TogglePause
     | SelectBackground Background
     | ApplyBackground
