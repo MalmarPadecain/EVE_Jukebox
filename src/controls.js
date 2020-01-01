@@ -1,21 +1,19 @@
-window.app.ports.control.subscribe(function (msg) {
-    let command = msg.split(' ')[0];
-    let params = msg.split(' ').slice(1);
-    switch (command) {
+window.app.ports.control.subscribe(function ({message, payload}) {
+    switch (message) {
         case "load":
-            load(params[0]);
+            load(payload);
             break;
         case "togglePause":
             togglePause();
             break;
         case "play":
-            play(params[0]);
+            play(payload);
             break;
         case "volume":
-            changeVolume(params[0]);
+            changeVolume(payload);
             break;
         case "background":
-            changeBackground(params[0]);
+            changeBackground(payload);
             break;
     }
 });

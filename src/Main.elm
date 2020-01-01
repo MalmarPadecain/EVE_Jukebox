@@ -5,6 +5,7 @@ import Core exposing (..)
 import Draggable
 import Http
 import Json.Decode as Decode exposing (Decoder)
+import Json.Encode as Encode
 import Platform.Sub as Sub
 import Playlist exposing (..)
 import Random exposing (generate)
@@ -13,7 +14,7 @@ import Task exposing (Task)
 import View exposing (..)
 
 
-port control : String -> Cmd msg
+port control : Encode.Value -> Cmd msg
 
 
 port progress : (Float -> msg) -> Sub msg
@@ -65,7 +66,14 @@ init _ =
         , selectedBackground = Still Gallente
         , appliedBackground = Still Gallente
         }
-    , Cmd.batch [ Task.attempt PlaylistsLoaded loadPlaylistList, control "background ./video/gallenteStill.png" ]
+    , Cmd.batch
+        [ Task.attempt PlaylistsLoaded loadPlaylistList
+        , control <|
+            Encode.object
+                [ ( "message", Encode.string "background" )
+                , ( "payload", Encode.string "./video/gallenteStill.png" )
+                ]
+        ]
     )
 
 
@@ -103,7 +111,11 @@ update msg model_ =
                         { model
                             | playlist = newPlaylist
                         }
-                    , control ("play " ++ newPlaylist.order.current.link)
+                    , control <|
+                        Encode.object
+                            [ ( "message", Encode.string "play" )
+                            , ( "payload", Encode.string newPlaylist.order.current.link )
+                            ]
                     )
 
                 Previous ->
@@ -116,11 +128,21 @@ update msg model_ =
                             { model
                                 | playlist = newPlaylist
                             }
-                        , control ("play " ++ newPlaylist.order.current.link)
+                        , control <|
+                            Encode.object
+                                [ ( "message", Encode.string "play" )
+                                , ( "payload", Encode.string newPlaylist.order.current.link )
+                                ]
                         )
 
                     else
-                        ( model_, control ("play " ++ model.playlist.order.current.link) )
+                        ( model_
+                        , control <|
+                            Encode.object
+                                [ ( "message", Encode.string "play" )
+                                , ( "payload", Encode.string model.playlist.order.current.link )
+                                ]
+                        )
 
                 Shuffle ->
                     if model.shuffled then
@@ -194,7 +216,11 @@ update msg model_ =
                     case result of
                         Ok pl ->
                             ( Ok { model | playlist = pl, shuffled = False }
-                            , control ("load " ++ playlist.order.current.link)
+                            , control <|
+                                Encode.object
+                                    [ ( "message", Encode.string "load" )
+                                    , ( "payload", Encode.string playlist.order.current.link )
+                                    ]
                             )
 
                         Err err ->
@@ -210,17 +236,29 @@ update msg model_ =
                         { model
                             | playlist = newPlaylist
                         }
-                    , control ("play " ++ newPlaylist.order.current.link)
+                    , control <|
+                        Encode.object
+                            [ ( "message", Encode.string "play" )
+                            , ( "payload", Encode.string newPlaylist.order.current.link )
+                            ]
                     )
 
                 ChangeVolume vol ->
                     ( Ok { model | volume = vol }
-                    , control ("volume " ++ String.fromFloat vol)
+                    , control <|
+                        Encode.object
+                            [ ( "message", Encode.string "volume" )
+                            , ( "payload", Encode.float vol )
+                            ]
                     )
 
                 TogglePause ->
                     ( Ok { model | playlist = { playlist | playing = not playlist.playing } }
-                    , control "togglePause"
+                    , control <|
+                        Encode.object
+                            [ ( "message", Encode.string "togglePause" )
+                            , ( "payload", Encode.null )
+                            ]
                     )
 
                 SelectBackground background ->
@@ -228,7 +266,11 @@ update msg model_ =
 
                 ApplyBackground ->
                     ( Ok { model | appliedBackground = model.selectedBackground }
-                    , control ("background " ++ resolveBackground model.selectedBackground)
+                    , control <|
+                        Encode.object
+                            [ ( "message", Encode.string "background" )
+                            , ( "payload", Encode.string <| resolveBackground model.selectedBackground )
+                            ]
                     )
 
                 OnDragBy ( dx, dy ) ->
