@@ -106,6 +106,13 @@ update msg model_ =
                     let
                         newPlaylist =
                             next model.playlist
+
+                        message =
+                            if newPlaylist.playing then
+                                "play"
+
+                            else
+                                "load"
                     in
                     ( Ok
                         { model
@@ -113,12 +120,20 @@ update msg model_ =
                         }
                     , control <|
                         Encode.object
-                            [ ( "message", Encode.string "play" )
+                            [ ( "message", Encode.string message )
                             , ( "payload", Encode.string newPlaylist.order.current.link )
                             ]
                     )
 
                 Previous ->
+                    let
+                        message =
+                            if playlist.playing then
+                                "play"
+
+                            else
+                                "load"
+                    in
                     if playlist.progress < 5 then
                         let
                             newPlaylist =
@@ -130,7 +145,7 @@ update msg model_ =
                             }
                         , control <|
                             Encode.object
-                                [ ( "message", Encode.string "play" )
+                                [ ( "message", Encode.string message )
                                 , ( "payload", Encode.string newPlaylist.order.current.link )
                                 ]
                         )
@@ -139,7 +154,7 @@ update msg model_ =
                         ( model_
                         , control <|
                             Encode.object
-                                [ ( "message", Encode.string "play" )
+                                [ ( "message", Encode.string message )
                                 , ( "payload", Encode.string model.playlist.order.current.link )
                                 ]
                         )
