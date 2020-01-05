@@ -700,6 +700,7 @@ html>body tbody.scrollContent {
 
 .modalFlexContainer{
   flex-direction: row;
+  flex-wrap: wrap;
   display:flex;
   margin-top: 14px;
   margin-bottom: 14px;
@@ -710,11 +711,12 @@ html>body tbody.scrollContent {
   flex-grow: 1;
 }
 
-ul{
+li{
   margin-top:5px;
   margin-bottom: 7px;
   padding-left: 0;
   padding-right: 10px;
+  list-style: none;
 }
 
 input[type="radio"] {

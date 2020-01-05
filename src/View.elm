@@ -3,7 +3,7 @@ module View exposing (renderTable, view)
 import Browser
 import Core exposing (..)
 import Draggable
-import Html exposing (Html, a, audio, b, br, button, div, h1, h3, hr, img, input, p, table, tbody, td, text, th, tr, ul, video)
+import Html exposing (Html, a, audio, b, br, button, div, h1, h3, hr, img, input, li, p, table, tbody, td, text, th, tr, ul, video)
 import Html.Attributes exposing (attribute, autoplay, checked, class, href, id, loop, name, src, step, style, title, type_, value)
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
@@ -379,8 +379,34 @@ aboutWindow =
         ]
 
 
-optionWindow : Background -> Html Msg
-optionWindow background =
+optionWindow : String -> Html Msg
+optionWindow backgroundLink =
+    let
+        viewRadio : { radioName : String, link : String } -> Html Msg
+        viewRadio { radioName, link } =
+            li [ class "" ]
+                [ input
+                    [ name "backgroundSelect"
+                    , type_ "radio"
+                    , onInput (\_ -> SelectBackground <| link)
+                    , if backgroundLink == link then
+                        checked True
+
+                      else
+                        checked False
+                    ]
+                    []
+                , text radioName
+                ]
+
+        viewRadioSet : ( String, List { radioName : String, link : String } ) -> Html Msg
+        viewRadioSet ( radioName, backgrounds ) =
+            div [ class "modalFlex" ]
+                [ div [ class "radioButtonTitle" ]
+                    [ text radioName ]
+                , ul [] <| List.map viewRadio backgrounds
+                ]
+    in
     div [ class "modal-window", id "open-opt" ]
         [ div [ class "modalInner" ]
             [ a [ class "modal-close", href "#modal-close", title "Close" ]
@@ -396,252 +422,8 @@ optionWindow background =
                     []
                 , h3 []
                     [ text "Video Backgrounds" ]
-                , div [ class "modalFlexContainer" ]
-                    [ div [ class "modalFlex" ]
-                        [ div [ class "radioButtonTitle" ]
-                            [ text "Minmatar" ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Balcony Minmatar)
-                                , if background == Balcony Minmatar then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Balcony"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Hangar Minmatar)
-                                , if background == Hangar Minmatar then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Hangar [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Room Minmatar)
-                                , if background == Room Minmatar then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Room [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Still Minmatar)
-                                , if background == Still Minmatar then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Still Image"
-                            ]
-                        ]
-                    , div [ class "modalFlex" ]
-                        [ div [ class "radioButtonTitle" ]
-                            [ text "Gallente" ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Balcony Gallente)
-                                , if background == Balcony Gallente then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Balcony"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Hangar Gallente)
-                                , if background == Hangar Gallente then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Hangar [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Room Gallente)
-                                , if background == Room Gallente then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Room [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Still Gallente)
-                                , if background == Still Gallente then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Still Image"
-                            ]
-                        ]
-                    , div [ class "modalFlex" ]
-                        [ div [ class "radioButtonTitle" ]
-                            [ text "Amarr" ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Balcony Amarr)
-                                , if background == Balcony Amarr then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Balcony [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Hangar Amarr)
-                                , if background == Hangar Amarr then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Hangar [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Room Amarr)
-                                , if background == Room Amarr then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Room [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Still Amarr)
-                                , if background == Still Amarr then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Still Image"
-                            ]
-                        ]
-                    ]
-                , div [ class "modalFlexContainer" ]
-                    [ div [ class "modalFlex" ]
-                        [ div [ class "radioButtonTitle" ]
-                            [ text "Caldari" ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Balcony Caldari)
-                                , if background == Balcony Caldari then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Balcony [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Hangar Caldari)
-                                , if background == Hangar Caldari then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Hangar [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Room Caldari)
-                                , if background == Room Caldari then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Room [WIP]"
-                            ]
-                        , ul [ class "" ]
-                            [ input
-                                [ name "backgroundSelect"
-                                , type_ "radio"
-                                , onInput (\_ -> SelectBackground <| Still Caldari)
-                                , if background == Still Caldari then
-                                    checked True
-
-                                  else
-                                    checked False
-                                ]
-                                []
-                            , text "Still Image"
-                            ]
-                        ]
-                    , div [ class "modalFlex", id "flexFinal" ]
-                        [ text "More backgrounds soon!" ]
-                    ]
+                , div [ class "modalFlexContainer" ] <|
+                    List.map viewRadioSet Core.possibleBackgrounds
                 , hr []
                     []
                 , div [ id "ApplyBtnContainer" ]
@@ -655,16 +437,15 @@ optionWindow background =
         ]
 
 
-videoDiv : Background -> Html msg
-videoDiv background =
-    case background of
-        Still _ ->
-            div [ id "videoWrapper" ]
-                [ img [ id "still", style "z-index" "8" ] [] ]
+videoDiv : String -> Html msg
+videoDiv link =
+    if String.contains ".png" link then
+        div [ id "videoWrapper" ]
+            [ img [ id "still", style "z-index" "8" ] [] ]
 
-        _ ->
-            div [ id "videoWrapper" ]
-                [ video [ id "video", style "z-index" "8", autoplay True, loop True, attribute "muted" "true" ] [] ]
+    else
+        div [ id "videoWrapper" ]
+            [ video [ id "video", style "z-index" "8", autoplay True, loop True, attribute "muted" "true" ] [] ]
 
 
 {-| Transforms a time value as received from audio.currentTime to a human readable string

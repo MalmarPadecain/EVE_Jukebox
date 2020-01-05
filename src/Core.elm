@@ -1,4 +1,4 @@
-module Core exposing (Background(..), Faction(..), Model, Msg(..), resolveBackground)
+module Core exposing (Model, Msg(..), possibleBackgrounds)
 
 import Draggable
 import Http
@@ -18,8 +18,8 @@ type alias Model =
         , dragState : DragState
         , shuffled : Bool
         , playlistList : List PlaylistCore
-        , selectedBackground : Background
-        , appliedBackground : Background
+        , selectedBackground : String
+        , appliedBackground : String
         }
 
 
@@ -35,78 +35,84 @@ type Msg
     | ChooseSong Song
     | ChangeVolume Float
     | TogglePause
-    | SelectBackground Background
+    | SelectBackground String
     | ApplyBackground
     | OnDragBy Draggable.Delta
     | DragMsg (Draggable.Msg String)
     | Progress Float
 
 
-type Faction
-    = Gallente
-    | Minmatar
-    | Amarr
-    | Caldari
-
-
-type Background
-    = Still Faction
-    | Balcony Faction
-    | Hangar Faction
-    | Room Faction
-
-
-resolveBackground : Background -> String
-resolveBackground bg =
+possibleBackgrounds :
+    List
+        ( String
+        , List
+            { radioName : String
+            , link : String
+            }
+        )
+possibleBackgrounds =
     let
         path =
             "./video/"
     in
-    case bg of
-        Still Gallente ->
-            path ++ "gallenteStill.png"
-
-        Still Minmatar ->
-            path ++ "minmatarStill.png"
-
-        Still Amarr ->
-            path ++ "amarrStill.png"
-
-        Still Caldari ->
-            path ++ "caldariStill.png"
-
-        Balcony Gallente ->
-            path ++ "gallenteBalcony.mp4"
-
-        Balcony Minmatar ->
-            path ++ "minmatarBalcony.mp4"
-
-        Balcony Amarr ->
-            path ++ "amarrBalcony.mp4"
-
-        Balcony Caldari ->
-            path ++ "caldariBalcony.mp4"
-
-        Hangar Gallente ->
-            path ++ "gallenteHangar.mp4"
-
-        Hangar Minmatar ->
-            path ++ "minmatarHangar.mp4"
-
-        Hangar Amarr ->
-            path ++ "amarrHangar.mp4"
-
-        Hangar Caldari ->
-            path ++ "caldariHangar.mp4"
-
-        Room Gallente ->
-            path ++ "gallenteRoom.mp4"
-
-        Room Minmatar ->
-            path ++ "minmatarRoom.mp4"
-
-        Room Amarr ->
-            path ++ "amarrRoom.mp4"
-
-        Room Caldari ->
-            path ++ "caldariRoom.mp4"
+    [ ( "Minmatar"
+      , [ { radioName = "Balcony"
+          , link = path ++ "minmatarBalcony.mp4"
+          }
+        , { radioName = "Hangar [WIP]"
+          , link = path ++ "minmatarHangar.mp4"
+          }
+        , { radioName = "Room [WIP]"
+          , link = path ++ "minmatarRoom.mp4"
+          }
+        , { radioName = "Still Image"
+          , link = path ++ "minmatarStill.png"
+          }
+        ]
+      )
+    , ( "Gallente"
+      , [ { radioName = "Balcony"
+          , link = path ++ "gallenteBalcony.mp4"
+          }
+        , { radioName = "Hangar [WIP]"
+          , link = path ++ "gallenteHangar.mp4"
+          }
+        , { radioName = "Room [WIP]"
+          , link = path ++ "gallenteRoom.mp4"
+          }
+        , { radioName = "Still Image"
+          , link = path ++ "gallenteStill.png"
+          }
+        ]
+      )
+    , ( "Amarr"
+      , [ { radioName = "Balcony [WIP]"
+          , link = path ++ "amarrBalcony.mp4"
+          }
+        , { radioName = "Hangar [WIP]"
+          , link = path ++ "amarrHangar.mp4"
+          }
+        , { radioName = "Room [WIP]"
+          , link = path ++ "amarrRoom.mp4"
+          }
+        , { radioName = "Still Image"
+          , link = path ++ "amarrStill.png"
+          }
+        ]
+      )
+    , ( "Caldari"
+      , [ { radioName = "Balcony [WIP]"
+          , link = path ++ "caldariBalcony.mp4"
+          }
+        , { radioName = "Hangar [WIP]"
+          , link = path ++ "caldariHangar.mp4"
+          }
+        , { radioName = "Room [WIP]"
+          , link = path ++ "caldariRoom.mp4"
+          }
+        , { radioName = "Still Image"
+          , link = path ++ "caldariStill.png"
+          }
+        ]
+      )
+    ]

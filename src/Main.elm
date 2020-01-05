@@ -40,6 +40,10 @@ dragConfig =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
+    let
+        initialBackground =
+            "./video/gallenteStill.png"
+    in
     ( Ok
         { playlist =
             { progress = 0
@@ -63,15 +67,15 @@ init _ =
             }
         , shuffled = False
         , playlistList = []
-        , selectedBackground = Still Gallente
-        , appliedBackground = Still Gallente
+        , selectedBackground = initialBackground
+        , appliedBackground = initialBackground
         }
     , Cmd.batch
         [ Task.attempt PlaylistsLoaded loadPlaylistList
         , control <|
             Encode.object
                 [ ( "message", Encode.string "background" )
-                , ( "payload", Encode.string "./video/gallenteStill.png" )
+                , ( "payload", Encode.string initialBackground )
                 ]
         ]
     )
@@ -284,7 +288,7 @@ update msg model_ =
                     , control <|
                         Encode.object
                             [ ( "message", Encode.string "background" )
-                            , ( "payload", Encode.string <| resolveBackground model.selectedBackground )
+                            , ( "payload", Encode.string model.selectedBackground )
                             ]
                     )
 
