@@ -747,6 +747,7 @@ input[type="radio"] {
 }
 
 .radioButtonTitle {
+    margin: 0;
 	font-weight: 700;
 	padding-left: 28px;
 }

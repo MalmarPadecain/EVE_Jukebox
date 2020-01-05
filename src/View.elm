@@ -3,7 +3,7 @@ module View exposing (renderTable, view)
 import Browser
 import Core exposing (..)
 import Draggable
-import Html exposing (Html, a, audio, b, br, button, div, h1, h3, hr, img, input, li, p, table, tbody, td, text, th, tr, ul, video)
+import Html exposing (Html, a, audio, b, br, button, div, h1, h2, h3, hr, img, input, li, p, table, tbody, td, text, th, tr, ul, video)
 import Html.Attributes exposing (attribute, autoplay, checked, class, href, id, loop, name, src, step, style, title, type_, value)
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
@@ -402,7 +402,7 @@ optionWindow backgroundLink =
         viewRadioSet : ( String, List { radioName : String, link : String } ) -> Html Msg
         viewRadioSet ( radioName, backgrounds ) =
             div [ class "modalFlex" ]
-                [ div [ class "radioButtonTitle" ]
+                [ h3 [ class "radioButtonTitle" ]
                     [ text radioName ]
                 , ul [] <| List.map viewRadio backgrounds
                 ]
@@ -420,7 +420,7 @@ optionWindow backgroundLink =
                     [ text "Here you can select the background that you see behind the jukebox as captured 2011 style. We recommend a still image if you're on a limited-data connection." ]
                 , hr []
                     []
-                , h3 []
+                , h2 []
                     [ text "Video Backgrounds" ]
                 , div [ class "modalFlexContainer" ] <|
                     List.map viewRadioSet Core.possibleBackgrounds
