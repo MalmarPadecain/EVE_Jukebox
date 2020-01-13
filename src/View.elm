@@ -205,6 +205,29 @@ renderTable playlist =
 
             else
                 "Duration"
+
+        -- The final row of the content table.
+        -- This is needed to set the width of all cells
+        -- and to make sure it fills the entirety of the remaining space in small playlists
+        finalRow : Playlist -> List (Html msg)
+        finalRow pl =
+            let
+                stl =
+                    style "height" <|
+                        if 313 - (List.length pl.displayOrder * 16) > 0 then
+                            (String.fromInt <| 303 - (List.length pl.displayOrder * 16)) ++ "px"
+
+                        else
+                            "0"
+            in
+            [ tr []
+                [ td [ id "col1", class "finalRow", stl ] []
+                , td [ id "col2", class "finalRow", stl ] []
+                , td [ id "col3", class "finalRow", stl ] []
+                , td [ id "col4", class "finalRow", stl ] []
+                , td [ id "col5", class "finalRow", stl ] []
+                ]
+            ]
     in
     div [ class "TracklistContainer" ]
         [ table [ class "TracklistHeader" ]
@@ -258,31 +281,6 @@ renderTable playlist =
                 |> tbody [ class "scrollContent" ]
             ]
         ]
-
-
-{-| The final row of the content table.
-This is needed to set the width of all cells
-and to make sure it fills the entirety of the remaining space in small playlists
--}
-finalRow : Playlist -> List (Html msg)
-finalRow pl =
-    let
-        stl =
-            style "height" <|
-                if 313 - (List.length pl.displayOrder * 16) > 0 then
-                    (String.fromInt <| 303 - (List.length pl.displayOrder * 16)) ++ "px"
-
-                else
-                    "0"
-    in
-    [ tr []
-        [ td [ id "col1", class "finalRow", stl ] []
-        , td [ id "col2", class "finalRow", stl ] []
-        , td [ id "col3", class "finalRow", stl ] []
-        , td [ id "col4", class "finalRow", stl ] []
-        , td [ id "col5", class "finalRow", stl ] []
-        ]
-    ]
 
 
 aboutWindow =
