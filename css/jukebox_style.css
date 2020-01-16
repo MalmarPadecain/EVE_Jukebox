@@ -14,8 +14,10 @@
 
 @font-face {
     font-family: 'EveSans';
-    src: url('fonts/evesans.eot');
-    src: url('fonts/evesans.eot?#iefix') format('embedded-opentype'), url('fonts/evesans.woff') format('woff'), url('fonts/evesans.ttf') format('truetype'), url('fonts/evesans.svg#webfont') format('svg');
+    src: url('fonts/evesans.woff2') format('woff2'),
+    url('fonts/evesans.woff') format('woff'),
+    url('fonts/evesans.ttf') format('truetype'),
+    url('fonts/evesans.svg#webfont') format('svg');
 }
 
 #videoWrapper {
@@ -109,13 +111,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    font-family: EveSans, Sans-Serif;
+    font-family: EveSans, Sans-Serif, sans-serif;
     font-size: 12px;
     font-weight: 300;
     border-width: 1.5px;
     border-style: inset;
     border-image: linear-gradient(326.1deg, rgba(0, 0, 0, 0) 50%, rgba(215, 215, 215, 0.75) 20%, rgba(215, 215, 215, 0.2) 70%) 1;
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.32);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.32);
     padding: 0;
     cursor: default;
     -webkit-user-select: none;
@@ -130,10 +132,7 @@
 .jukeboxMain {
     background-color: rgba(45, 45, 45, 0.5);
     flex-grow: 0;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 3px;
-    margin-right: 3px;
+    margin: 2px 3px;
 }
 
 .MainTextPos {
@@ -142,7 +141,7 @@
 
 #TitleBox {
     margin-top: 2px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     flex-grow: 0;
     background-color: rgba(0, 0, 0, 0);
 }
@@ -154,9 +153,9 @@
 
 #NowPlayingContainer {
     background-color: rgba(70, 70, 70, 0.55);
-    -webkit-box-shadow: inset 3px 3px 7px 0px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: inset 3px 3px 7px 0px rgba(0, 0, 0, 0.25);
-    box-shadow: inset 3px 3px 7px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: inset 3px 3px 7px 0 rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: inset 3px 3px 7px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: inset 3px 3px 7px 0 rgba(0, 0, 0, 0.25);
     height: 20px;
     display: flex;
     flex-direction: row;
@@ -220,16 +219,13 @@
 }
 
 .TracklistHeader {
-    margin-top: 4px;
-    margin-left: 4px;
-    margin-right: 4px;
-    margin-bottom: 0px;
+    margin: 4px 4px 0;
     flex-grow: 1;
     background-color: rgba(40, 40, 40, 0.5)
 }
 
 .Tracklist {
-    margin-top: 0px;
+    margin-top: 0;
     margin-left: 4px;
     margin-right: 4px;
     flex-grow: 1;
@@ -268,7 +264,7 @@
     border-bottom-color: rgba(255, 255, 255, 0.2);
     text-align: center;
     display: inline-block;
-    font-family: EveSans, Sans-Serif;
+    font-family: EveSans, Sans-Serif, sans-serif;
     color: rgb(190, 190, 190);
     font-size: 13px;
     font-weight: 100;
@@ -288,7 +284,7 @@
 }
 
 .controlBtn {
-    box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.18);
     margin-left: 2px;
     border: 1px solid rgba(215, 215, 215, 0)
 }
@@ -413,7 +409,7 @@
     border: 1px solid rgba(55, 55, 55, 1);
     -webkit-transition: .2s;
     transition: opacity .2s;
-    margin-top: 0px;
+    margin-top: 0;
     margin-right: 3px;
     margin-left: 1px;
     outline: none;
@@ -429,7 +425,7 @@
     background: radial-gradient(8px 10px ellipse at 50% 5%, rgb(158, 196, 220) 20%, rgb(72, 97, 109) 50%, rgba(0, 0, 0, 0.45) 80%);
     cursor: pointer;
     outline: none;
-    box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: -2px 2px 5px 0 rgba(0, 0, 0, 0.7);
 }
 
 .slider::-moz-range-thumb {
@@ -441,7 +437,7 @@
     background: radial-gradient(8px 10px ellipse at 50% 5%, rgb(158, 196, 220) 20%, rgb(72, 97, 109) 50%, rgba(0, 0, 0, 0.45) 80%);
     cursor: pointer;
     outline: none;
-    box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: -2px 2px 5px 0 rgba(0, 0, 0, 0.7);
 }
 
 #buttonList {
@@ -453,15 +449,15 @@
 }
 
 #UpperSeparator {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
     background-color: rgba(0, 0, 0, 0);
     margin-top: 1px;
 }
 
 #LowerSeparator {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
     background-color: rgba(0, 0, 0, 0);
 }
 
@@ -516,8 +512,7 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid rgba(215, 215, 215, 0.20);
-    margin: 0 0;
-    padding: -5;
+    margin: 0;
 }
 
 #col1head {
@@ -572,9 +567,9 @@ table.TracklistHeader {
 }
 
 table.Tracklist {
-    border-left: 0px solid rgba(140, 140, 140, 1);
+    border-left: 0 solid rgba(140, 140, 140, 1);
     border-right: 1px solid rgba(140, 140, 140, 1);
-    border-top: 0px solid rgba(140, 140, 140, 1);
+    border-top: 0 solid rgba(140, 140, 140, 1);
     border-bottom: 1px solid rgba(140, 140, 140, 1);
     border-collapse: collapse;
     background-color: rgba(60, 60, 60, 0.15);
@@ -584,20 +579,15 @@ table.Tracklist {
     background: rgba(0, 0, 0, 0);
 }
 
-tr {
-    /*border-top: 1px solid rgba(140, 140, 140, 1);*/
-    /*Part of outer border*/
-}
-
 tr + tr {
-    border-top: 1px solid rgba(140, 140, 140, 0.6);
     /*Part of outer border*/
+    border-top: 1px solid rgba(140, 140, 140, 0.6);
 }
 
 td {
     border-left: 1px solid rgba(117, 117, 117, 1);
     vertical-align: center;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     padding-left: 4px;
     height: 17px;
 }
@@ -607,7 +597,7 @@ td + td {
 }
 
 th:last-child {
-    border-right: 0px;
+    border-right: 0;
 }
 
 tr td:nth-child(2) {
@@ -618,8 +608,8 @@ th {
     border-right: 1px solid rgba(117, 117, 117, 0.6);
     font-weight: 400;
     padding-left: 4px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+    padding-bottom: 0;
+    padding-top: 0;
     line-height: 15px;
 }
 
@@ -672,10 +662,7 @@ html > body tbody.scrollContent {
     width: 550px;
     position: relative;
     margin: 10% auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
+    padding: 1rem 1.5rem 0.5rem;
     background: #444343;
     color: #eae8e6;
 }
@@ -694,7 +681,7 @@ html > body tbody.scrollContent {
     top: 0;
     width: 70px;
     text-decoration: none;
-    font-family: EveSans, Sans-Serif;
+    font-family: EveSans, Sans-Serif, sans-serif;
 }
 
 .modal-close:hover {
@@ -707,7 +694,7 @@ html > body tbody.scrollContent {
 }
 
 .modalText {
-    font-family: EveSans, Sans-Serif;
+    font-family: EveSans, Sans-Serif, sans-serif;
 }
 
 .modalFlexContainer {
@@ -737,7 +724,7 @@ input[type="radio"] {
 }
 
 #About {
-    font-family: EVESans, Sans-Serif;
+    font-family: EVESans, Sans-Serif, sans-serif;
     text-decoration: none;
     color: black;
     font-weight: 400;
@@ -793,15 +780,13 @@ h3 {
     background-color: #3a3a3a;
     border-radius: 5px;
     border: 2px solid #9c9c9c;
-    padding: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 3px 5px;
     color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    font-family: EveSans;
+    font-family: EveSans, sans-serif;
     margin: 4px 2px;
     cursor: pointer;
 }
