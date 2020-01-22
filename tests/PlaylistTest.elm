@@ -77,6 +77,7 @@ emptyPlaylist =
     , core = { name = "emptyPlaylist", link = "" }
     , order = { current = song0, previous = [], next = [] }
     , displayOrder = [ song0 ]
+    , orderedBy = Asc Number
     }
 
 
@@ -87,6 +88,7 @@ initPlaylist =
     , core = { name = "initPlaylist", link = "" }
     , order = initOrder
     , displayOrder = songList
+    , orderedBy = Asc Number
     }
 
 
@@ -185,6 +187,7 @@ testDecoder =
                                   , link = "https://www.modenstudios.com/EVE/music/Rebirth.mp3"
                                   }
                                 ]
+                            , orderedBy = Asc Number
                             }
                         )
         ]

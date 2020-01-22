@@ -174,15 +174,18 @@ renderPlaylistList list pl =
 renderTable : Playlist -> Html Msg
 renderTable playlist =
     let
-        ( orderedBy, direction ) =
+        order =
             playlist.orderedBy
 
+        orderedBy =
+            getOrderBy order
+
         orderSign =
-            case direction of
-                Asc ->
+            case order of
+                Asc _ ->
                     "🞃"
 
-                Desc ->
+                Desc _ ->
                     "🞁"
 
         numberText =
