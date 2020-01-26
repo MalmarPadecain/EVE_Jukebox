@@ -3,7 +3,7 @@ module View exposing (renderTable, view)
 import Browser
 import Core exposing (..)
 import Draggable
-import Html exposing (Html, a, audio, b, br, button, div, h1, h2, h3, hr, img, input, li, p, table, tbody, td, text, th, tr, ul, video)
+import Html exposing (Html, a, audio, b, br, button, div, h1, h2, h3, hr, img, input, li, p, span, table, tbody, td, text, th, tr, ul, video)
 import Html.Attributes exposing (attribute, autoplay, checked, class, href, id, loop, name, src, step, style, title, type_, value)
 import Html.Events exposing (on, onClick, onInput)
 import Html.Lazy exposing (lazy)
@@ -364,11 +364,17 @@ aboutWindow =
                     []
                 , p [ id "stylingBy" ]
                     [ a [ href "https://ashyin.space/", id "stylingBy" ]
-                        [ text "Styling by Ashley Traynor" ]
+                        [ text "Styling by " 
+                        , span [ class "orangeText" ]
+                               [ text "Ashley Traynor" ]
+                        ]
                     , br []
                         []
                     , a [ href "https://evewho.com/pilot/Malhia+Fehrnah", id "stylingBy" ]
-                        [ text "Backend by Malmar Padecain" ]
+                        [ text "Backend by " 
+                        , span [ class "orangeText" ]
+                               [ text "Malmar Padecain" ]
+                        ]
                     , br []
                         []
                     , a [ class "orangeText", href "https://github.com/MalmarPadecain/EVE_Jukebox" ]
