@@ -185,18 +185,17 @@
 
 .PlaylistContainer {
     background-color: rgba(70, 70, 70, 0.55);
-    flex-grow: 0;
+    display: block;
+    padding: 0;
     width: 110px;
     margin-top: 4px;
-    display: flex;
     flex-direction: column;
 }
 
 .Playlist {
-    justify-content: flex-start;
     font-size: 13px;
-    margin-left: 4px;
-    margin-top: 2px;
+    margin: 0;
+    padding: 2px 0 2px 3px;
     cursor: default;
 }
 

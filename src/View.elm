@@ -110,7 +110,7 @@ view model =
                             ]
                         ]
                     , div [ class "jukeboxMain", id "ListContainer" ]
-                        [ div [ class "PlaylistContainer" ]
+                        [ ul [ class "PlaylistContainer" ]
                             (renderPlaylistList playlistList playlist)
                         , lazy renderTable playlist
                         ]
@@ -161,10 +161,10 @@ renderPlaylistList list pl =
     List.map
         (\plc ->
             if plc.name == pl.core.name then
-                div [ class "Playlist", id "selectedPlaylist", onClick (LoadPlaylist plc) ] [ text plc.name ]
+                li [ class "Playlist", id "selectedPlaylist", onClick (LoadPlaylist plc) ] [ text plc.name ]
 
             else
-                div [ class "Playlist", onClick (LoadPlaylist plc) ] [ text plc.name ]
+                li [ class "Playlist", onClick (LoadPlaylist plc) ] [ text plc.name ]
         )
         list
 
