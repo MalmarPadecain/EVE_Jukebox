@@ -299,52 +299,52 @@ aboutWindow =
                 , p []
                     [ text "Bring back the good old times of EVE with this recreation of the EVE Jukebox using CSS. If you find any problems please let us know on Discord at Laura#1479 or Malmar Padecain#0659        " ]
                 , ul []
-                    [ b [ class "orangeText" ]
-                        [ text "EVE Soundtrack: " ]
-                    , text "The original soundtrack as it was in the Crucible jukebox in 2011."
-                    ]
-                , ul []
-                    [ b [ class "orangeText" ]
-                        [ text "Mission Music: " ]
-                    , text "All of the music found in missions across New Eden. Mostly rock music."
-                    ]
-                , ul []
-                    [ b [ class "orangeText" ]
-                        [ text "Login Themes: " ]
-                    , text "A chronological list of expansion themes, or \"login music\"."
-                    ]
-                , ul []
-                    [ b [ class "orangeText" ]
-                        [ text "Cinematic Themes: " ]
-                    , text "Music from trailers."
-                    ]
-                , ul []
-                    [ b [ class "orangeText" ]
-                        [ text "Permaband: " ]
-                    , text "Only the best band this side of Jita."
-                    ]
-                , ul []
-                    [ b [ class "orangeText" ]
-                        [ text "Orchestral: " ]
-                    , text "The 10-year anniversary music from Fanfest 2013"
-                    ]
-                , div [ class "modalFlex" ]
-                    [ ul []
+                    [ li []
+                        [ b [ class "orangeText" ]
+                            [ text "EVE Soundtrack: " ]
+                        , text "The original soundtrack as it was in the Crucible jukebox in 2011."
+                        ]
+                    , li []
+                        [ b [ class "orangeText" ]
+                            [ text "Mission Music: " ]
+                        , text "All of the music found in missions across New Eden. Mostly rock music."
+                        ]
+                    , li []
+                        [ b [ class "orangeText" ]
+                            [ text "Login Themes: " ]
+                        , text "A chronological list of expansion themes, or \"login music\"."
+                        ]
+                    , li []
+                        [ b [ class "orangeText" ]
+                            [ text "Cinematic Themes: " ]
+                        , text "Music from trailers."
+                        ]
+                    , li []
+                        [ b [ class "orangeText" ]
+                            [ text "Permaband: " ]
+                        , text "Only the best band this side of Jita."
+                        ]
+                    , li []
+                        [ b [ class "orangeText" ]
+                            [ text "Orchestral: " ]
+                        , text "The 10-year anniversary music from Fanfest 2013"
+                        ]
+                    , li []
                         [ b [ class "orangeText" ]
                             [ text "Misc Tracks: " ]
                         , text "Various tracks that didn't fit anywhere else."
                         ]
-                    , ul []
+                    , li []
                         [ b [ class "orangeText" ]
                             [ text "Peace Logs: " ]
                         , text "Fan-made ambient and downtempo music."
                         ]
-                    , ul []
+                    , li []
                         [ b [ class "orangeText" ]
                             [ text "War Logs: " ]
                         , text "Fan made drum and bass or dubstep."
                         ]
-                    , ul []
+                    , li []
                         [ b [ class "orangeText" ]
                             [ text "Dead Logs: " ]
                         , text "Fan made dark ambient/drone music."
