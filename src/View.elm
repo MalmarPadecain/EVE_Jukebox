@@ -363,16 +363,16 @@ aboutWindow =
                 , br []
                     []
                 , p [ id "stylingBy" ]
-                    [ a [ href "https://ashyin.space/", id "stylingBy" ]
-                        [ text "Styling by " 
-                        , span [ class "orangeText" ]
+                    [ text "Styling by "
+                    , a [ href "https://ashyin.space/", id "stylingBy" ]
+                        [ span [ class "orangeText" ]
                                [ text "Ashley Traynor" ]
                         ]
                     , br []
                         []
+                    , text "Backend by "
                     , a [ href "https://evewho.com/pilot/Malhia+Fehrnah", id "stylingBy" ]
-                        [ text "Backend by " 
-                        , span [ class "orangeText" ]
+                        [ span [ class "orangeText" ]
                                [ text "Malmar Padecain" ]
                         ]
                     , br []
